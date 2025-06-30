@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="{{ get_locale() }}" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% if title %}{{ title }} - {% endif %}{{ _('Smart Agriculture App') }}
+    </title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Custom CSS -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Noto Sans Devanagari', sans-serif;
+        }
+        
+        .bg-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .card {
+            @apply bg-white rounded-lg shadow-md p-6 border border-gray-200;
+        }
+        
+        .btn-primary {
+            @apply bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition-colors;
+        }
+        
+        .btn-secondary {
+            @apply bg-gray-600 hover:bg-gray-700 text-white font-medium py-2 px-4 rounded-md transition-colors;
+        }
+        
+        .btn-success {
+            @apply bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-md transition-colors;
+        }
+        
+        .btn-warning {
+            @apply bg-yellow-600 hover:bg-yellow-700 text-white font-medium py-2 px-4 rounded-md transition-colors;
+        }
+        
+        .btn-danger {
+            @apply bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-md transition-colors;
+        }
+    </style>
+    
+    {% block head %}{% endblock %}
+</head>
+<body class="bg-gray-50 min-h-screen">
+    
+    <!-- Navigation -->
+    {% if current_user.is_authenticated %}
+    <nav class="bg-white shadow-sm border-b">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="{{ url_for('main.dashboard') }}" class="flex items-center">
+                        <span class="text-2xl">🌾</span>
+                        <span class="ml-2 text-xl font-bold text-gray-900">{{ _('Smart Agriculture') }}</span>
+                    </a>
+                    
+                    <div class="hidden md:ml-8 md:flex md:space-x-8">
+                        <a href="{{ url_for('main.dashboard') }}" 
+                           class="text-gray-900 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">
+                            {{ _('Dashboard') }}
+                        </a>
+                        <a href="{{ url_for('farms.index') }}" 
+                           class="text-gray-900 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">
+                            {{ _('Farms') }}
+                        </a>
+                        <a href="{{ url_for('crops.index') }}" 
+                           class="text-gray-900 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">
+                            {{ _('Crops') }}
+                        </a>
+                        <a href="{{ url_for('ai.disease_scanner') }}" 
+                           class="text-gray-900 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">
+                            {{ _('Disease Scanner') }}
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <!-- Language Switcher -->
+                    <div class="relative">
+                        <button class="text-gray-900 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium flex items-center" 
+                                onclick="toggleLanguageDropdown()">
+                            🌐 {% if get_locale() == 'en' %}English{% else %}हिंदी{% endif %}
+                            <svg class="ml-1 h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                        
+                        <div id="languageDropdown" class="hidden absolute right-0 mt-2 w-40 bg-white rounded-md shadow-lg z-50">
+                            <a href="{{ url_for(request.endpoint, lang='hi', **request.view_args) }}" 
+                               class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 {% if get_locale() == 'hi' %}bg-gray-50 font-medium{% endif %}">
+                                🇮🇳 हिंदी
+                            </a>
+                            <a href="{{ url_for(request.endpoint, lang='en', **request.view_args) }}" 
+                               class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 {% if get_locale() == 'en' %}bg-gray-50 font-medium{% endif %}">
+                                🇺🇸 English
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- User Dropdown -->
+                    <div class="relative">
+                        <button class="text-gray-900 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium" 
+                                onclick="toggleDropdown()">
+                            {{ current_user.username }}
+                            <svg class="ml-1 h-4 w-4 inline" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                        
+                        <div id="userDropdown" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg">
+                            <a href="{{ url_for('auth.profile') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                {{ _('Profile') }}
+                            </a>
+                            <a href="{{ url_for('main.help_page') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                {{ _('Help') }}
+                            </a>
+                            <hr class="my-1">
+                            <a href="{{ url_for('auth.logout') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                {{ _('Logout') }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    {% else %}
+    <!-- Guest User Navigation -->
+    <nav class="bg-white shadow-sm border-b">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="{{ url_for('main.index') }}" class="flex items-center">
+                        <span class="text-2xl">🌾</span>
+                        <span class="ml-2 text-xl font-bold text-gray-900">{{ _('Smart Agriculture') }}</span>
+                    </a>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <!-- Language Switcher -->
+                    <div class="relative">
+                        <button class="text-gray-900 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium flex items-center" 
+                                onclick="toggleLanguageDropdown()">
+                            🌐 {% if get_locale() == 'en' %}English{% else %}हिंदी{% endif %}
+                            <svg class="ml-1 h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                        
+                        <div id="languageDropdown" class="hidden absolute right-0 mt-2 w-40 bg-white rounded-md shadow-lg z-50">
+                            <a href="{{ url_for(request.endpoint, lang='hi', **request.view_args) }}" 
+                               class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 {% if get_locale() == 'hi' %}bg-gray-50 font-medium{% endif %}">
+                                🇮🇳 हिंदी
+                            </a>
+                            <a href="{{ url_for(request.endpoint, lang='en', **request.view_args) }}" 
+                               class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 {% if get_locale() == 'en' %}bg-gray-50 font-medium{% endif %}">
+                                🇺🇸 English
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Auth Links -->
+                    <a href="{{ url_for('auth.login') }}" 
+                       class="text-gray-900 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">
+                        {{ _('Login') }}
+                    </a>
+                    <a href="{{ url_for('auth.register') }}" 
+                       class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors">
+                        {{ _('Register') }}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    {% endif %}
+    
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4">
+                {% for category, message in messages %}
+                    {% set alert_class = 'bg-blue-100 border-blue-500 text-blue-700' %}
+                    {% if category == 'error' %}
+                        {% set alert_class = 'bg-red-100 border-red-500 text-red-700' %}
+                    {% elif category == 'success' %}
+                        {% set alert_class = 'bg-green-100 border-green-500 text-green-700' %}
+                    {% elif category == 'warning' %}
+                        {% set alert_class = 'bg-yellow-100 border-yellow-500 text-yellow-700' %}
+                    {% endif %}
+                    
+                    <div class="border-l-4 p-4 {{ alert_class }} mb-4 rounded-r-md">
+                        <p>{{ message }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+    
+    <!-- Main Content -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">{{ _('Smart Agriculture App') }}</h3>
+                    <p class="text-gray-300 text-sm">
+                        {{ _('Making agriculture easier for Indian farmers with smart technology.') }}
+                    </p>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">{{ _('Services') }}</h3>
+                    <ul class="text-gray-300 text-sm space-y-2">
+                        <li>{{ _('Smart Irrigation') }}</li>
+                        <li>{{ _('Disease Detection') }}</li>
+                        <li>{{ _('Weather Information') }}</li>
+                        <li>{{ _('Crop Management') }}</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">{{ _('Contact') }}</h3>
+                    <ul class="text-gray-300 text-sm space-y-2">
+                        <li><a href="{{ url_for('main.contact') }}" class="hover:text-white">{{ _('Contact Us') }}</a></li>
+                        <li><a href="{{ url_for('main.help_page') }}" class="hover:text-white">{{ _('Help') }}</a></li>
+                        <li><a href="{{ url_for('main.privacy') }}" class="hover:text-white">{{ _('Privacy Policy') }}</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+                <p class="text-gray-400 text-sm">
+                    © 2024 {{ _('Smart Agriculture App') }}. {{ _('All rights reserved.') }}
+                </p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- JavaScript -->
+    <script>
+        function toggleDropdown() {
+            const dropdown = document.getElementById('userDropdown');
+            dropdown.classList.toggle('hidden');
+        }
+        
+        function toggleLanguageDropdown() {
+            const dropdown = document.getElementById('languageDropdown');
+            dropdown.classList.toggle('hidden');
+        }
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const userDropdown = document.getElementById('userDropdown');
+            const langDropdown = document.getElementById('languageDropdown');
+            const button = event.target.closest('button');
+            
+            if (!button) {
+                if (userDropdown && !userDropdown.classList.contains('hidden')) {
+                    userDropdown.classList.add('hidden');
+                }
+                if (langDropdown && !langDropdown.classList.contains('hidden')) {
+                    langDropdown.classList.add('hidden');
+                }
+            }
+        });
+        
+        // Auto-hide flash messages
+        setTimeout(function() {
+            const alerts = document.querySelectorAll('.flash-message');
+            alerts.forEach(function(alert) {
+                alert.style.transition = 'opacity 0.5s';
+                alert.style.opacity = '0';
+                setTimeout(function() {
+                    alert.remove();
+                }, 500);
+            });
+        }, 5000);
+    </script>
+    
+    {% block scripts %}{% endblock %}
+</body>
+</html>

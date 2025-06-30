@@ -1,0 +1,233 @@
+{% extends "base.html" %}
+
+{% block title %}
+<span data-translate="add_activity">गतिविधि जोड़ें</span> - {{ crop.crop_type }} - <span data-translate="smart_agriculture_app">स्मार्ट कृषि ऐप</span>
+{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-50">
+    <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <div class="bg-white rounded-lg shadow p-8">
+            <div class="mb-6">
+                <h1 class="text-3xl font-bold text-gray-900 mb-2">
+                    <span data-translate="add_activity">गतिविधि जोड़ें</span>
+                </h1>
+                <p class="text-gray-600">
+                    {{ crop.crop_type.title() }} {% if crop.variety %}({{ crop.variety }}){% endif %} - 
+                    <span data-translate="farm">खेत</span>: {{ crop.farm.farm_name }}
+                </p>
+            </div>
+            
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="mb-4 p-4 rounded-lg flash-message {% if category == 'success' %}bg-green-100 border border-green-400 text-green-700{% else %}bg-red-100 border border-red-400 text-red-700{% endif %}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            
+            <form method="POST" class="space-y-6">
+                
+                <!-- Activity Type -->
+                <div>
+                    <label for="activity_type" class="block text-sm font-medium text-gray-700 mb-2">
+                        <span data-translate="activity_type">गतिविधि का प्रकार</span> *
+                    </label>
+                    <select id="activity_type" 
+                            name="activity_type" 
+                            required
+                            onchange="updateActivityForm()"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500">
+                        <option value="">-- <span data-translate="select_activity_type">गतिविधि प्रकार चुनें</span> --</option>
+                        <option value="irrigation">💧 <span data-translate="irrigation">सिंचाई</span></option>
+                        <option value="fertilizer">🌿 <span data-translate="fertilizer">उर्वरक</span></option>
+                        <option value="pesticide">🛡️ <span data-translate="pesticide">कीटनाशक</span></option>
+                        <option value="harvesting">🌾 <span data-translate="harvesting">कटाई</span></option>
+                        <option value="other">📋 <span data-translate="other">अन्य</span></option>
+                    </select>
+                </div>
+                
+                <!-- Description -->
+                <div>
+                    <label for="description" class="block text-sm font-medium text-gray-700 mb-2">
+                        <span data-translate="description">विवरण</span> *
+                    </label>
+                    <textarea id="description" 
+                              name="description" 
+                              rows="3" 
+                              required
+                              placeholder="गतिविधि का विस्तृत विवरण दर्ज करें..."
+                              class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500"></textarea>
+                    <div id="descriptionHelp" class="mt-1 text-sm text-gray-500">
+                        <span data-translate="description_help">गतिविधि का विस्तृत विवरण दर्ज करें</span>
+                    </div>
+                </div>
+                
+                <!-- Quantity -->
+                <div>
+                    <label for="quantity" class="block text-sm font-medium text-gray-700 mb-2">
+                        <span data-translate="quantity">मात्रा</span>
+                    </label>
+                    <input type="text" 
+                           id="quantity" 
+                           name="quantity" 
+                           placeholder="उदाहरण: 5mm पानी, 10kg यूरिया"
+                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500">
+                    <div id="quantityHelp" class="mt-1 text-sm text-gray-500">
+                        <span data-translate="quantity_help">मात्रा और इकाई दर्ज करें</span>
+                    </div>
+                </div>
+                
+                <!-- Scheduled Date -->
+                <div>
+                    <label for="scheduled_date" class="block text-sm font-medium text-gray-700 mb-2">
+                        <span data-translate="scheduled_date">निर्धारित तारीख</span> *
+                    </label>
+                    <input type="date" 
+                           id="scheduled_date" 
+                           name="scheduled_date" 
+                           required
+                           min="{{ today.strftime('%Y-%m-%d') }}"
+                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500">
+                    <p class="mt-1 text-sm text-gray-500">
+                        <span data-translate="scheduled_date_help">गतिविधि कब करनी है, वह तारीख चुनें</span>
+                    </p>
+                </div>
+                
+                <!-- Activity-specific recommendations -->
+                <div id="recommendations" class="bg-blue-50 border border-blue-200 rounded-lg p-4 hidden">
+                    <h3 class="font-medium text-blue-800 mb-2">
+                        <span data-translate="recommendations">सुझाव</span>
+                    </h3>
+                    <div id="recommendationContent" class="text-sm text-blue-700"></div>
+                </div>
+                
+                <!-- Action Buttons -->
+                <div class="flex flex-col sm:flex-row gap-4 pt-6">
+                    <button type="submit" 
+                            class="flex-1 bg-green-600 text-white py-3 px-6 rounded-lg hover:bg-green-700 transition duration-300">
+                        ➕ <span data-translate="add_activity">गतिविधि जोड़ें</span>
+                    </button>
+                    
+                    <a href="{{ url_for('crops.view', crop_id=crop.id) }}" 
+                       class="flex-1 border border-gray-300 text-gray-700 py-3 px-6 rounded-lg hover:bg-gray-50 transition duration-300 text-center">
+                        <span data-translate="cancel">रद्द करें</span>
+                    </a>
+                </div>
+            </form>
+            
+            <!-- Quick Add Buttons -->
+            <div class="mt-8 pt-6 border-t border-gray-200">
+                <h3 class="font-medium text-gray-700 mb-4">
+                    <span data-translate="quick_add">त्वरित जोड़ें</span>
+                </h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                    <button onclick="quickAdd('irrigation', 'आज सिंचाई करें', '5mm')" 
+                            class="p-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition duration-300 text-center">
+                        <div class="text-2xl mb-1">💧</div>
+                        <div class="text-xs text-gray-600"><span data-translate="irrigation">सिंचाई</span></div>
+                    </button>
+                    
+                    <button onclick="quickAdd('fertilizer', 'उर्वरक डालें', '10kg')" 
+                            class="p-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition duration-300 text-center">
+                        <div class="text-2xl mb-1">🌿</div>
+                        <div class="text-xs text-gray-600"><span data-translate="fertilizer">उर्वरक</span></div>
+                    </button>
+                    
+                    <button onclick="quickAdd('pesticide', 'कीटनाशक छिड़काव', '1 लीटर')" 
+                            class="p-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition duration-300 text-center">
+                        <div class="text-2xl mb-1">🛡️</div>
+                        <div class="text-xs text-gray-600"><span data-translate="pesticide">कीटनाशक</span></div>
+                    </button>
+                    
+                    <button onclick="quickAdd('other', 'अन्य गतिविधि', '')" 
+                            class="p-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition duration-300 text-center">
+                        <div class="text-2xl mb-1">📋</div>
+                        <div class="text-xs text-gray-600"><span data-translate="other">अन्य</span></div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Set today's date as default
+document.addEventListener('DOMContentLoaded', function() {
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('scheduled_date').value = today;
+});
+
+function updateActivityForm() {
+    const activityType = document.getElementById('activity_type').value;
+    const recommendationsDiv = document.getElementById('recommendations');
+    const recommendationContent = document.getElementById('recommendationContent');
+    const descriptionHelp = document.getElementById('descriptionHelp');
+    const quantityHelp = document.getElementById('quantityHelp');
+    
+    // Clear previous recommendations
+    recommendationsDiv.classList.add('hidden');
+    
+    // Update help texts and recommendations based on activity type
+    switch(activityType) {
+        case 'irrigation':
+            descriptionHelp.innerHTML = '<span data-translate="irrigation_desc_help">सिंचाई की विधि और समय का विवरण दें</span>';
+            quantityHelp.innerHTML = '<span data-translate="irrigation_quantity_help">पानी की मात्रा mm या लीटर में दें</span>';
+            recommendationsDiv.classList.remove('hidden');
+            recommendationContent.innerHTML = `
+                <ul class="list-disc list-inside space-y-1">
+                    <li>सुबह या शाम के समय सिंचाई करें</li>
+                    <li>फसल की अवस्था के अनुसार पानी दें</li>
+                    <li>मिट्टी में नमी की जांच करें</li>
+                </ul>
+            `;
+            break;
+            
+        case 'fertilizer':
+            descriptionHelp.innerHTML = '<span data-translate="fertilizer_desc_help">उर्वरक का प्रकार और डालने की विधि बताएं</span>';
+            quantityHelp.innerHTML = '<span data-translate="fertilizer_quantity_help">उर्वरक की मात्रा kg में दें</span>';
+            recommendationsDiv.classList.remove('hidden');
+            recommendationContent.innerHTML = `
+                <ul class="list-disc list-inside space-y-1">
+                    <li>मिट्टी परीक्षण के आधार पर उर्वरक दें</li>
+                    <li>यूरिया सुबह के समय डालें</li>
+                    <li>उर्वरक डालने के बाद सिंचाई करें</li>
+                </ul>
+            `;
+            break;
+            
+        case 'pesticide':
+            descriptionHelp.innerHTML = '<span data-translate="pesticide_desc_help">कीटनाशक का नाम और छिड़काव की विधि बताएं</span>';
+            quantityHelp.innerHTML = '<span data-translate="pesticide_quantity_help">कीटनाशक की मात्रा लीटर में दें</span>';
+            recommendationsDiv.classList.remove('hidden');
+            recommendationContent.innerHTML = `
+                <ul class="list-disc list-inside space-y-1">
+                    <li>शाम के समय छिड़काव करें</li>
+                    <li>हवा न चलने पर छिड़काव करें</li>
+                    <li>सुरक्षा उपकरण पहनें</li>
+                </ul>
+            `;
+            break;
+            
+        case 'harvesting':
+            descriptionHelp.innerHTML = '<span data-translate="harvesting_desc_help">कटाई की विधि और समय का विवरण दें</span>';
+            quantityHelp.innerHTML = '<span data-translate="harvesting_quantity_help">कटाई का क्षेत्रफल एकड़ में दें</span>';
+            break;
+            
+        default:
+            descriptionHelp.innerHTML = '<span data-translate="description_help">गतिविधि का विस्तृत विवरण दर्ज करें</span>';
+            quantityHelp.innerHTML = '<span data-translate="quantity_help">मात्रा और इकाई दर्ज करें</span>';
+    }
+}
+
+function quickAdd(type, description, quantity) {
+    document.getElementById('activity_type').value = type;
+    document.getElementById('description').value = description;
+    document.getElementById('quantity').value = quantity;
+    updateActivityForm();
+}
+</script>
+{% endblock %}

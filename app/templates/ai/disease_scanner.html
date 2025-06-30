@@ -1,0 +1,389 @@
+{% extends "base.html" %}
+
+{% block title %}रोग पहचान स्कैनर - स्मार्ट कृषि ऐप{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gradient-to-br from-green-50 to-blue-50">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header -->
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+            <div class="text-center">
+                <h1 class="text-3xl font-bold text-gray-800 mb-2">🔍 रोग पहचान स्कैनर</h1>
+                <p class="text-gray-600">अपनी फसल की फोटो अपलोड करें और AI से रोग की पहचान कराएं</p>
+            </div>
+        </div>
+
+        <div class="max-w-4xl mx-auto">
+            <!-- Upload Section -->
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                <form id="diseaseForm" enctype="multipart/form-data" method="POST">
+                    <div class="text-center">
+                        <!-- File Upload Area -->
+                        <div id="uploadArea" class="border-2 border-dashed border-gray-300 rounded-lg p-12 mb-6 hover:border-green-500 transition-colors cursor-pointer">
+                            <div id="uploadPlaceholder">
+                                <div class="text-6xl mb-4">📷</div>
+                                <h3 class="text-xl font-semibold text-gray-700 mb-2">फसल की फोटो अपलोड करें</h3>
+                                <p class="text-gray-500 mb-4">यहाँ क्लिक करें या फोटो को खींचकर छोड़ें</p>
+                                <p class="text-sm text-gray-400">JPG, PNG या GIF (अधिकतम 10MB)</p>
+                            </div>
+                            
+                            <div id="imagePreview" class="hidden">
+                                <img id="previewImg" src="" alt="Preview" class="max-w-full max-h-64 mx-auto rounded-lg shadow">
+                                <p class="mt-4 text-gray-600">फोटो अपलोड हो गई है</p>
+                            </div>
+                        </div>
+                        
+                        <input type="file" id="fileInput" name="image" accept="image/*" class="hidden">
+                        
+                        <!-- Crop Selection -->
+                        <div class="mb-6">
+                            <label for="crop_id" class="block text-sm font-medium text-gray-700 mb-2">अपनी फसल चुनें</label>
+                            <select id="crop_id" name="crop_id" class="w-full max-w-md mx-auto px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500" required>
+                                <option value="">फसल चुनें</option>
+                                {% for crop in crops %}
+                                <option value="{{ crop.id }}">{{ crop.crop_type }} - {{ crop.farm_name }} ({{ crop.variety }})</option>
+                                {% endfor %}
+                            </select>
+                            <p class="text-sm text-gray-500 mt-1">कोई फसल नहीं दिख रही? <a href="{{ url_for('crops.add_crop') }}" class="text-green-600 hover:underline">पहले फसल जोड़ें</a></p>
+                        </div>
+                        
+                        <!-- Submit Button -->
+                        <button type="submit" id="analyzeBtn" class="bg-green-600 text-white px-8 py-3 rounded-lg hover:bg-green-700 transition duration-300 disabled:bg-gray-400 disabled:cursor-not-allowed" disabled>
+                            <span id="btnText">🔍 रोग की जांच करें</span>
+                            <span id="loadingText" class="hidden">⏳ जांच हो रही है...</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Results Section -->
+            <div id="resultsSection" class="hidden bg-white rounded-lg shadow-lg p-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">📊 विश्लेषण परिणाम</h2>
+                
+                <div id="resultsContent" class="space-y-6">
+                    <!-- Results will be populated here -->
+                </div>
+                
+                <div class="text-center mt-8">
+                    <button id="newScanBtn" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300">
+                        नई जांच करें
+                    </button>
+                </div>
+            </div>
+
+            <!-- Help Section -->
+            <div class="bg-white rounded-lg shadow-lg p-8 mt-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">📋 उपयोग की जानकारी</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="text-center">
+                        <div class="text-4xl mb-3">📸</div>
+                        <h3 class="font-semibold mb-2">स्पष्ट फोटो लें</h3>
+                        <p class="text-sm text-gray-600">पत्ते या फसल के प्रभावित हिस्से की साफ फोटो खींचें</p>
+                    </div>
+                    
+                    <div class="text-center">
+                        <div class="text-4xl mb-3">☀️</div>
+                        <h3 class="font-semibold mb-2">अच्छी रोशनी</h3>
+                        <p class="text-sm text-gray-600">दिन की रोशनी में या अच्छी लाइट में फोटो लें</p>
+                    </div>
+                    
+                    <div class="text-center">
+                        <div class="text-4xl mb-3">🎯</div>
+                        <h3 class="font-semibold mb-2">फोकस करें</h3>
+                        <p class="text-sm text-gray-600">रोग के लक्षण पर फोकस करके फोटो लें</p>
+                    </div>
+                </div>
+                
+                <div class="mt-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                    <p class="text-sm text-yellow-800">
+                        <strong>नोट:</strong> यह AI आधारित जांच है और 100% सटीक नहीं हो सकती। गंभीर समस्या के लिए कृषि विशेषज्ञ से सलाह लें।
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const uploadArea = document.getElementById('uploadArea');
+    const fileInput = document.getElementById('fileInput');
+    const uploadPlaceholder = document.getElementById('uploadPlaceholder');
+    const imagePreview = document.getElementById('imagePreview');
+    const previewImg = document.getElementById('previewImg');
+    const analyzeBtn = document.getElementById('analyzeBtn');
+    const diseaseForm = document.getElementById('diseaseForm');
+    const resultsSection = document.getElementById('resultsSection');
+    const btnText = document.getElementById('btnText');
+    const loadingText = document.getElementById('loadingText');
+    const newScanBtn = document.getElementById('newScanBtn');
+
+    // Upload area click handler
+    uploadArea.addEventListener('click', () => fileInput.click());
+
+    // Drag and drop handlers
+    uploadArea.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        uploadArea.classList.add('border-green-500');
+    });
+
+    uploadArea.addEventListener('dragleave', () => {
+        uploadArea.classList.remove('border-green-500');
+    });
+
+    uploadArea.addEventListener('drop', (e) => {
+        e.preventDefault();
+        uploadArea.classList.remove('border-green-500');
+        const files = e.dataTransfer.files;
+        if (files.length > 0) {
+            handleFileSelection(files[0]);
+        }
+    });
+
+    // File input change handler
+    fileInput.addEventListener('change', (e) => {
+        if (e.target.files.length > 0) {
+            handleFileSelection(e.target.files[0]);
+        }
+    });
+
+    function handleFileSelection(file) {
+        if (file && file.type.startsWith('image/')) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                previewImg.src = e.target.result;
+                uploadPlaceholder.classList.add('hidden');
+                imagePreview.classList.remove('hidden');
+                analyzeBtn.disabled = false;
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+
+    // Form submission
+    diseaseForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData();
+        const fileInput = document.getElementById('fileInput');
+        const cropId = document.getElementById('crop_id').value;
+        
+        if (!fileInput.files[0]) {
+            alert('कृपया एक फोटो अपलोड करें');
+            return;
+        }
+        
+        if (!cropId) {
+            alert('कृपया एक फसल चुनें');
+            return;
+        }
+        
+        formData.append('image', fileInput.files[0]);
+        formData.append('crop_id', cropId);
+        
+        btnText.classList.add('hidden');
+        loadingText.classList.remove('hidden');
+        analyzeBtn.disabled = true;
+
+        // Make actual API call
+        fetch('/ai/detect-disease', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                showResults(data.result);
+            } else {
+                showError(data.error || 'विश्लेषण में त्रुटि हुई');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            showError('नेटवर्क त्रुटि हुई');
+        })
+        .finally(() => {
+            btnText.classList.remove('hidden');
+            loadingText.classList.add('hidden');
+            analyzeBtn.disabled = false;
+        });
+    });
+
+    function showResults(result) {
+        const resultsContent = document.getElementById('resultsContent');
+        
+        const isHealthy = result.is_healthy;
+        const confidence = (result.confidence * 100).toFixed(1);
+        const disease = result.disease;
+        const diseaseEn = result.disease_en;
+        const treatment = result.treatment;
+        const analysisDetails = result.analysis_details || {};
+        const recommendations = result.recommendations || [];
+        
+        let statusColor = isHealthy ? 'green' : 'red';
+        let statusIcon = isHealthy ? '✅' : '⚠️';
+        let statusMessage = isHealthy ? 'फसल स्वस्थ है' : 'रोग की पहचान';
+        
+        resultsContent.innerHTML = `
+            <!-- Main Result Card -->
+            <div class="border border-gray-200 rounded-lg p-6">
+                <div class="flex items-start space-x-4">
+                    <div class="text-4xl">${statusIcon}</div>
+                    <div class="flex-1">
+                        <h3 class="text-xl font-semibold text-${statusColor}-600 mb-2">${statusMessage}</h3>
+                        <p class="text-gray-700 mb-4">
+                            ${isHealthy ? 
+                                'आपकी फसल स्वस्थ दिख रही है। नियमित देखभाल जारी रखें।' : 
+                                `आपकी फसल में <strong>${disease}</strong> (${diseaseEn}) के लक्षण दिखाई दे रहे हैं।`
+                            }
+                        </p>
+                        
+                        <!-- Confidence Score -->
+                        <div class="mb-4">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-sm font-medium">विश्वसनीयता स्तर</span>
+                                <span class="text-sm font-bold">${confidence}%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-${statusColor}-600 h-2 rounded-full" style="width: ${confidence}%"></div>
+                            </div>
+                        </div>
+                        
+                        ${!isHealthy ? `
+                            <!-- Treatment Section -->
+                            <div class="bg-${statusColor}-50 border border-${statusColor}-200 rounded-lg p-4 mb-4">
+                                <h4 class="font-semibold text-${statusColor}-800 mb-2">तुरंत उपचार:</h4>
+                                <div class="text-sm text-${statusColor}-700">
+                                    ${typeof treatment === 'object' ? formatTreatment(treatment) : `<p>${treatment}</p>`}
+                                </div>
+                            </div>
+                        ` : ''}
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Analysis Details -->
+            ${Object.keys(analysisDetails).length > 0 ? `
+                <div class="border border-gray-200 rounded-lg p-6">
+                    <h4 class="font-semibold text-gray-800 mb-4">📊 विश्लेषण विवरण</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        ${Object.entries(analysisDetails).map(([key, value]) => `
+                            <div class="bg-gray-50 p-3 rounded">
+                                <span class="text-sm font-medium">${formatAnalysisKey(key)}:</span>
+                                <span class="text-sm text-gray-600 ml-2">${value}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            ` : ''}
+            
+            <!-- Prevention Recommendations -->
+            ${recommendations.length > 0 ? `
+                <div class="border border-gray-200 rounded-lg p-6">
+                    <h4 class="font-semibold text-gray-800 mb-4">🛡️ बचाव के सुझाव</h4>
+                    <div class="space-y-3">
+                        ${recommendations.map(rec => `
+                            <div class="flex items-start space-x-3">
+                                <div class="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
+                                <div>
+                                    <span class="text-sm font-medium text-blue-800">${rec.category}:</span>
+                                    <p class="text-sm text-gray-700">${rec.recommendation}</p>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            ` : ''}
+            
+            <!-- Action Buttons -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button onclick="saveReport()" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300">
+                    📋 रिपोर्ट सेव करें
+                </button>
+                <a href="/ai/disease-history" class="bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition duration-300 text-center">
+                    📜 पुराने स्कैन देखें
+                </a>
+                <button onclick="shareReport()" class="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition duration-300">
+                    📤 विशेषज्ञ को भेजें
+                </button>
+            </div>
+        `;
+        
+        resultsSection.classList.remove('hidden');
+    }
+    
+    function formatTreatment(treatment) {
+        if (typeof treatment === 'string') return `<p>${treatment}</p>`;
+        
+        let html = '';
+        if (treatment.urgency) {
+            html += `<div class="mb-3 p-2 bg-red-100 border border-red-300 rounded text-red-800 font-medium">${treatment.urgency}</div>`;
+        }
+        if (treatment.immediate) {
+            html += `<div class="mb-2"><strong>तत्काल कार्रवाई:</strong> ${treatment.immediate}</div>`;
+        }
+        if (treatment.chemical) {
+            html += `<div class="mb-2"><strong>रासायनिक उपचार:</strong> ${treatment.chemical}</div>`;
+        }
+        if (treatment.organic) {
+            html += `<div class="mb-2"><strong>जैविक विकल्प:</strong> ${treatment.organic}</div>`;
+        }
+        if (treatment.frequency) {
+            html += `<div class="mb-2"><strong>आवृत्ति:</strong> ${treatment.frequency}</div>`;
+        }
+        if (treatment.precautions) {
+            html += `<div class="mb-2"><strong>सावधानियां:</strong> ${treatment.precautions}</div>`;
+        }
+        return html;
+    }
+    
+    function formatAnalysisKey(key) {
+        const keyMap = {
+            'image_quality': 'छवि गुणवत्ता',
+            'image_size': 'छवि आकार',
+            'analysis_time': 'विश्लेषण समय',
+            'severity_level': 'गंभीरता स्तर'
+        };
+        return keyMap[key] || key;
+    }
+    
+    function showError(message) {
+        const resultsContent = document.getElementById('resultsContent');
+        resultsContent.innerHTML = `
+            <div class="border border-red-200 rounded-lg p-6 bg-red-50">
+                <div class="flex items-start space-x-4">
+                    <div class="text-4xl">❌</div>
+                    <div class="flex-1">
+                        <h3 class="text-xl font-semibold text-red-600 mb-2">त्रुटि</h3>
+                        <p class="text-red-700">${message}</p>
+                        <p class="text-sm text-red-600 mt-2">कृपया दोबारा कोशिश करें या कृषि विशेषज्ञ से संपर्क करें।</p>
+                    </div>
+                </div>
+            </div>
+        `;
+        resultsSection.classList.remove('hidden');
+    }
+    
+    function saveReport() {
+        // Implement save functionality
+        alert('रिपोर्ट सेव की गई है। यह आपके इतिहास में उपलब्ध है।');
+    }
+    
+    function shareReport() {
+        // Implement share functionality
+        alert('विशेषज्ञ को रिपोर्ट भेजी जा रही है...');
+    }
+
+    // New scan button
+    newScanBtn.addEventListener('click', () => {
+        fileInput.value = '';
+        uploadPlaceholder.classList.remove('hidden');
+        imagePreview.classList.add('hidden');
+        resultsSection.classList.add('hidden');
+        analyzeBtn.disabled = true;
+        document.getElementById('crop_id').value = '';
+    });
+});
+</script>
+{% endblock %}

@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block title %}प्रोफाइल - स्मार्ट कृषि ऐप{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gradient-to-br from-green-50 to-blue-50">
+    <div class="container mx-auto px-4 py-8">
+        <div class="bg-white rounded-lg shadow-lg p-8 max-w-2xl mx-auto">
+            <h1 class="text-3xl font-bold text-gray-800 mb-8 text-center">प्रोफाइल</h1>
+            
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="mb-4 p-4 rounded-lg {% if category == 'success' %}bg-green-100 border border-green-400 text-green-700{% else %}bg-red-100 border border-red-400 text-red-700{% endif %}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            
+            <div class="space-y-6">
+                <div class="text-center mb-6">
+                    <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl">👨‍🌾</span>
+                    </div>
+                    <h2 class="text-xl font-semibold text-gray-800">{{ current_user.username }}</h2>
+                    <p class="text-gray-600">{{ current_user.email }}</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h3 class="font-semibold text-gray-700 mb-2">नाम</h3>
+                        <p class="text-gray-600">{{ current_user.username }}</p>
+                    </div>
+                    
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h3 class="font-semibold text-gray-700 mb-2">ईमेल</h3>
+                        <p class="text-gray-600">{{ current_user.email }}</p>
+                    </div>
+                    
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h3 class="font-semibold text-gray-700 mb-2">फोन नंबर</h3>
+                        <p class="text-gray-600">{{ current_user.phone or 'नहीं दिया गया' }}</p>
+                    </div>
+                    
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h3 class="font-semibold text-gray-700 mb-2">स्थान</h3>
+                        <p class="text-gray-600">{{ current_user.location or 'नहीं दिया गया' }}</p>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
+                    <div class="bg-green-50 p-4 rounded-lg text-center">
+                        <div class="text-2xl font-bold text-green-600">{{ current_user.farms.count() }}</div>
+                        <div class="text-sm text-green-700">कुल खेत</div>
+                    </div>
+                    
+                    <div class="bg-blue-50 p-4 rounded-lg text-center">
+                        <div class="text-2xl font-bold text-blue-600">
+                            {% set crop_count = 0 %}
+                            {% for farm in current_user.farms %}
+                                {% set crop_count = crop_count + farm.crops.count() %}
+                            {% endfor %}
+                            {{ crop_count }}
+                        </div>
+                        <div class="text-sm text-blue-700">कुल फसलें</div>
+                    </div>
+                    
+                    <div class="bg-purple-50 p-4 rounded-lg text-center">
+                        <div class="text-2xl font-bold text-purple-600">{{ current_user.created_at.strftime('%Y') }}</div>
+                        <div class="text-sm text-purple-700">ज्वाइन किया</div>
+                    </div>
+                </div>
+                
+                <div class="flex flex-col sm:flex-row gap-4 mt-8">
+                    <a href="{{ url_for('auth.edit_profile') }}" 
+                       class="flex-1 bg-green-600 text-white py-3 px-6 rounded-lg hover:bg-green-700 transition duration-300 text-center">
+                        प्रोफाइल एडिट करें
+                    </a>
+                    
+                    <a href="{{ url_for('auth.change_password') }}" 
+                       class="flex-1 bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition duration-300 text-center">
+                        पासवर्ड बदलें
+                    </a>
+                    
+                    <a href="{{ url_for('main.dashboard') }}" 
+                       class="flex-1 border border-gray-300 text-gray-700 py-3 px-6 rounded-lg hover:bg-gray-50 transition duration-300 text-center">
+                        डैशबोर्ड पर जाएं
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

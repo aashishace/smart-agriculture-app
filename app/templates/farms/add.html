@@ -1,0 +1,174 @@
+{% extends "base.html" %}
+
+{% block title %}{{ _('Add Farm') }} - {{ _('Smart Agriculture App') }}{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-50">
+    <div class="max-w-2xl mx-auto px-4 py-8">
+        <div class="bg-white rounded-lg shadow p-8">
+            <div class="flex items-center justify-between mb-6">
+                <h1 class="text-2xl font-bold text-gray-900">{{ _('Add New Farm') }}</h1>
+                <a href="{{ url_for('farms.index') }}" 
+                   class="text-blue-600 hover:text-blue-800 flex items-center">
+                    ← {{ _('Back to Farm List') }}
+                </a>
+            </div>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="mb-4 p-4 rounded-lg {% if category == 'success' %}bg-green-100 border border-green-400 text-green-700{% else %}bg-red-100 border border-red-400 text-red-700{% endif %}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <form method="POST" class="space-y-6">
+                <!-- Farm Name -->
+                <div>
+                    <label for="farm_name" class="block text-sm font-medium text-gray-700 mb-2">
+                        {{ _('Farm Name') }} *
+                    </label>
+                    <input type="text" 
+                           id="farm_name" 
+                           name="farm_name" 
+                           required
+                           placeholder="{{ _('e.g., Main Farm, East Field, etc.') }}"
+                           class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                </div>
+
+                <!-- Area in Acres -->
+                <div>
+                    <label for="area_acres" class="block text-sm font-medium text-gray-700 mb-2">
+                        {{ _('Area (in Acres)') }} *
+                    </label>
+                    <input type="number" 
+                           id="area_acres" 
+                           name="area_acres" 
+                           step="0.1" 
+                           min="0.1" 
+                           max="10000"
+                           required
+                           placeholder="{{ _('e.g., 2.5') }}"
+                           class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                    <p class="text-sm text-gray-600 mt-1">{{ _('Enter in decimal format (e.g., 2.5 acres)') }}</p>
+                </div>
+
+                <!-- Soil Type -->
+                <div>
+                    <label for="soil_type" class="block text-sm font-medium text-gray-700 mb-2">
+                        {{ _('Soil Type') }}
+                    </label>
+                    <select id="soil_type" 
+                            name="soil_type" 
+                            class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                        <option value="">{{ _('Select Soil Type') }}</option>
+                        <option value="clay">{{ _('Clay Soil') }}</option>
+                        <option value="sandy">{{ _('Sandy Soil') }}</option>
+                        <option value="loamy">{{ _('Loamy Soil') }}</option>
+                        <option value="silt">{{ _('Silt Soil') }}</option>
+                        <option value="black">{{ _('Black Soil') }}</option>
+                        <option value="red">{{ _('Red Soil') }}</option>
+                        <option value="alluvial">{{ _('Alluvial Soil') }}</option>
+                    </select>
+                </div>
+
+                <!-- GPS Coordinates Section -->
+                <div class="border-t pt-6">
+                    <h3 class="text-lg font-medium text-gray-900 mb-4">{{ _('Location Information (Optional)') }}</h3>
+                    <p class="text-sm text-gray-600 mb-4">
+                        {{ _('Add GPS coordinates for accurate weather information and irrigation advice') }}
+                    </p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- Latitude -->
+                        <div>
+                            <label for="latitude" class="block text-sm font-medium text-gray-700 mb-2">
+                                {{ _('Latitude') }}
+                            </label>
+                            <input type="number" 
+                                   id="latitude" 
+                                   name="latitude" 
+                                   step="0.000001" 
+                                   min="-90" 
+                                   max="90"
+                                   placeholder="{{ _('e.g., 26.8467') }}"
+                                   class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                        </div>
+
+                        <!-- Longitude -->
+                        <div>
+                            <label for="longitude" class="block text-sm font-medium text-gray-700 mb-2">
+                                {{ _('Longitude') }}
+                            </label>
+                            <input type="number" 
+                                   id="longitude" 
+                                   name="longitude" 
+                                   step="0.000001" 
+                                   min="-180" 
+                                   max="180"
+                                   placeholder="{{ _('e.g., 80.9462') }}"
+                                   class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                        </div>
+                    </div>
+
+                    <!-- Location Helper -->
+                    <div class="mt-4 p-4 bg-blue-50 rounded-lg">
+                        <h4 class="font-medium text-blue-900 mb-2">{{ _('How to get GPS coordinates:') }}</h4>
+                        <ul class="text-sm text-blue-800 space-y-1">
+                            <li>• {{ _('Open Google Maps and find your farm location') }}</li>
+                            <li>• {{ _('Long press on the location') }}</li>
+                            <li>• {{ _('Coordinates will appear (e.g., 26.8467, 80.9462)') }}</li>
+                            <li>• {{ _('First number is Latitude, second is Longitude') }}</li>
+                        </ul>
+                    </div>
+
+                    <!-- Get Current Location Button -->
+                    <div class="mt-4">
+                        <button type="button" 
+                                id="getCurrentLocation"
+                                class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300">
+                            📍 {{ _('Get My Current Location') }}
+                        </button>
+                        <p class="text-sm text-gray-600 mt-2">
+                            {{ _('This feature only works when you are at your farm') }}
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="flex justify-end space-x-4 pt-6">
+                    <a href="{{ url_for('farms.index') }}" 
+                       class="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition duration-300">
+                        {{ _('Cancel') }}
+                    </a>
+                    <button type="submit" 
+                            class="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition duration-300">
+                        {{ _('Add Farm') }}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+document.getElementById('getCurrentLocation').addEventListener('click', function() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            function(position) {
+                document.getElementById('latitude').value = position.coords.latitude.toFixed(6);
+                document.getElementById('longitude').value = position.coords.longitude.toFixed(6);
+                alert('{{ _("Location successfully obtained!") }}');
+            },
+            function(error) {
+                alert('{{ _("Error getting location: ") }}' + error.message);
+            }
+        );
+    } else {
+        alert('{{ _("Your browser does not support GPS location.") }}');
+    }
+});
+</script>
+{% endblock %}

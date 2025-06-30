@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+
+{% block title %}{{ _('Smart Agriculture App') }} - {{ _('Smart solutions for farmers') }}{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="bg-gradient text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div class="text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6">
+                🌾 {{ _('Smart Agriculture App') }}
+            </h1>
+            <p class="text-xl md:text-2xl mb-8 opacity-90">
+                {{ _('Make farming easy and profitable with modern technology') }}
+            </p>
+            <div class="space-x-4">
+                <a href="{{ url_for('auth.register') }}" 
+                   class="bg-white text-blue-600 hover:bg-gray-100 font-bold py-3 px-8 rounded-lg text-lg transition-colors">
+                    {{ _('Get Started') }}
+                </a>
+                <a href="{{ url_for('auth.login') }}" 
+                   class="border-2 border-white text-white hover:bg-white hover:text-blue-600 font-bold py-3 px-8 rounded-lg text-lg transition-colors">
+                    {{ _('Login') }}
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Features Section -->
+<div class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">{{ _('Our Services') }}</h2>
+            <p class="text-lg text-gray-600">{{ _('Smart solutions specially designed for farmers') }}</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Smart Irrigation -->
+            <div class="text-center p-6 rounded-lg border border-gray-200 hover:shadow-lg transition-shadow">
+                <div class="text-4xl mb-4">💧</div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">{{ _('Smart Irrigation') }}</h3>
+                <p class="text-gray-600">{{ _('Right irrigation information based on weather') }}</p>
+            </div>
+            
+            <!-- Disease Detection -->
+            <div class="text-center p-6 rounded-lg border border-gray-200 hover:shadow-lg transition-shadow">
+                <div class="text-4xl mb-4">🔍</div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">{{ _('Disease Detection') }}</h3>
+                <p class="text-gray-600">{{ _('Instantly identify crop diseases from photos') }}</p>
+            </div>
+            
+            <!-- Weather Alerts -->
+            <div class="text-center p-6 rounded-lg border border-gray-200 hover:shadow-lg transition-shadow">
+                <div class="text-4xl mb-4">🌤️</div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">{{ _('Weather Alerts') }}</h3>
+                <p class="text-gray-600">{{ _('Get weather information via SMS') }}</p>
+            </div>
+            
+            <!-- Crop Management -->
+            <div class="text-center p-6 rounded-lg border border-gray-200 hover:shadow-lg transition-shadow">
+                <div class="text-4xl mb-4">🌱</div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">{{ _('Crop Management') }}</h3>
+                <p class="text-gray-600">{{ _('Keep complete records of your crops') }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Benefits Section -->
+<div class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">{{ _('Why Choose Our App?') }}</h2>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="text-center">
+                <div class="text-5xl mb-4">📱</div>
+                <h3 class="text-xl font-semibold mb-2">{{ _('Easy to Use') }}</h3>
+                <p class="text-gray-600">{{ _('Simple Hindi interface, no technical knowledge required') }}</p>
+            </div>
+            
+            <div class="text-center">
+                <div class="text-5xl mb-4">🎯</div>
+                <h3 class="text-xl font-semibold mb-2">{{ _('Accurate Suggestions') }}</h3>
+                <p class="text-gray-600">{{ _('Personalized advice according to your region and crops') }}</p>
+            </div>
+            
+            <div class="text-center">
+                <div class="text-5xl mb-4">💰</div>
+                <h3 class="text-xl font-semibold mb-2">{{ _('Free Service') }}</h3>
+                <p class="text-gray-600">{{ _('All main features completely free') }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- How it Works -->
+<div class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">{{ _('How to Use?') }}</h2>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div class="text-center">
+                <div class="bg-blue-100 text-blue-600 rounded-full w-12 h-12 flex items-center justify-center font-bold text-xl mx-auto mb-4">1</div>
+                <h3 class="font-semibold mb-2">{{ _('Register') }}</h3>
+                <p class="text-sm text-gray-600">{{ _('Create your account') }}</p>
+            </div>
+            
+            <div class="text-center">
+                <div class="bg-blue-100 text-blue-600 rounded-full w-12 h-12 flex items-center justify-center font-bold text-xl mx-auto mb-4">2</div>
+                <h3 class="font-semibold mb-2">{{ _('Add Farm') }}</h3>
+                <p class="text-sm text-gray-600">{{ _('Provide your farm information') }}</p>
+            </div>
+            
+            <div class="text-center">
+                <div class="bg-blue-100 text-blue-600 rounded-full w-12 h-12 flex items-center justify-center font-bold text-xl mx-auto mb-4">3</div>
+                <h3 class="font-semibold mb-2">{{ _('Add Crops') }}</h3>
+                <p class="text-sm text-gray-600">{{ _('Tell us what you are growing') }}</p>
+            </div>
+            
+            <div class="text-center">
+                <div class="bg-blue-100 text-blue-600 rounded-full w-12 h-12 flex items-center justify-center font-bold text-xl mx-auto mb-4">4</div>
+                <h3 class="font-semibold mb-2">सुझाव पाएं</h3>
+                <p class="text-sm text-gray-600">स्मार्ट सלाह मिले</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CTA Section -->
+<div class="bg-green-600 text-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl font-bold mb-4">{{ _('Start Today!') }}</h2>
+        <p class="text-xl mb-8">{{ _('Thousands of farmers are already using it') }}</p>
+        <a href="{{ url_for('auth.register') }}" 
+           class="bg-white text-green-600 hover:bg-gray-100 font-bold py-4 px-8 rounded-lg text-lg transition-colors">
+            {{ _('Register for Free') }}
+        </a>
+    </div>
+</div>
+{% endblock %}

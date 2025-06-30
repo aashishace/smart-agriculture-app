@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+
+{% block title %}रोग पहचान इतिहास - स्मार्ट कृषि ऐप{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gradient-to-br from-green-50 to-blue-50">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header -->
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-800 mb-2">📋 रोग पहचान इतिहास</h1>
+                    <p class="text-gray-600">आपकी पिछली सभी रोग जांच का रिकॉर्ड</p>
+                </div>
+                <a href="{{ url_for('ai.disease_scanner') }}" class="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition duration-300">
+                    🔍 नई जांच करें
+                </a>
+            </div>
+        </div>
+
+        {% if detections and detections|length > 0 %}
+        <!-- Detection History -->
+        <div class="space-y-6">
+            {% for detection in detections %}
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-800">
+                                {{ detection.detected_disease or 'अज्ञात रोग' }}
+                            </h3>
+                            <p class="text-gray-600">
+                                {{ detection.created_at.strftime('%d %B %Y, %I:%M %p') if detection.created_at else 'तारीख अज्ञात' }}
+                            </p>
+                        </div>
+                        <span class="px-3 py-1 rounded-full text-sm font-medium
+                            {% if detection.confidence and detection.confidence > 80 %}bg-green-100 text-green-800
+                            {% elif detection.confidence and detection.confidence > 60 %}bg-yellow-100 text-yellow-800
+                            {% else %}bg-red-100 text-red-800{% endif %}">
+                            {% if detection.confidence %}
+                                {{ detection.confidence|round(1) }}% सटीकता
+                            {% else %}
+                                सटीकता अज्ञात
+                            {% endif %}
+                        </span>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- Image -->
+                        {% if detection.image_path %}
+                        <div class="text-center">
+                            <img src="{{ url_for('static', filename='uploads/' + detection.image_path) }}" 
+                                 alt="Crop Image" 
+                                 class="w-full h-32 object-cover rounded-lg shadow">
+                            <p class="text-sm text-gray-600 mt-2">अपलोड की गई फोटो</p>
+                        </div>
+                        {% else %}
+                        <div class="text-center">
+                            <div class="w-full h-32 bg-gray-200 rounded-lg flex items-center justify-center">
+                                <span class="text-gray-500">📷 फोटो उपलब्ध नहीं</span>
+                            </div>
+                        </div>
+                        {% endif %}
+                        
+                        <!-- Detection Details -->
+                        <div class="md:col-span-2">
+                            <div class="space-y-3">
+                                <div>
+                                    <span class="font-medium text-gray-700">फसल:</span>
+                                    <span class="text-gray-600">{{ detection.crop_type or 'अज्ञात' }}</span>
+                                </div>
+                                
+                                {% if detection.symptoms %}
+                                <div>
+                                    <span class="font-medium text-gray-700">लक्षण:</span>
+                                    <span class="text-gray-600">{{ detection.symptoms }}</span>
+                                </div>
+                                {% endif %}
+                                
+                                {% if detection.treatment_recommendation %}
+                                <div>
+                                    <span class="font-medium text-gray-700">सुझावे गए उपचार:</span>
+                                    <div class="mt-2 p-3 bg-blue-50 border border-blue-200 rounded">
+                                        <p class="text-blue-800 text-sm">{{ detection.treatment_recommendation }}</p>
+                                    </div>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Action Buttons -->
+                    <div class="mt-6 flex space-x-3">
+                        <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-300">
+                            विस्तार से देखें
+                        </button>
+                        <button class="border border-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-50 transition duration-300">
+                            रिपोर्ट डाउनलोड करें
+                        </button>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Pagination (if needed) -->
+        <div class="mt-8 text-center">
+            <button class="border border-gray-300 text-gray-700 px-6 py-2 rounded hover:bg-gray-50 transition duration-300">
+                और देखें
+            </button>
+        </div>
+        
+        {% else %}
+        <!-- Empty State -->
+        <div class="bg-white rounded-lg shadow-lg p-12 text-center">
+            <div class="text-6xl mb-4">🔍</div>
+            <h3 class="text-2xl font-semibold text-gray-800 mb-4">अभी तक कोई जांच नहीं</h3>
+            <p class="text-gray-600 mb-8">
+                अपनी फसल की पहली रोग जांच करें और इतिहास यहाँ देखें
+            </p>
+            
+            <div class="space-y-4">
+                <a href="{{ url_for('ai.disease_scanner') }}" 
+                   class="block w-full max-w-sm mx-auto bg-green-600 text-white py-3 px-6 rounded-lg hover:bg-green-700 transition duration-300">
+                    🔍 पहली जांच करें
+                </a>
+                
+                <a href="{{ url_for('main.dashboard') }}" 
+                   class="block w-full max-w-sm mx-auto border border-gray-300 text-gray-700 py-3 px-6 rounded-lg hover:bg-gray-50 transition duration-300">
+                    डैशबोर्ड पर जाएं
+                </a>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

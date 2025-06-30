@@ -1,0 +1,272 @@
+{% extends "base.html" %}
+
+{% block title %}
+<span data-translate="activities">गतिविधियां</span> - {{ crop.crop_type }} - <span data-translate="smart_agriculture_app">स्मार्ट कृषि ऐप</span>
+{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-50">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- Header -->
+        <div class="bg-white rounded-lg shadow p-6 mb-8">
+            <div class="flex justify-between items-start">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-900 mb-2">
+                        <span data-translate="crop_activities">फसल गतिविधियां</span>
+                    </h1>
+                    <p class="text-gray-600">
+                        {{ crop.crop_type.title() }} {% if crop.variety %}({{ crop.variety }}){% endif %} - 
+                        <span data-translate="farm">खेत</span>: {{ crop.farm.farm_name }}
+                    </p>
+                </div>
+                <div class="flex space-x-3">
+                    <a href="{{ url_for('crops.add_activity', crop_id=crop.id) }}" 
+                       class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition duration-300">
+                        ➕ <span data-translate="add_activity">गतिविधि जोड़ें</span>
+                    </a>
+                    <a href="{{ url_for('crops.view', crop_id=crop.id) }}" 
+                       class="border border-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-50 transition duration-300">
+                        <span data-translate="back_to_crop">फसल पर वापस</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filter and Stats -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+            <div class="bg-white rounded-lg shadow p-4 text-center">
+                <div class="text-2xl font-bold text-blue-600">{{ activities.total }}</div>
+                <div class="text-sm text-gray-600"><span data-translate="total_activities">कुल गतिविधियां</span></div>
+            </div>
+            <div class="bg-white rounded-lg shadow p-4 text-center">
+                <div class="text-2xl font-bold text-green-600">
+                    {{ activities.items | selectattr('status', 'equalto', 'completed') | list | length }}
+                </div>
+                <div class="text-sm text-gray-600"><span data-translate="completed">पूर्ण</span></div>
+            </div>
+            <div class="bg-white rounded-lg shadow p-4 text-center">
+                <div class="text-2xl font-bold text-yellow-600">
+                    {{ activities.items | selectattr('status', 'equalto', 'pending') | list | length }}
+                </div>
+                <div class="text-sm text-gray-600"><span data-translate="pending">बकाया</span></div>
+            </div>
+            <div class="bg-white rounded-lg shadow p-4 text-center">
+                <div class="text-2xl font-bold text-red-600">
+                    {{ activities.items | selectattr('is_overdue', 'equalto', true) | list | length }}
+                </div>
+                <div class="text-sm text-gray-600"><span data-translate="overdue">विलंबित</span></div>
+            </div>
+        </div>
+
+        <!-- Activities List -->
+        <div class="bg-white rounded-lg shadow">
+            <div class="p-6 border-b border-gray-200">
+                <h2 class="text-xl font-semibold text-gray-900">
+                    <span data-translate="activity_history">गतिविधि इतिहास</span>
+                </h2>
+            </div>
+            
+            {% if activities.items %}
+                <div class="divide-y divide-gray-200">
+                    {% for activity in activities.items %}
+                    <div class="p-6 hover:bg-gray-50 transition duration-200">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center flex-1">
+                                <!-- Activity Icon -->
+                                <div class="text-3xl mr-4">
+                                    {% if activity.activity_type == 'irrigation' %}💧
+                                    {% elif activity.activity_type == 'fertilizer' %}🌿
+                                    {% elif activity.activity_type == 'pesticide' %}🛡️
+                                    {% elif activity.activity_type == 'harvesting' %}🌾
+                                    {% else %}📋{% endif %}
+                                </div>
+                                
+                                <!-- Activity Details -->
+                                <div class="flex-1">
+                                    <div class="flex items-center gap-3 mb-1">
+                                        <h3 class="font-medium text-gray-900">
+                                            {{ activity.description or activity.activity_type.title() }}
+                                        </h3>
+                                        
+                                        <!-- Status Badge -->
+                                        <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full 
+                                            {% if activity.status == 'completed' %}bg-green-100 text-green-800
+                                            {% elif activity.status == 'pending' and activity.is_overdue() %}bg-red-100 text-red-800
+                                            {% elif activity.status == 'pending' %}bg-yellow-100 text-yellow-800
+                                            {% else %}bg-gray-100 text-gray-800{% endif %}">
+                                            {% if activity.status == 'completed' %}<span data-translate="completed">पूर्ण</span>
+                                            {% elif activity.is_overdue() %}<span data-translate="overdue">विलंबित</span>
+                                            {% elif activity.status == 'pending' %}<span data-translate="pending">बकाया</span>
+                                            {% else %}{{ activity.status.title() }}{% endif %}
+                                        </span>
+                                    </div>
+                                    
+                                    <div class="text-sm text-gray-600">
+                                        <span data-translate="scheduled">निर्धारित</span>: 
+                                        {% if activity.scheduled_date %}
+                                            {% if activity.scheduled_date.strftime %}
+                                                {{ activity.scheduled_date.strftime('%d/%m/%Y') }}
+                                            {% else %}
+                                                {{ activity.scheduled_date }}
+                                            {% endif %}
+                                        {% else %}
+                                            N/A
+                                        {% endif %}
+                                        {% if activity.completed_date %}
+                                        | <span data-translate="completed">पूर्ण</span>: 
+                                            {% if activity.completed_date.strftime %}
+                                                {{ activity.completed_date.strftime('%d/%m/%Y') }}
+                                            {% else %}
+                                                {{ activity.completed_date }}
+                                            {% endif %}
+                                        {% endif %}
+                                        {% if activity.quantity %}
+                                        | <span data-translate="quantity">मात्रा</span>: {{ activity.quantity }}
+                                        {% endif %}
+                                    </div>
+                                    
+                                    {% if activity.notes %}
+                                    <div class="mt-2 text-sm text-gray-500">
+                                        <span data-translate="notes">टिप्पणी</span>: {{ activity.notes }}
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            
+                            <!-- Actions -->
+                            <div class="flex items-center space-x-2 ml-4">
+                                {% if activity.status == 'pending' %}
+                                <form action="{{ url_for('crops.complete_activity', activity_id=activity.id) }}" 
+                                      method="POST" 
+                                      class="inline"
+                                      onsubmit="return confirm('क्या आप इस गतिविधि को पूर्ण चिह्नित करना चाहते हैं?')">
+                                    <button type="submit" 
+                                            class="bg-green-600 text-white px-3 py-1 rounded text-sm hover:bg-green-700 transition duration-300">
+                                        ✓ <span data-translate="mark_complete">पूर्ण करें</span>
+                                    </button>
+                                </form>
+                                {% endif %}
+                                
+                                <button onclick="showActivityDetails({{ activity.id }})" 
+                                        class="text-blue-600 hover:text-blue-700 text-sm">
+                                    <span data-translate="details">विवरण</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                
+                <!-- Pagination -->
+                {% if activities.pages > 1 %}
+                <div class="bg-white px-6 py-3 border-t border-gray-200">
+                    <div class="flex items-center justify-between">
+                        <div class="text-sm text-gray-700">
+                            <span data-translate="showing">दिखाया जा रहा</span> 
+                            {{ (activities.page - 1) * activities.per_page + 1 }} 
+                            <span data-translate="to">से</span> 
+                            {{ activities.page * activities.per_page if activities.page < activities.pages else activities.total }} 
+                            <span data-translate="of">का</span> {{ activities.total }} 
+                            <span data-translate="results">परिणाम</span>
+                        </div>
+                        
+                        <div class="flex space-x-1">
+                            {% if activities.has_prev %}
+                            <a href="{{ url_for('crops.activities', crop_id=crop.id, page=activities.prev_num) }}" 
+                               class="px-3 py-2 text-sm text-gray-500 hover:text-gray-700">
+                                ← <span data-translate="previous">पिछला</span>
+                            </a>
+                            {% endif %}
+                            
+                            {% for page_num in activities.iter_pages() %}
+                                {% if page_num %}
+                                    {% if page_num != activities.page %}
+                                    <a href="{{ url_for('crops.activities', crop_id=crop.id, page=page_num) }}" 
+                                       class="px-3 py-2 text-sm text-gray-500 hover:text-gray-700">
+                                        {{ page_num }}
+                                    </a>
+                                    {% else %}
+                                    <span class="px-3 py-2 text-sm bg-green-600 text-white rounded">
+                                        {{ page_num }}
+                                    </span>
+                                    {% endif %}
+                                {% else %}
+                                <span class="px-3 py-2 text-sm text-gray-400">…</span>
+                                {% endif %}
+                            {% endfor %}
+                            
+                            {% if activities.has_next %}
+                            <a href="{{ url_for('crops.activities', crop_id=crop.id, page=activities.next_num) }}" 
+                               class="px-3 py-2 text-sm text-gray-500 hover:text-gray-700">
+                                <span data-translate="next">अगला</span> →
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                
+            {% else %}
+                <!-- Empty State -->
+                <div class="text-center py-12">
+                    <div class="text-6xl mb-4">📋</div>
+                    <h3 class="text-lg font-medium text-gray-900 mb-2">
+                        <span data-translate="no_activities">कोई गतिविधि नहीं मिली</span>
+                    </h3>
+                    <p class="text-gray-600 mb-6">
+                        <span data-translate="no_activities_desc">इस फसल के लिए अभी तक कोई गतिविधि नहीं जोड़ी गई है</span>
+                    </p>
+                    <a href="{{ url_for('crops.add_activity', crop_id=crop.id) }}" 
+                       class="inline-block bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition duration-300">
+                        ➕ <span data-translate="add_first_activity">पहली गतिविधि जोड़ें</span>
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<!-- Activity Details Modal -->
+<div id="activityModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden items-center justify-center z-50">
+    <div class="bg-white rounded-lg shadow-xl max-w-md w-full mx-4">
+        <div class="p-6">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-semibold text-gray-900">
+                    <span data-translate="activity_details">गतिविधि विवरण</span>
+                </h3>
+                <button onclick="hideActivityDetails()" class="text-gray-400 hover:text-gray-600">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <div id="activityDetails">
+                <!-- Activity details will be loaded here -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function showActivityDetails(activityId) {
+    // Simple implementation - in a real app you'd fetch details via AJAX
+    document.getElementById('activityModal').style.display = 'flex';
+    document.getElementById('activityDetails').innerHTML = `
+        <p class="text-gray-600">गतिविधि ID: ${activityId}</p>
+        <p class="text-sm text-gray-500 mt-2">विस्तृत जानकारी यहाँ दिखाई जाएगी...</p>
+    `;
+}
+
+function hideActivityDetails() {
+    document.getElementById('activityModal').style.display = 'none';
+}
+
+// Close modal when clicking outside
+document.getElementById('activityModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+        hideActivityDetails();
+    }
+});
+</script>
+{% endblock %}

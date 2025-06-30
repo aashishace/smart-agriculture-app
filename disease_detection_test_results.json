@@ -1,0 +1,32 @@
+[
+  {
+    "test_case": "Healthy Wheat Leaf",
+    "error": "slice(None, 100, None)",
+    "status": "FAILED"
+  },
+  {
+    "test_case": "Diseased Wheat Leaf",
+    "error": "slice(None, 100, None)",
+    "status": "FAILED"
+  },
+  {
+    "test_case": "Healthy Rice Plant",
+    "error": "slice(None, 100, None)",
+    "status": "FAILED"
+  },
+  {
+    "test_case": "Diseased Rice Plant",
+    "error": "slice(None, 100, None)",
+    "status": "FAILED"
+  },
+  {
+    "test_case": "Healthy Sugarcane",
+    "error": "slice(None, 100, None)",
+    "status": "FAILED"
+  },
+  {
+    "test_case": "Diseased Sugarcane",
+    "error": "slice(None, 100, None)",
+    "status": "FAILED"
+  }
+]

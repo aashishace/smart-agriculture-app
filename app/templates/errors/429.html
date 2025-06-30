@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}बहुत सारे अनुरोध - Smart Agriculture{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 text-center">
+            <div class="error-page">
+                <h1 class="display-1 text-warning">429</h1>
+                <h2 class="mb-4">बहुत सारे अनुरोध</h2>
+                <p class="lead">आपने बहुत सारे अनुरोध भेजे हैं। कृपया कुछ समय बाद फिर से कोशिश करें।</p>
+                <div class="mt-4">
+                    <a href="{{ url_for('main.index') }}" class="btn btn-primary">
+                        <i class="fas fa-home"></i> होम पेज पर जाएं
+                    </a>
+                    <button class="btn btn-outline-secondary ml-2" onclick="setTimeout(() => location.reload(), 5000)">
+                        <i class="fas fa-refresh"></i> 5 सेकंड में रीलोड करें
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.error-page {
+    padding: 4rem 0;
+}
+.display-1 {
+    font-size: 8rem;
+    font-weight: 300;
+}
+</style>
+{% endblock %}

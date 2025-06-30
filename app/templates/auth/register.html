@@ -1,0 +1,170 @@
+{% extends "base.html" %}
+
+{% block title %}{{ _('Create Account') }}{% endblock %}
+
+{% block content %}
+<div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md w-full space-y-8">
+        <div class="text-center">
+            <div class="text-6xl mb-4">🌾</div>
+            <h2 class="text-3xl font-bold text-gray-900">
+                {{ _('Register with Smart Agriculture App') }}
+            </h2>
+            <p class="mt-2 text-sm text-gray-600">
+                {{ _('Already have an account?') }}
+                <a href="{{ url_for('auth.login') }}" class="font-medium text-blue-600 hover:text-blue-500">
+                    {{ _('Login') }}
+                </a>
+            </p>
+        </div>
+        
+        <form class="mt-8 space-y-6" method="POST">
+            <div class="space-y-4">
+                <div>
+                    <label for="name" class="block text-sm font-medium text-gray-700">
+                        {{ _('Full Name') }} *
+                    </label>
+                    <input id="name" 
+                           name="name" 
+                           type="text" 
+                           required
+                           placeholder="{{ _('Your full name') }}"
+                           class="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm">
+                </div>
+                
+                <div>
+                    <label for="phone" class="block text-sm font-medium text-gray-700">
+                        {{ _('Mobile Number') }} *
+                    </label>
+                    <input id="phone" 
+                           name="phone" 
+                           type="tel" 
+                           required
+                           placeholder="1234567890"
+                           pattern="[6-9]\d{9}"
+                           class="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm">
+                    <p class="text-xs text-gray-500 mt-1">{{ _('10 digit Indian mobile number') }}</p>
+                </div>
+                
+                <div>
+                    <label for="village" class="block text-sm font-medium text-gray-700">
+                        {{ _('Village/City') }} *
+                    </label>
+                    <input id="village" 
+                           name="village" 
+                           type="text" 
+                           required
+                           placeholder="{{ _('Your village or city') }}"
+                           class="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm">
+                </div>
+                
+                <div>
+                    <label for="state" class="block text-sm font-medium text-gray-700">
+                        {{ _('State') }} *
+                    </label>
+                    <select id="state" 
+                            name="state" 
+                            required
+                            class="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                        <option value="">{{ _('Select State') }}</option>
+                        <option value="UP">{{ _('Uttar Pradesh') }}</option>
+                        <option value="Bihar">{{ _('Bihar') }}</option>
+                        <option value="MP">{{ _('Madhya Pradesh') }}</option>
+                        <option value="Rajasthan">{{ _('Rajasthan') }}</option>
+                        <option value="Punjab">{{ _('Punjab') }}</option>
+                        <option value="Haryana">{{ _('Haryana') }}</option>
+                        <option value="Maharashtra">{{ _('Maharashtra') }}</option>
+                        <option value="Karnataka">{{ _('Karnataka') }}</option>
+                        <option value="Tamil Nadu">{{ _('Tamil Nadu') }}</option>
+                        <option value="Andhra Pradesh">{{ _('Andhra Pradesh') }}</option>
+                        <option value="West Bengal">{{ _('West Bengal') }}</option>
+                        <option value="Gujarat">{{ _('Gujarat') }}</option>
+                        <option value="Odisha">{{ _('Odisha') }}</option>
+                        <option value="Telangana">{{ _('Telangana') }}</option>
+                        <option value="Kerala">{{ _('Kerala') }}</option>
+                        <option value="Jharkhand">{{ _('Jharkhand') }}</option>
+                        <option value="Assam">{{ _('Assam') }}</option>
+                        <option value="Chhattisgarh">{{ _('Chhattisgarh') }}</option>
+                        <option value="Uttarakhand">{{ _('Uttarakhand') }}</option>
+                        <option value="Himachal Pradesh">{{ _('Himachal Pradesh') }}</option>
+                        <option value="Jammu Kashmir">{{ _('Jammu Kashmir') }}</option>
+                        <option value="Other">{{ _('Other') }}</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label for="preferred_language" class="block text-sm font-medium text-gray-700">
+                        {{ _('Language') }}
+                    </label>
+                    <select id="preferred_language" 
+                            name="preferred_language"
+                            class="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                        <option value="hi">हिंदी</option>
+                        <option value="en">English</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700">
+                        {{ _('Password') }} *
+                    </label>
+                    <input id="password" 
+                           name="password" 
+                           type="password" 
+                           required
+                           minlength="6"
+                           placeholder="{{ _('At least 6 characters') }}"
+                           class="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm">
+                </div>
+                
+                <div>
+                    <label for="confirm_password" class="block text-sm font-medium text-gray-700">
+                        {{ _('Confirm Password') }} *
+                    </label>
+                    <input id="confirm_password" 
+                           name="confirm_password" 
+                           type="password" 
+                           required
+                           placeholder="{{ _('Re-enter password') }}"
+                           class="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm">
+                </div>
+            </div>
+
+            <div>
+                <button type="submit" 
+                        class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                    {{ _('Register') }}
+                </button>
+            </div>
+            
+            <div class="text-center">
+                <p class="text-xs text-gray-500">
+                    {{ _('By registering you agree to our') }}
+                    <a href="{{ url_for('main.terms') }}" class="text-blue-600 hover:underline">{{ _('Terms') }}</a>
+                    {{ _('and') }}
+                    <a href="{{ url_for('main.privacy') }}" class="text-blue-600 hover:underline">{{ _('Privacy Policy') }}</a>.
+                </p>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+// Password confirmation validation
+document.addEventListener('DOMContentLoaded', function() {
+    const password = document.getElementById('password');
+    const confirmPassword = document.getElementById('confirm_password');
+    
+    function validatePassword() {
+        if (password.value !== confirmPassword.value) {
+            confirmPassword.setCustomValidity("{{ _('Passwords do not match') }}");
+        } else {
+            confirmPassword.setCustomValidity('');
+        }
+    }
+    
+    password.addEventListener('change', validatePassword);
+    confirmPassword.addEventListener('keyup', validatePassword);
+});
+</script>
+{% endblock %}

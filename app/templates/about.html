@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}{{ _('About Us') }} - {{ _('Smart Agriculture App') }}{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gradient-to-br from-green-50 to-blue-50">
+    <div class="container mx-auto px-4 py-8">
+        <div class="bg-white rounded-lg shadow-lg p-8 max-w-4xl mx-auto">
+            <h1 class="text-4xl font-bold text-gray-800 mb-8 text-center">{{ _('About Us') }}</h1>
+            
+            <div class="prose max-w-none">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-4">{{ _('Smart Agriculture App') }}</h2>
+                <p class="text-gray-600 mb-6">
+                    {{ _('Smart Agriculture App is a modern agricultural management platform that helps farmers make better decisions in their farming. This app provides features like weather information, crop monitoring, disease identification, and irrigation management.') }}
+                </p>
+                
+                <h3 class="text-xl font-semibold text-gray-700 mb-3">{{ _('Our Features') }}</h3>
+                <ul class="list-disc list-inside text-gray-600 mb-6">
+                    <li>{{ _('Real-time weather information') }}</li>
+                    <li>{{ _('Crop monitoring and management') }}</li>
+                    <li>{{ _('AI-based disease identification') }}</li>
+                    <li>{{ _('Smart irrigation system') }}</li>
+                    <li>{{ _('Advice from agricultural experts') }}</li>
+                    <li>{{ _('Market price information') }}</li>
+                </ul>
+                
+                <h3 class="text-xl font-semibold text-gray-700 mb-3">{{ _('Our Mission') }}</h3>
+                <p class="text-gray-600 mb-6">
+                    {{ _('Our mission is to increase the agricultural productivity of Indian farmers by connecting them with modern technology. We want every farmer to be able to take advantage of digital agriculture.') }}
+                </p>
+                
+                <div class="bg-green-50 border-l-4 border-green-400 p-4 mt-8">
+                    <p class="text-green-700">
+                        <strong>{{ _('Contact Us') }}:</strong> {{ _('If you have any questions or want to connect with us, please visit our') }}
+                        <a href="{{ url_for('main.contact') }}" class="text-green-600 hover:text-green-800 underline">{{ _('contact page') }}</a>
+                        {{ _('.') }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

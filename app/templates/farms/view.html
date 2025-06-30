@@ -1,0 +1,307 @@
+{% extends "base.html" %}
+
+{% block title %}{{ farm.farm_name }} - स्मार्ट कृषि ऐप{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-50">
+    <div class="max-w-6xl mx-auto px-4 py-8">
+        
+        <!-- Header -->
+        <div class="flex justify-between items-start mb-8">
+            <div>
+                <div class="flex items-center space-x-4 mb-2">
+                    <a href="{{ url_for('farms.index') }}" 
+                       class="text-blue-600 hover:text-blue-800">
+                        ← खेत सूची में वापस
+                    </a>
+                </div>
+                <h1 class="text-3xl font-bold text-gray-900">{{ farm.farm_name }}</h1>
+                <p class="text-gray-600 mt-2">{{ farm.area_acres }} एकड़ क्षेत्रफल</p>
+            </div>
+            <div class="flex space-x-3">
+                <a href="{{ url_for('farms.edit', farm_id=farm.id) }}" 
+                   class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300">
+                    ✏️ संपादित करें
+                </a>
+                <a href="{{ url_for('crops.add_crop') }}?farm_id={{ farm.id }}" 
+                   class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition duration-300">
+                    🌱 फसल जोड़ें
+                </a>
+            </div>
+        </div>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="mb-6 p-4 rounded-lg {% if category == 'success' %}bg-green-100 border border-green-400 text-green-700{% else %}bg-red-100 border border-red-400 text-red-700{% endif %}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <!-- Main Content -->
+            <div class="lg:col-span-2 space-y-6">
+                
+                <!-- Farm Statistics -->
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h2 class="text-xl font-semibold text-gray-900 mb-4">खेत का सांख्यिकी</h2>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="text-center p-4 bg-blue-50 rounded-lg">
+                            <div class="text-2xl font-bold text-blue-600">{{ stats.total_crops }}</div>
+                            <div class="text-sm text-blue-800">सक्रिय फसलें</div>
+                        </div>
+                        <div class="text-center p-4 bg-green-50 rounded-lg">
+                            <div class="text-2xl font-bold text-green-600">{{ "%.1f"|format(stats.total_area_used) }}</div>
+                            <div class="text-sm text-green-800">उपयोग में (एकड़)</div>
+                        </div>
+                        <div class="text-center p-4 bg-yellow-50 rounded-lg">
+                            <div class="text-2xl font-bold text-yellow-600">{{ "%.1f"|format(stats.available_area) }}</div>
+                            <div class="text-sm text-yellow-800">उपलब्ध (एकड़)</div>
+                        </div>
+                        <div class="text-center p-4 bg-purple-50 rounded-lg">
+                            <div class="text-2xl font-bold text-purple-600">{{ "%.0f"|format(stats.utilization_percent) }}%</div>
+                            <div class="text-sm text-purple-800">उपयोग प्रतिशत</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Active Crops -->
+                <div class="bg-white rounded-lg shadow">
+                    <div class="p-6 border-b border-gray-200">
+                        <div class="flex justify-between items-center">
+                            <h2 class="text-xl font-semibold text-gray-900">सक्रिय फसलें</h2>
+                            {% if stats.available_area > 0 %}
+                                <a href="{{ url_for('crops.add_crop') }}?farm_id={{ farm.id }}" 
+                                   class="text-green-600 hover:text-green-800 text-sm font-medium">
+                                    + नई फसल जोड़ें
+                                </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    {% if active_crops %}
+                        <div class="p-6">
+                            <div class="space-y-4">
+                                {% for crop in active_crops %}
+                                    <div class="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition duration-300">
+                                        <div class="flex justify-between items-start">
+                                            <div class="flex-1">
+                                                <div class="flex items-center space-x-3 mb-2">
+                                                    <h3 class="font-semibold text-gray-900">
+                                                        {{ crop.crop_type|title }}
+                                                        {% if crop.variety %}({{ crop.variety }}){% endif %}
+                                                    </h3>
+                                                    <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">
+                                                        {{ crop.area_acres }} एकड़
+                                                    </span>
+                                                </div>
+                                                <div class="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm text-gray-600">
+                                                    <div>
+                                                        <strong>रोपण:</strong> {{ crop.planting_date.strftime('%d/%m/%Y') if crop.planting_date }}
+                                                    </div>
+                                                    <div>
+                                                        <strong>दिन:</strong> {{ crop.get_days_since_planting() }} दिन पुराना
+                                                    </div>
+                                                    <div>
+                                                        <strong>अवस्था:</strong> {{ crop.get_growth_stage_info()['description'] }}
+                                                    </div>
+                                                </div>
+                                                {% if crop.expected_harvest_date %}
+                                                    <div class="mt-2 text-sm">
+                                                        <span class="text-gray-600">कटाई की संभावित तारीख:</span>
+                                                        <span class="font-medium text-orange-600">
+                                                            {{ crop.expected_harvest_date.strftime('%d/%m/%Y') }}
+                                                        </span>
+                                                        {% set days_to_harvest = crop.get_days_to_harvest() %}
+                                                        {% if days_to_harvest is not none %}
+                                                            <span class="text-gray-500">
+                                                                ({{ days_to_harvest }} दिन बाकी)
+                                                            </span>
+                                                        {% endif %}
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                            <div class="flex flex-col space-y-2 ml-4">
+                                                <a href="{{ url_for('crops.view', crop_id=crop.id) }}" 
+                                                   class="bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700 transition duration-300 text-center">
+                                                    विवरण
+                                                </a>
+                                                <a href="{{ url_for('crops.add_activity', crop_id=crop.id) }}" 
+                                                   class="bg-green-600 text-white px-3 py-1 rounded text-sm hover:bg-green-700 transition duration-300 text-center">
+                                                    गतिविधि
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="p-8 text-center">
+                            <div class="text-4xl mb-4">🌱</div>
+                            <h3 class="text-lg font-medium text-gray-900 mb-2">अभी तक कोई फसल नहीं</h3>
+                            <p class="text-gray-600 mb-4">इस खेत में अपनी पहली फसल जोड़ें</p>
+                            <a href="{{ url_for('crops.add_crop') }}?farm_id={{ farm.id }}" 
+                               class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition duration-300">
+                                फसल जोड़ें
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="space-y-6">
+                
+                <!-- Farm Details -->
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">खेत की जानकारी</h3>
+                    <div class="space-y-3">
+                        <div>
+                            <span class="text-gray-600">नाम:</span>
+                            <span class="font-medium">{{ farm.farm_name }}</span>
+                        </div>
+                        <div>
+                            <span class="text-gray-600">क्षेत्रफल:</span>
+                            <span class="font-medium">{{ farm.area_acres }} एकड़</span>
+                        </div>
+                        {% if farm.soil_type %}
+                            <div>
+                                <span class="text-gray-600">मिट्टी:</span>
+                                <span class="font-medium">{{ farm.soil_type }}</span>
+                            </div>
+                        {% endif %}
+                        <div>
+                            <span class="text-gray-600">जोड़ा गया:</span>
+                            <span class="font-medium">{{ farm.created_at.strftime('%d/%m/%Y') if farm.created_at }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Location Info -->
+                {% if farm.is_location_set() %}
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4">स्थान</h3>
+                        <div class="space-y-3">
+                            <div>
+                                <span class="text-gray-600">अक्षांश:</span>
+                                <span class="font-medium">{{ "%.6f"|format(farm.latitude) }}</span>
+                            </div>
+                            <div>
+                                <span class="text-gray-600">देशांतर:</span>
+                                <span class="font-medium">{{ "%.6f"|format(farm.longitude) }}</span>
+                            </div>
+                            <div class="mt-4">
+                                <a href="https://www.google.com/maps?q={{ farm.latitude }},{{ farm.longitude }}" 
+                                   target="_blank"
+                                   class="text-blue-600 hover:text-blue-800 text-sm">
+                                    📍 Google Maps में देखें
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-6">
+                        <h3 class="text-lg font-semibold text-yellow-800 mb-2">स्थान जोड़ें</h3>
+                        <p class="text-yellow-700 text-sm mb-4">
+                            मौसम की सटीक जानकारी के लिए GPS निर्देशांक जोड़ें
+                        </p>
+                        <a href="{{ url_for('farms.edit', farm_id=farm.id) }}" 
+                           class="bg-yellow-600 text-white px-4 py-2 rounded text-sm hover:bg-yellow-700 transition duration-300">
+                            स्थान जोड़ें
+                        </a>
+                    </div>
+                {% endif %}
+
+                <!-- Quick Actions -->
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">त्वरित कार्य</h3>
+                    <div class="space-y-3">
+                        <a href="{{ url_for('crops.add_crop') }}?farm_id={{ farm.id }}" 
+                           class="block w-full bg-green-600 text-white py-2 px-4 rounded text-center hover:bg-green-700 transition duration-300">
+                            🌱 नई फसल जोड़ें
+                        </a>
+                        <a href="{{ url_for('farms.edit', farm_id=farm.id) }}" 
+                           class="block w-full bg-blue-600 text-white py-2 px-4 rounded text-center hover:bg-blue-700 transition duration-300">
+                            ✏️ खेत संपादित करें
+                        </a>
+                        {% if farm.is_location_set() %}
+                            <a href="{{ url_for('main.get_weather_api', lat=farm.latitude, lon=farm.longitude) }}" 
+                               class="block w-full bg-purple-600 text-white py-2 px-4 rounded text-center hover:bg-purple-700 transition duration-300">
+                                🌤️ मौसम देखें
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- Danger Zone -->
+                <div class="bg-red-50 border border-red-200 rounded-lg p-6">
+                    <h3 class="text-lg font-semibold text-red-800 mb-2">खतरनाक क्षेत्र</h3>
+                    <p class="text-red-700 text-sm mb-4">
+                        खेत हटाने से सभी फसलों की जानकारी भी हट जाएगी।
+                    </p>
+                    <button onclick="confirmDelete()" 
+                            class="bg-red-600 text-white px-4 py-2 rounded text-sm hover:bg-red-700 transition duration-300">
+                        🗑️ खेत हटाएं
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div id="deleteModal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
+    <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+        <div class="mt-3 text-center">
+            <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100">
+                <svg class="h-6 w-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.5 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+                </svg>
+            </div>
+            <h3 class="text-lg font-medium text-gray-900 mt-5">खेत हटाएं?</h3>
+            <div class="mt-2 px-7 py-3">
+                <p class="text-sm text-gray-500">
+                    क्या आप वाकई "{{ farm.farm_name }}" को हटाना चाहते हैं? 
+                    {% if active_crops %}
+                        <br><br>
+                        <strong class="text-red-600">चेतावनी:</strong> इससे {{ active_crops|length }} सक्रिय फसलों की जानकारी भी हट जाएगी।
+                    {% endif %}
+                </p>
+            </div>
+            <div class="items-center px-4 py-3">
+                <form method="POST" action="{{ url_for('farms.delete', farm_id=farm.id) }}" class="inline">
+                    <button type="submit" 
+                            class="px-4 py-2 bg-red-600 text-white text-base font-medium rounded-md shadow-sm hover:bg-red-700 mr-2">
+                        हां, हटाएं
+                    </button>
+                </form>
+                <button onclick="closeDeleteModal()" 
+                        class="px-4 py-2 bg-gray-300 text-gray-800 text-base font-medium rounded-md shadow-sm hover:bg-gray-400">
+                    रद्द करें
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function confirmDelete() {
+    document.getElementById('deleteModal').classList.remove('hidden');
+}
+
+function closeDeleteModal() {
+    document.getElementById('deleteModal').classList.add('hidden');
+}
+
+// Close modal when clicking outside
+document.getElementById('deleteModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+        closeDeleteModal();
+    }
+});
+</script>
+{% endblock %}

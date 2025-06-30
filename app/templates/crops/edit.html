@@ -1,0 +1,185 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ _('Edit Crop') }} - {{ crop.crop_type }} - {{ _('Smart Agriculture App') }}
+{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-50">
+    <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <div class="bg-white rounded-lg shadow p-8">
+            <div class="mb-6">
+                <h1 class="text-3xl font-bold text-gray-900 mb-2">
+                    {{ _('Edit Crop') }}
+                </h1>
+                <p class="text-gray-600">{{ crop.crop_type.title() }} {% if crop.variety %}({{ crop.variety }}){% endif %}</p>
+            </div>
+            
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="mb-4 p-4 rounded-lg flash-message {% if category == 'success' %}bg-green-100 border border-green-400 text-green-700{% else %}bg-red-100 border border-red-400 text-red-700{% endif %}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            
+            <form method="POST" class="space-y-6">
+                
+                <!-- Variety -->
+                <div>
+                    <label for="variety" class="block text-sm font-medium text-gray-700 mb-2">
+                        {{ _('Variety') }}
+                    </label>
+                    <input type="text" 
+                           id="variety" 
+                           name="variety" 
+                           value="{{ crop.variety or '' }}"
+                           placeholder="उदाहरण: HD-2967, PB-1509"
+                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500">
+                    <p class="mt-1 text-sm text-gray-500">
+                        {{ _('Enter the crop variety name') }}
+                    </p>
+                </div>
+                
+                <!-- Current Stage -->
+                <div>
+                    <label for="current_stage" class="block text-sm font-medium text-gray-700 mb-2">
+                        {{ _('Current Stage') }}
+                    </label>
+                    <select id="current_stage" 
+                            name="current_stage" 
+                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500">
+                        <option value="">-- <span data-translate="select_stage">अवस्था चुनें</span> --</option>
+                        <option value="germination" {% if crop.current_stage == 'germination' %}selected{% endif %}>
+                            <span data-translate="germination">अंकुरण</span>
+                        </option>
+                        <option value="vegetative" {% if crop.current_stage == 'vegetative' %}selected{% endif %}>
+                            <span data-translate="vegetative">वानस्पतिक वृद्धि</span>
+                        </option>
+                        <option value="tillering" {% if crop.current_stage == 'tillering' %}selected{% endif %}>
+                            <span data-translate="tillering">कल्ले निकलना</span>
+                        </option>
+                        <option value="jointing" {% if crop.current_stage == 'jointing' %}selected{% endif %}>
+                            <span data-translate="jointing">गांठ बनना</span>
+                        </option>
+                        <option value="flowering" {% if crop.current_stage == 'flowering' %}selected{% endif %}>
+                            <span data-translate="flowering">फूल आना</span>
+                        </option>
+                        <option value="grain_filling" {% if crop.current_stage == 'grain_filling' %}selected{% endif %}>
+                            <span data-translate="grain_filling">दाना भरना</span>
+                        </option>
+                        <option value="maturity" {% if crop.current_stage == 'maturity' %}selected{% endif %}>
+                            <span data-translate="maturity">पकना</span>
+                        </option>
+                    </select>
+                    <p class="mt-1 text-sm text-gray-500">
+                        <span data-translate="stage_help">फसल की वर्तमान वृद्धि अवस्था चुनें</span>
+                    </p>
+                </div>
+                
+                <!-- Status -->
+                <div>
+                    <label for="status" class="block text-sm font-medium text-gray-700 mb-2">
+                        <span data-translate="status">स्थिति</span>
+                    </label>
+                    <select id="status" 
+                            name="status" 
+                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500">
+                        <option value="active" {% if crop.status == 'active' %}selected{% endif %}>
+                            <span data-translate="active">सक्रिय</span>
+                        </option>
+                        <option value="harvested" {% if crop.status == 'harvested' %}selected{% endif %}>
+                            <span data-translate="harvested">कटाई हो गई</span>
+                        </option>
+                        <option value="failed" {% if crop.status == 'failed' %}selected{% endif %}>
+                            <span data-translate="failed">असफल</span>
+                        </option>
+                    </select>
+                    <p class="mt-1 text-sm text-gray-500">
+                        <span data-translate="status_help">फसल की वर्तमान स्थिति चुनें</span>
+                    </p>
+                </div>
+                
+                <!-- Read-only Information -->
+                <div class="bg-gray-50 p-4 rounded-lg">
+                    <h3 class="font-medium text-gray-700 mb-3">
+                        <span data-translate="crop_information">फसल की जानकारी</span>
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                        <div>
+                            <span class="text-gray-500"><span data-translate="crop_type">फसल प्रकार</span>:</span>
+                            <span class="font-medium">{{ crop.crop_type.title() }}</span>
+                        </div>
+                        <div>
+                            <span class="text-gray-500"><span data-translate="area">क्षेत्रफल</span>:</span>
+                            <span class="font-medium">{{ crop.area_acres }} <span data-translate="acres">एकड़</span></span>
+                        </div>
+                        <div>
+                            <span class="text-gray-500"><span data-translate="planting_date">रोपण तारीख</span>:</span>
+                            <span class="font-medium">
+                                {% if crop.planting_date %}
+                                    {% if crop.planting_date.strftime %}
+                                        {{ crop.planting_date.strftime('%d/%m/%Y') }}
+                                    {% else %}
+                                        {{ crop.planting_date }}
+                                    {% endif %}
+                                {% else %}
+                                    N/A
+                                {% endif %}
+                            </span>
+                        </div>
+                        <div>
+                            <span class="text-gray-500"><span data-translate="expected_harvest">अपेक्षित कटाई</span>:</span>
+                            <span class="font-medium">
+                                {% if crop.expected_harvest_date %}
+                                    {% if crop.expected_harvest_date.strftime %}
+                                        {{ crop.expected_harvest_date.strftime('%d/%m/%Y') }}
+                                    {% else %}
+                                        {{ crop.expected_harvest_date }}
+                                    {% endif %}
+                                {% else %}
+                                    N/A
+                                {% endif %}
+                            </span>
+                        </div>
+                    </div>
+                    <p class="mt-2 text-xs text-gray-400">
+                        <span data-translate="readonly_note">फसल प्रकार, क्षेत्रफल और तारीखें संपादित नहीं की जा सकतीं</span>
+                    </p>
+                </div>
+                
+                <!-- Action Buttons -->
+                <div class="flex flex-col sm:flex-row gap-4 pt-6">
+                    <button type="submit" 
+                            class="flex-1 bg-green-600 text-white py-3 px-6 rounded-lg hover:bg-green-700 transition duration-300">
+                        <span data-translate="save_changes">परिवर्तन सेव करें</span>
+                    </button>
+                    
+                    <a href="{{ url_for('crops.view', crop_id=crop.id) }}" 
+                       class="flex-1 border border-gray-300 text-gray-700 py-3 px-6 rounded-lg hover:bg-gray-50 transition duration-300 text-center">
+                        <span data-translate="cancel">रद्द करें</span>
+                    </a>
+                </div>
+            </form>
+            
+            <!-- Additional Actions -->
+            <div class="mt-8 pt-6 border-t border-gray-200">
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="{{ url_for('crops.activities', crop_id=crop.id) }}" 
+                       class="flex-1 bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition duration-300 text-center">
+                        📋 <span data-translate="view_activities">गतिविधियां देखें</span>
+                    </a>
+                    
+                    <a href="{{ url_for('crops.add_activity', crop_id=crop.id) }}" 
+                       class="flex-1 bg-purple-600 text-white py-3 px-6 rounded-lg hover:bg-purple-700 transition duration-300 text-center">
+                        ➕ <span data-translate="add_activity">गतिविधि जोड़ें</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

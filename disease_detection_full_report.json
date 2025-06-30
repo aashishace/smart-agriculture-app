@@ -1,0 +1,568 @@
+{
+  "timestamp": "2025-06-29T17:44:37.638377",
+  "overall_stats": {
+    "total_tests": 9,
+    "successful_tests": 9,
+    "failed_tests": 0,
+    "success_rate": 100.0
+  },
+  "crop_stats": {
+    "wheat": {
+      "total": 3,
+      "healthy": 0,
+      "diseased": 3
+    },
+    "rice": {
+      "total": 3,
+      "healthy": 1,
+      "diseased": 2
+    },
+    "sugarcane": {
+      "total": 3,
+      "healthy": 0,
+      "diseased": 3
+    }
+  },
+  "detailed_results": [
+    {
+      "crop_type": "wheat",
+      "image_type": "healthy",
+      "detection_id": 1,
+      "result": {
+        "disease": "चूर्णी फफूंदी",
+        "disease_en": "Powdery Mildew",
+        "confidence": 0.7323522404668814,
+        "is_healthy": false,
+        "treatment": {
+          "immediate": "पौधों के बीच हवा का प्रवाह बढ़ाएं",
+          "chemical": "सल्फर (0.2%) या बाविस्टिन का छिड़काव करें",
+          "organic": "दूध और पानी का घोल (1:10) या बेकिंग सोडा स्प्रे करें",
+          "frequency": "7-10 दिन के अंतराल पर छिड़काव करें",
+          "precautions": "अधिक नमी से बचें, ओवरहेड सिंचाई न करें",
+          "urgency": "निगरानी रखें और निवारक उपाय करें"
+        },
+        "crop_type": "wheat",
+        "severity": "low",
+        "analysis_details": {
+          "image_quality": "Good",
+          "image_size": "300x300",
+          "analysis_time": "1.4 seconds",
+          "severity_level": "Low"
+        },
+        "recommendations": [
+          {
+            "category": "सामान्य बचाव",
+            "recommendation": "फसल चक्र अपनाएं - एक ही फसल लगातार न लगाएं",
+            "priority": "medium"
+          },
+          {
+            "category": "सामान्य बचाव",
+            "recommendation": "बुआई से पहले बीज उपचार जरूर करें",
+            "priority": "medium"
+          },
+          {
+            "category": "सामान्य बचाव",
+            "recommendation": "खेत की सफाई रखें, पुराने अवशेषों को हटाएं",
+            "priority": "medium"
+          },
+          {
+            "category": "सामान्य बचाव",
+            "recommendation": "उचित जल प्रबंधन करें, जल भराव से बचें",
+            "priority": "medium"
+          },
+          {
+            "category": "सामान्य बचाव",
+            "recommendation": "नियमित रूप से फसल की निगरानी करें",
+            "priority": "medium"
+          },
+          {
+            "category": "विशिष्ट बचाव",
+            "recommendation": "हवा का अच्छा प्रवाह सुनिश्चित करें",
+            "priority": "high"
+          },
+          {
+            "category": "विशिष्ट बचाव",
+            "recommendation": "ओवरहेड सिंचाई से बचें",
+            "priority": "high"
+          },
+          {
+            "category": "विशिष्ट बचाव",
+            "recommendation": "नम मौसम में विशेष सावधानी रखें",
+            "priority": "high"
+          }
+        ]
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "crop_type": "wheat",
+      "image_type": "diseased",
+      "detection_id": 2,
+      "result": {
+        "disease": "पत्ती की जंग",
+        "disease_en": "Leaf Rust",
+        "confidence": 0.7194579985957021,
+        "is_healthy": false,
+        "treatment": {
+          "immediate": "प्रभावित पत्तियों को तुरंत हटा दें और जला दें",
+          "chemical": "प्रोपिकोनाज़ोल (0.1%) या टेबुकोनाज़ोल (0.1%) का छिड़काव करें",
+          "organic": "नीम का तेल (3%) या बाइकार्बोनेट सोडा (0.5%) का घोल स्प्रे करें",
+          "frequency": "15 दिन के अंतराल पर 2-3 बार छिड़काव करें",
+          "precautions": "नम मौसम में छिड़काव न करें, सुबह या शाम को करें",
+          "urgency": "जल्दी उपचार करें - 2-3 दिन के अंदर"
+        },
+        "crop_type": "wheat",
+        "severity": "medium",
+        "analysis_details": {
+          "image_quality": "Good",
+          "image_size": "300x300",
+          "analysis_time": "3.1 seconds",
+          "severity_level": "Medium"
+        },
+        "recommendations": [
+          {
+            "category": "सामान्य बचाव",
+            "recommendation": "फसल चक्र अपनाएं - एक ही फसल लगातार न लगाएं",
+            "priority": "medium"
+          },
+          {
+            "category": "सामान्य बचाव",
+            "recommendation": "बुआई से पहले बीज उपचार जरूर करें",
+            "priority": "medium"
+          },
+          {
+            "category": "सामान्य बचाव",
+            "recommendation": "खेत की सफाई रखें, पुराने अवशेषों को हटाएं",
+            "priority": "medium"
+          },
+          {
+            "category": "सामान्य बचाव",
+            "recommendation": "उचित जल प्रबंधन करें, जल भराव से बचें",
+            "priority": "medium"
+          },
+          {
+            "category": "सामान्य बचाव",
+            "recommendation": "नियमित रूप से फसल की निगरानी करें",
+            "priority": "medium"
+          },
+          {
+            "category": "विशिष्ट बचाव",
+            "recommendation": "प्रतिरोधी किस्मों का चुनाव करें",
+            "priority": "high"
+          },
+          {
+            "category": "विशिष्ट बचाव",
+            "recommendation": "नाइट्रोजन की अधिक मात्रा से बचें",
+            "priority": "high"
+          },
+          {
+            "category": "विशिष्ट बचाव",
+            "recommendation": "पौधों के बीच उचित दूरी रखें",
+            "priority": "high"
+          }
+        ]
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "crop_type": "wheat",
+      "image_type": "yellow",
+      "detection_id": 3,
+      "result": {
+        "disease": "सेप्टोरिया पत्ती धब्बा",
+        "disease_en": "Septoria Leaf Spot",
+        "confidence": 0.5527715554644946,
+        "is_healthy": false,
+        "treatment": {
+          "immediate": "प्रभावित भागों को तुरंत हटा दें",
+          "chemical": "कृषि विशेषज्ञ से उपयुक्त दवा की सलाह लें",
+          "organic": "नीम का तेल या जैविक कवकनाशी का प्रयोग करें",
+          "frequency": "विशेषज्ञ की सलाह अनुसार",
+          "precautions": "रोग के लक्षणों पर नज़र रखें",
+          "urgency": "जल्दी उपचार करें - 2-3 दिन के अंदर"
+        },
+        "crop_type": "wheat",
+        "severity": "medium",
+        "analysis_details": {
+          "image_quality": "Needs Better Lighting",
+          "image_size": "300x300",
+          "analysis_time": "2.0 seconds",
+          "severity_level": "Medium"
+        },
+        "recommendations": [
+          {
+            "category": "सामान्य बचाव",
+            "recommendation": "फसल चक्र अपनाएं - एक ही फसल लगातार न लगाएं",
+            "priority": "medium"
+          },
+          {
+            "category": "सामान्य बचाव",
+            "recommendation": "बुआई से पहले बीज उपचार जरूर करें",
+            "priority": "medium"
+          },
+          {
+            "category": "सामान्य बचाव",
+            "recommendation": "खेत की सफाई रखें, पुराने अवशेषों को हटाएं",
+            "priority": "medium"
+          },
+          {
+            "category": "सामान्य बचाव",
+            "recommendation": "उचित जल प्रबंधन करें, जल भराव से बचें",
+            "priority": "medium"
+          },
+          {
+            "category": "सामान्य बचाव",
+            "recommendation": "नियमित रूप से फसल की निगरानी करें",
+            "priority": "medium"
+          }
+        ]
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "crop_type": "rice",
+      "image_type": "healthy",
+      "detection_id": 4,
+      "result": {
+        "disease": "शीथ ब्लाइट",
+        "disease_en": "Sheath Blight",
+        "confidence": 0.798132022441652,
+        "is_healthy": false,
+        "treatment": {
+          "immediate": "संक्रमित शीथ को साफ चाकू से काट दें",
+          "chemical": "हेक्साकोनाज़ोल या वैलिडामाइसिन का स्प्रे करें",
+          "organic": "स्यूडोमोनास फ्लोरेसेंस या त्रिकोडर्मा का उपयोग करें",
+          "frequency": "12-15 दिन के अंतराल पर 2-3 बार उपचार करें",
+          "precautions": "पानी का स्तर कम रखें, जल निकासी सुनिश्चित करें",
+          "urgency": "तत्काल उपचार आवश्यक - 24 घंटे के अंदर कार्रवाई करें"
+        },
+        "crop_type": "rice",
+        "severity": "high",
+        "analysis_details": {
+          "image_quality": "Good",
+          "image_size": "300x300",
+          "analysis_time": "2.0 seconds",
+          "severity_level": "High"
+        },
+        "recommendations": [
+          {
+            "category": "सामान्य बचाव",
+            "recommendation": "फसल चक्र अपनाएं - एक ही फसल लगातार न लगाएं",
+            "priority": "medium"
+          },
+          {
+            "category": "सामान्य बचाव",
+            "recommendation": "बुआई से पहले बीज उपचार जरूर करें",
+            "priority": "medium"
+          },
+          {
+            "category": "सामान्य बचाव",
+            "recommendation": "खेत की सफाई रखें, पुराने अवशेषों को हटाएं",
+            "priority": "medium"
+          },
+          {
+            "category": "सामान्य बचाव",
+            "recommendation": "उचित जल प्रबंधन करें, जल भराव से बचें",
+            "priority": "medium"
+          },
+          {
+            "category": "सामान्य बचाव",
+            "recommendation": "नियमित रूप से फसल की निगरानी करें",
+            "priority": "medium"
+          }
+        ]
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "crop_type": "rice",
+      "image_type": "diseased",
+      "detection_id": 5,
+      "result": {
+        "disease": "स्वस्थ",
+        "disease_en": "Healthy",
+        "confidence": 0.8245303413824939,
+        "is_healthy": true,
+        "treatment": {
+          "immediate": "प्रभावित भागों को तुरंत हटा दें",
+          "chemical": "कृषि विशेषज्ञ से उपयुक्त दवा की सलाह लें",
+          "organic": "नीम का तेल या जैविक कवकनाशी का प्रयोग करें",
+          "frequency": "विशेषज्ञ की सलाह अनुसार",
+          "precautions": "रोग के लक्षणों पर नज़र रखें",
+          "urgency": "स्वस्थ फसल - नियमित देखभाल जारी रखें"
+        },
+        "crop_type": "rice",
+        "severity": "none",
+        "analysis_details": {
+          "image_quality": "Good",
+          "image_size": "300x300",
+          "analysis_time": "2.4 seconds",
+          "severity_level": "None"
+        },
+        "recommendations": [
+          {
+            "category": "सामान्य बचाव",
+            "recommendation": "फसल चक्र अपनाएं - एक ही फसल लगातार न लगाएं",
+            "priority": "medium"
+          },
+          {
+            "category": "सामान्य बचाव",
+            "recommendation": "बुआई से पहले बीज उपचार जरूर करें",
+            "priority": "medium"
+          },
+          {
+            "category": "सामान्य बचाव",
+            "recommendation": "खेत की सफाई रखें, पुराने अवशेषों को हटाएं",
+            "priority": "medium"
+          },
+          {
+            "category": "सामान्य बचाव",
+            "recommendation": "उचित जल प्रबंधन करें, जल भराव से बचें",
+            "priority": "medium"
+          },
+          {
+            "category": "सामान्य बचाव",
+            "recommendation": "नियमित रूप से फसल की निगरानी करें",
+            "priority": "medium"
+          }
+        ]
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "crop_type": "rice",
+      "image_type": "yellow",
+      "detection_id": 6,
+      "result": {
+        "disease": "चावल का धमाका",
+        "disease_en": "Rice Blast",
+        "confidence": 0.6060806247787539,
+        "is_healthy": false,
+        "treatment": {
+          "immediate": "प्रभावित भागों को तुरंत हटा दें",
+          "chemical": "कृषि विशेषज्ञ से उपयुक्त दवा की सलाह लें",
+          "organic": "नीम का तेल या जैविक कवकनाशी का प्रयोग करें",
+          "frequency": "विशेषज्ञ की सलाह अनुसार",
+          "precautions": "रोग के लक्षणों पर नज़र रखें",
+          "urgency": "तत्काल उपचार आवश्यक - 24 घंटे के अंदर कार्रवाई करें"
+        },
+        "crop_type": "rice",
+        "severity": "high",
+        "analysis_details": {
+          "image_quality": "Needs Better Lighting",
+          "image_size": "300x300",
+          "analysis_time": "1.3 seconds",
+          "severity_level": "High"
+        },
+        "recommendations": [
+          {
+            "category": "सामान्य बचाव",
+            "recommendation": "फसल चक्र अपनाएं - एक ही फसल लगातार न लगाएं",
+            "priority": "medium"
+          },
+          {
+            "category": "सामान्य बचाव",
+            "recommendation": "बुआई से पहले बीज उपचार जरूर करें",
+            "priority": "medium"
+          },
+          {
+            "category": "सामान्य बचाव",
+            "recommendation": "खेत की सफाई रखें, पुराने अवशेषों को हटाएं",
+            "priority": "medium"
+          },
+          {
+            "category": "सामान्य बचाव",
+            "recommendation": "उचित जल प्रबंधन करें, जल भराव से बचें",
+            "priority": "medium"
+          },
+          {
+            "category": "सामान्य बचाव",
+            "recommendation": "नियमित रूप से फसल की निगरानी करें",
+            "priority": "medium"
+          }
+        ]
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "crop_type": "sugarcane",
+      "image_type": "healthy",
+      "detection_id": 7,
+      "result": {
+        "disease": "पीली पत्ती",
+        "disease_en": "Yellow Leaf",
+        "confidence": 0.6537497919365128,
+        "is_healthy": false,
+        "treatment": {
+          "immediate": "प्रभावित भागों को तुरंत हटा दें",
+          "chemical": "कृषि विशेषज्ञ से उपयुक्त दवा की सलाह लें",
+          "organic": "नीम का तेल या जैविक कवकनाशी का प्रयोग करें",
+          "frequency": "विशेषज्ञ की सलाह अनुसार",
+          "precautions": "रोग के लक्षणों पर नज़र रखें",
+          "urgency": "जल्दी उपचार करें - 2-3 दिन के अंदर"
+        },
+        "crop_type": "sugarcane",
+        "severity": "medium",
+        "analysis_details": {
+          "image_quality": "Good",
+          "image_size": "300x300",
+          "analysis_time": "2.8 seconds",
+          "severity_level": "Medium"
+        },
+        "recommendations": [
+          {
+            "category": "सामान्य बचाव",
+            "recommendation": "फसल चक्र अपनाएं - एक ही फसल लगातार न लगाएं",
+            "priority": "medium"
+          },
+          {
+            "category": "सामान्य बचाव",
+            "recommendation": "बुआई से पहले बीज उपचार जरूर करें",
+            "priority": "medium"
+          },
+          {
+            "category": "सामान्य बचाव",
+            "recommendation": "खेत की सफाई रखें, पुराने अवशेषों को हटाएं",
+            "priority": "medium"
+          },
+          {
+            "category": "सामान्य बचाव",
+            "recommendation": "उचित जल प्रबंधन करें, जल भराव से बचें",
+            "priority": "medium"
+          },
+          {
+            "category": "सामान्य बचाव",
+            "recommendation": "नियमित रूप से फसल की निगरानी करें",
+            "priority": "medium"
+          }
+        ]
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "crop_type": "sugarcane",
+      "image_type": "diseased",
+      "detection_id": 8,
+      "result": {
+        "disease": "लाल सड़न",
+        "disease_en": "Red Rot",
+        "confidence": 0.847043244374422,
+        "is_healthy": false,
+        "treatment": {
+          "immediate": "संक्रमित गन्ने को तुरंत काटकर जला दें",
+          "chemical": "कार्बेंडाज़िम (0.1%) या प्रोपिकोनाज़ोल का घोल लगाएं",
+          "organic": "बॉर्डो मिश्रण या त्रिकोडर्मा हार्ज़ियानम का उपयोग करें",
+          "frequency": "15-20 दिन के अंतराल पर उपचार दोहराएं",
+          "precautions": "रोगमुक्त बीज गन्ने का ही उपयोग करें",
+          "urgency": "तत्काल उपचार आवश्यक - 24 घंटे के अंदर कार्रवाई करें"
+        },
+        "crop_type": "sugarcane",
+        "severity": "high",
+        "analysis_details": {
+          "image_quality": "Good",
+          "image_size": "300x300",
+          "analysis_time": "1.7 seconds",
+          "severity_level": "High"
+        },
+        "recommendations": [
+          {
+            "category": "सामान्य बचाव",
+            "recommendation": "फसल चक्र अपनाएं - एक ही फसल लगातार न लगाएं",
+            "priority": "medium"
+          },
+          {
+            "category": "सामान्य बचाव",
+            "recommendation": "बुआई से पहले बीज उपचार जरूर करें",
+            "priority": "medium"
+          },
+          {
+            "category": "सामान्य बचाव",
+            "recommendation": "खेत की सफाई रखें, पुराने अवशेषों को हटाएं",
+            "priority": "medium"
+          },
+          {
+            "category": "सामान्य बचाव",
+            "recommendation": "उचित जल प्रबंधन करें, जल भराव से बचें",
+            "priority": "medium"
+          },
+          {
+            "category": "सामान्य बचाव",
+            "recommendation": "नियमित रूप से फसल की निगरानी करें",
+            "priority": "medium"
+          },
+          {
+            "category": "विशिष्ट बचाव",
+            "recommendation": "स्वस्थ और प्रमाणित बीज गन्ने का उपयोग करें",
+            "priority": "high"
+          },
+          {
+            "category": "विशिष्ट बचाव",
+            "recommendation": "गहरी जुताई करें",
+            "priority": "high"
+          },
+          {
+            "category": "विशिष्ट बचाव",
+            "recommendation": "जल निकासी का उचित प्रबंध करें",
+            "priority": "high"
+          }
+        ]
+      },
+      "status": "SUCCESS"
+    },
+    {
+      "crop_type": "sugarcane",
+      "image_type": "yellow",
+      "detection_id": 9,
+      "result": {
+        "disease": "रिंग स्पॉट",
+        "disease_en": "Ring Spot",
+        "confidence": 0.5699260343676563,
+        "is_healthy": false,
+        "treatment": {
+          "immediate": "प्रभावित भागों को तुरंत हटा दें",
+          "chemical": "कृषि विशेषज्ञ से उपयुक्त दवा की सलाह लें",
+          "organic": "नीम का तेल या जैविक कवकनाशी का प्रयोग करें",
+          "frequency": "विशेषज्ञ की सलाह अनुसार",
+          "precautions": "रोग के लक्षणों पर नज़र रखें",
+          "urgency": "निगरानी रखें और निवारक उपाय करें"
+        },
+        "crop_type": "sugarcane",
+        "severity": "low",
+        "analysis_details": {
+          "image_quality": "Needs Better Lighting",
+          "image_size": "300x300",
+          "analysis_time": "2.7 seconds",
+          "severity_level": "Low"
+        },
+        "recommendations": [
+          {
+            "category": "सामान्य बचाव",
+            "recommendation": "फसल चक्र अपनाएं - एक ही फसल लगातार न लगाएं",
+            "priority": "medium"
+          },
+          {
+            "category": "सामान्य बचाव",
+            "recommendation": "बुआई से पहले बीज उपचार जरूर करें",
+            "priority": "medium"
+          },
+          {
+            "category": "सामान्य बचाव",
+            "recommendation": "खेत की सफाई रखें, पुराने अवशेषों को हटाएं",
+            "priority": "medium"
+          },
+          {
+            "category": "सामान्य बचाव",
+            "recommendation": "उचित जल प्रबंधन करें, जल भराव से बचें",
+            "priority": "medium"
+          },
+          {
+            "category": "सामान्य बचाव",
+            "recommendation": "नियमित रूप से फसल की निगरानी करें",
+            "priority": "medium"
+          }
+        ]
+      },
+      "status": "SUCCESS"
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}{{ _('Server Error') }} - {{ _('Smart Agriculture App') }}{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gradient-to-br from-red-50 to-orange-50 flex items-center justify-center">
+    <div class="bg-white rounded-lg shadow-lg p-8 text-center max-w-lg mx-4">
+        <div class="text-6xl mb-4">⚠️</div>
+        <h1 class="text-6xl font-bold text-red-600 mb-4">500</h1>
+        <h2 class="text-2xl font-semibold text-gray-700 mb-4">{{ _('Server Error') }}</h2>
+        <p class="text-gray-600 mb-8">
+            {{ _('Sorry, there is a problem with our server. Our technical team is working to resolve this issue.') }}
+        </p>
+        
+        <div class="space-y-4">
+            <button onclick="window.location.reload()" 
+                    class="block w-full bg-red-600 text-white py-3 px-6 rounded-lg hover:bg-red-700 transition duration-300">
+                {{ _('Reload Page') }}
+            </button>
+            
+            <a href="{{ url_for('main.index') }}" 
+               class="block w-full bg-green-600 text-white py-3 px-6 rounded-lg hover:bg-green-700 transition duration-300">
+                {{ _('Go to Home Page') }}
+            </a>
+            
+            <a href="{{ url_for('main.contact') }}" 
+               class="block w-full border border-gray-300 text-gray-700 py-3 px-6 rounded-lg hover:bg-gray-50 transition duration-300">
+                {{ _('Report Problem') }}
+            </a>
+        </div>
+        
+        <div class="mt-8 pt-8 border-t border-gray-200">
+            <p class="text-sm text-gray-500">
+                {{ _('If this problem persists, please contact our') }} 
+                <a href="{{ url_for('main.contact') }}" class="text-red-600 hover:text-red-800 underline">{{ _('support team') }}</a>
+                {{ _('and send a screenshot of this error.') }}
+            </p>
+        </div>
+        
+        <div class="bg-red-50 border border-red-200 rounded-lg p-4 mt-6">
+            <p class="text-sm text-red-700">
+                <strong>{{ _('Technical Information') }}:</strong> {{ _('Internal Server Error (HTTP 500)') }}
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+    </div>
+</div>
+{% endblock %}

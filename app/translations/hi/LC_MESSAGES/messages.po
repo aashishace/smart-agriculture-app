@@ -1,0 +1,2614 @@
+# Hindi translations for Smart Agriculture App
+# Copyright (C) 2024
+# This file is distributed under the same license as the Smart Agriculture
+# App project.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Smart Agriculture App 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-07-01 01:54+0530\n"
+"PO-Revision-Date: 2024-12-30 10:00+0000\n"
+"Last-Translator: \n"
+"Language: hi\n"
+"Language-Team: Hindi <>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: app/__init__.py:93
+msgid "Please log in to access this page."
+msgstr ""
+
+#: app/routes/ai.py:53
+msgid "No image uploaded"
+msgstr ""
+
+#: app/routes/ai.py:59
+msgid "No file selected"
+msgstr ""
+
+#: app/routes/ai.py:62
+msgid "Invalid crop selected"
+msgstr ""
+
+#: app/routes/ai.py:71
+#, fuzzy
+msgid "Crop not found"
+msgstr "फसल की जानकारी"
+
+#: app/routes/ai.py:77
+msgid "Invalid file type. Use PNG, JPG, or JPEG"
+msgstr ""
+
+#: app/routes/ai.py:81
+msgid "File too large. Maximum size is 16MB"
+msgstr ""
+
+#: app/routes/ai.py:103
+msgid "Invalid image file. File may be corrupted or not a valid image."
+msgstr ""
+
+#: app/routes/ai.py:152
+#, python-format
+msgid "Detection failed: %(error)s"
+msgstr ""
+
+#: app/routes/auth.py:30
+msgid "Name must be at least 2 characters long"
+msgstr ""
+
+#: app/routes/auth.py:35
+msgid "Please enter a valid phone number (10 digits)"
+msgstr ""
+
+#: app/routes/auth.py:40
+msgid "This phone number is already registered"
+msgstr ""
+
+#: app/routes/auth.py:43
+msgid "Password must be at least 6 characters long"
+msgstr ""
+
+#: app/routes/auth.py:46 app/templates/auth/register.html:160
+msgid "Passwords do not match"
+msgstr ""
+
+#: app/routes/auth.py:71
+msgid "Welcome! Let's start by adding your farm."
+msgstr ""
+
+#: app/routes/auth.py:76
+msgid "Registration error occurred. Please try again."
+msgstr ""
+
+#: app/routes/auth.py:93
+msgid "Please enter phone number and password."
+msgstr ""
+
+#: app/routes/auth.py:113
+msgid "Your account is inactive. Please contact support."
+msgstr ""
+
+#: app/routes/auth.py:115
+msgid "Incorrect phone number or password."
+msgstr ""
+
+#: app/routes/auth.py:124
+msgid "You have been logged out successfully."
+msgstr ""
+
+#: app/routes/auth.py:145
+msgid "Name must be at least 2 characters long."
+msgstr ""
+
+#: app/routes/auth.py:155
+msgid "Profile updated successfully."
+msgstr ""
+
+#: app/routes/auth.py:160
+msgid "Error updating profile."
+msgstr ""
+
+#: app/routes/auth.py:175
+msgid "Current password is incorrect."
+msgstr ""
+
+#: app/routes/auth.py:179
+msgid "New password must be at least 6 characters long."
+msgstr ""
+
+#: app/routes/auth.py:183
+msgid "New passwords do not match."
+msgstr ""
+
+#: app/routes/auth.py:189
+msgid "Password changed successfully."
+msgstr ""
+
+#: app/routes/auth.py:194
+msgid "Error changing password."
+msgstr ""
+
+#: app/routes/crops.py:42
+msgid "Please add a farm first."
+msgstr ""
+
+#: app/routes/crops.py:56
+msgid "Please select a farm."
+msgstr ""
+
+#: app/routes/crops.py:60
+msgid "Invalid farm."
+msgstr ""
+
+#: app/routes/crops.py:64
+msgid "Please select a supported crop."
+msgstr ""
+
+#: app/routes/crops.py:69
+msgid "Area must be between 0 and 1000 acres."
+msgstr ""
+
+#: app/routes/crops.py:71 app/routes/farms.py:58
+msgid "Please enter valid area."
+msgstr ""
+
+#: app/routes/crops.py:77
+msgid "Planting date must be before today."
+msgstr ""
+
+#: app/routes/crops.py:79
+msgid "Please enter valid planting date."
+msgstr ""
+
+#: app/routes/crops.py:86
+#, python-format
+msgid "Available area is only %(area).1f acres."
+msgstr ""
+
+#: app/routes/crops.py:126
+#, python-format
+msgid "Crop added successfully. %(count)d activities scheduled automatically."
+msgstr ""
+
+#: app/routes/crops.py:128
+msgid "Crop added successfully."
+msgstr ""
+
+#: app/routes/crops.py:134
+msgid "Error adding crop."
+msgstr ""
+
+#: app/routes/crops.py:180
+msgid "Crop information updated successfully."
+msgstr ""
+
+#: app/routes/crops.py:185
+msgid "Error updating crop."
+msgstr ""
+
+#: app/routes/crops.py:223 app/routes/crops.py:271
+msgid "Please select activity type."
+msgstr ""
+
+#: app/routes/crops.py:229 app/routes/crops.py:277
+msgid "Please enter valid date."
+msgstr ""
+
+#: app/routes/crops.py:244
+msgid "Activity added successfully."
+msgstr ""
+
+#: app/routes/crops.py:249
+msgid "Error adding activity."
+msgstr ""
+
+#: app/routes/crops.py:267
+msgid "Please select at least one crop."
+msgstr ""
+
+#: app/routes/crops.py:301
+#, python-format
+msgid "Activity added for %(count)d crops."
+msgstr ""
+
+#: app/routes/crops.py:303
+msgid "No activities were added."
+msgstr ""
+
+#: app/routes/crops.py:346
+#, python-format
+msgid "%(count)d activities scheduled automatically."
+msgstr ""
+
+#: app/routes/crops.py:348
+msgid "All activities already exist."
+msgstr ""
+
+#: app/routes/crops.py:365
+msgid "Activity marked as completed."
+msgstr ""
+
+#: app/routes/crops.py:367
+msgid "An error occurred."
+msgstr ""
+
+#: app/routes/farms.py:51 app/routes/farms.py:134
+msgid "Farm name must be at least 2 characters long."
+msgstr ""
+
+#: app/routes/farms.py:56
+msgid "Area must be between 0 and 10000 acres."
+msgstr ""
+
+#: app/routes/farms.py:69 app/routes/farms.py:145
+msgid "Please enter valid GPS coordinates."
+msgstr ""
+
+#: app/routes/farms.py:71 app/routes/farms.py:148
+msgid "GPS coordinates must be numbers."
+msgstr ""
+
+#: app/routes/farms.py:92
+msgid "Farm added successfully."
+msgstr ""
+
+#: app/routes/farms.py:97
+msgid "Error adding farm."
+msgstr ""
+
+#: app/routes/farms.py:162
+msgid "Farm information updated successfully."
+msgstr ""
+
+#: app/routes/farms.py:167
+msgid "Error updating farm."
+msgstr ""
+
+#: app/routes/farms.py:180
+#, python-format
+msgid "First remove or complete all %(count)d crops."
+msgstr ""
+
+#: app/routes/farms.py:188
+#, python-format
+msgid "Farm \"%(name)s\" deleted successfully."
+msgstr ""
+
+#: app/routes/farms.py:193
+msgid "Error deleting farm."
+msgstr ""
+
+#: app/routes/main.py:170
+msgid "Your message has been sent. We will contact you soon."
+msgstr ""
+
+#: app/templates/about.html:3 app/templates/about.html:9
+msgid "About Us"
+msgstr ""
+
+#: app/templates/about.html:3 app/templates/about.html:12
+#: app/templates/auth/profile_edit.html:3 app/templates/base.html:7
+#: app/templates/base.html:220 app/templates/base.html:248
+#: app/templates/contact.html:3 app/templates/contact.html:51
+#: app/templates/crops/add.html:3 app/templates/crops/edit.html:4
+#: app/templates/crops/view.html:4 app/templates/errors/404.html:3
+#: app/templates/farms/add.html:3 app/templates/farms/index.html:3
+#: app/templates/index.html:3 app/templates/index.html:11
+#: app/templates/onboarding.html:4
+msgid "Smart Agriculture App"
+msgstr "स्मार्ट कृषि ऐप"
+
+#: app/templates/about.html:14
+msgid ""
+"Smart Agriculture App is a modern agricultural management platform that "
+"helps farmers make better decisions in their farming. This app provides "
+"features like weather information, crop monitoring, disease "
+"identification, and irrigation management."
+msgstr ""
+
+#: app/templates/about.html:17
+msgid "Our Features"
+msgstr ""
+
+#: app/templates/about.html:19
+#, fuzzy
+msgid "Real-time weather information"
+msgstr "मौसम की जानकारी"
+
+#: app/templates/about.html:20
+msgid "Crop monitoring and management"
+msgstr ""
+
+#: app/templates/about.html:21
+msgid "AI-based disease identification"
+msgstr ""
+
+#: app/templates/about.html:22
+msgid "Smart irrigation system"
+msgstr ""
+
+#: app/templates/about.html:23
+msgid "Advice from agricultural experts"
+msgstr ""
+
+#: app/templates/about.html:24
+#, fuzzy
+msgid "Market price information"
+msgstr "मौसम की जानकारी"
+
+#: app/templates/about.html:27
+msgid "Our Mission"
+msgstr ""
+
+#: app/templates/about.html:29
+msgid ""
+"Our mission is to increase the agricultural productivity of Indian "
+"farmers by connecting them with modern technology. We want every farmer "
+"to be able to take advantage of digital agriculture."
+msgstr ""
+
+#: app/templates/about.html:34 app/templates/base.html:239
+#: app/templates/contact.html:3 app/templates/contact.html:9
+msgid "Contact Us"
+msgstr ""
+
+#: app/templates/about.html:34
+msgid "If you have any questions or want to connect with us, please visit our"
+msgstr ""
+
+#: app/templates/about.html:35
+#, fuzzy
+msgid "contact page"
+msgstr "संपर्क"
+
+#: app/templates/about.html:36 app/templates/errors/404.html:38
+msgid "."
+msgstr ""
+
+#: app/templates/base.html:65 app/templates/base.html:146
+#: app/templates/dashboard.html:3 app/templates/dashboard_clean.html:3
+msgid "Smart Agriculture"
+msgstr "स्मार्ट कृषि"
+
+#: app/templates/base.html:71 app/templates/dashboard.html:3
+#: app/templates/dashboard_clean.html:3
+msgid "Dashboard"
+msgstr "डैशबोर्ड"
+
+#: app/templates/base.html:75
+msgid "Farms"
+msgstr "खेत"
+
+#: app/templates/base.html:79
+msgid "Crops"
+msgstr "फसलें"
+
+#: app/templates/base.html:83 app/templates/dashboard.html:183
+msgid "Disease Scanner"
+msgstr "रोग स्कैनर"
+
+#: app/templates/base.html:123
+msgid "Profile"
+msgstr "प्रोफाइल"
+
+#: app/templates/base.html:126 app/templates/base.html:240
+#: app/templates/dashboard.html:193 app/templates/help.html:3
+msgid "Help"
+msgstr "सहायता"
+
+#: app/templates/base.html:130
+msgid "Logout"
+msgstr "लॉगआउट"
+
+#: app/templates/auth/login.html:3 app/templates/auth/login.html:69
+#: app/templates/auth/register.html:16 app/templates/base.html:176
+#: app/templates/index.html:23
+msgid "Login"
+msgstr "लॉगिन"
+
+#: app/templates/auth/register.html:136 app/templates/base.html:180
+#: app/templates/index.html:109
+msgid "Register"
+msgstr "पंजीकरण"
+
+#: app/templates/base.html:222
+msgid "Making agriculture easier for Indian farmers with smart technology."
+msgstr ""
+
+#: app/templates/base.html:227
+msgid "Services"
+msgstr ""
+
+#: app/templates/base.html:229 app/templates/index.html:42
+msgid "Smart Irrigation"
+msgstr ""
+
+#: app/templates/base.html:230 app/templates/index.html:49
+msgid "Disease Detection"
+msgstr ""
+
+#: app/templates/base.html:231 app/templates/dashboard.html:208
+#: app/templates/dashboard_clean.html:181
+msgid "Weather Information"
+msgstr "मौसम की जानकारी"
+
+#: app/templates/base.html:232 app/templates/index.html:63
+msgid "Crop Management"
+msgstr ""
+
+#: app/templates/base.html:237
+msgid "Contact"
+msgstr "संपर्क"
+
+#: app/templates/auth/register.html:145 app/templates/base.html:241
+msgid "Privacy Policy"
+msgstr ""
+
+#: app/templates/base.html:248
+msgid "All rights reserved."
+msgstr ""
+
+#: app/templates/contact.html:23 app/templates/help.html:57
+msgid "Name"
+msgstr ""
+
+#: app/templates/contact.html:29
+msgid "Email"
+msgstr ""
+
+#: app/templates/contact.html:35 app/templates/help.html:65
+msgid "Message"
+msgstr ""
+
+#: app/templates/contact.html:42 app/templates/help.html:68
+msgid "Send Message"
+msgstr ""
+
+#: app/templates/contact.html:49
+msgid "Office Address"
+msgstr ""
+
+#: app/templates/contact.html:52
+msgid "Agricultural Technology Center"
+msgstr ""
+
+#: app/templates/contact.html:53
+msgid "New Delhi - 110001"
+msgstr ""
+
+#: app/templates/contact.html:58
+msgid "Contact Information"
+msgstr ""
+
+#: app/templates/contact.html:60
+msgid "Phone: +91-11-1234-5678"
+msgstr ""
+
+#: app/templates/contact.html:61
+msgid "Email: support@smartagri.com"
+msgstr ""
+
+#: app/templates/contact.html:62
+msgid "Hours: 9 AM to 6 PM"
+msgstr ""
+
+#: app/templates/dashboard.html:13 app/templates/onboarding.html:4
+msgid "Welcome"
+msgstr ""
+
+#: app/templates/dashboard.html:13
+msgid "welcome!"
+msgstr ""
+
+#: app/templates/dashboard.html:16 app/templates/dashboard_clean.html:16
+msgid "Smart Agriculture Dashboard"
+msgstr "स्मार्ट कृषि डैशबोर्ड"
+
+#: app/templates/dashboard.html:20 app/templates/dashboard_clean.html:20
+msgid "Today's Date"
+msgstr "आज की तारीख"
+
+#: app/templates/dashboard.html:23 app/templates/dashboard_clean.html:23
+msgid "Weather"
+msgstr "मौसम"
+
+#: app/templates/dashboard.html:23 app/templates/dashboard_clean.html:23
+msgid "Clear"
+msgstr "साफ"
+
+#: app/templates/dashboard.html:36 app/templates/dashboard_clean.html:36
+msgid "Getting Started"
+msgstr "शुरुआत करें"
+
+#: app/templates/dashboard.html:38
+msgid "Add your farm first to get smart agricultural recommendations"
+msgstr ""
+
+#: app/templates/dashboard.html:43 app/templates/dashboard_clean.html:43
+msgid "Start Setup"
+msgstr "सेटअप शुरू करें"
+
+#: app/templates/dashboard.html:63 app/templates/dashboard_clean.html:63
+#: app/templates/farms/index.html:111
+msgid "Total Farms"
+msgstr "कुल खेत"
+
+#: app/templates/dashboard.html:76 app/templates/dashboard_clean.html:76
+#: app/templates/farms/index.html:56
+msgid "Active Crops"
+msgstr "सक्रिय फसलें"
+
+#: app/templates/dashboard.html:89 app/templates/dashboard_clean.html:89
+#: app/templates/dashboard_clean.html:115
+msgid "Today's Tasks"
+msgstr "आज के काम"
+
+#: app/templates/dashboard.html:102
+msgid "Urgent Irrigation"
+msgstr ""
+
+#: app/templates/dashboard.html:113
+msgid "Crop Distribution"
+msgstr ""
+
+#: app/templates/dashboard.html:121
+msgid "Monthly Activities"
+msgstr ""
+
+#: app/templates/dashboard.html:130
+msgid "Weather Trends (7 days)"
+msgstr ""
+
+#: app/templates/dashboard.html:142
+msgid "Today's Activities"
+msgstr ""
+
+#: app/templates/dashboard.html:161
+msgid "No work today!"
+msgstr ""
+
+#: app/templates/crops/view.html:296 app/templates/dashboard.html:168
+#: app/templates/dashboard_clean.html:141
+msgid "Quick Actions"
+msgstr "त्वरित कार्य"
+
+#: app/templates/dashboard.html:173 app/templates/farms/add.html:10
+#: app/templates/farms/index.html:17
+msgid "Add New Farm"
+msgstr ""
+
+#: app/templates/crops/add.html:3 app/templates/crops/add.html:10
+#: app/templates/dashboard.html:178
+msgid "Add New Crop"
+msgstr ""
+
+#: app/templates/dashboard.html:188 app/templates/dashboard_clean.html:161
+msgid "View Crops"
+msgstr "फसलें देखें"
+
+#: app/templates/crops/view.html:286 app/templates/dashboard.html:198
+#: app/templates/dashboard_clean.html:171
+msgid "Schedule Irrigation"
+msgstr "सिंचाई शेड्यूल करें"
+
+#: app/templates/dashboard.html:218 app/templates/dashboard_clean.html:191
+msgid "Humidity"
+msgstr "नमी"
+
+#: app/templates/dashboard.html:222 app/templates/dashboard_clean.html:195
+msgid "Wind Speed"
+msgstr "हवा की गति"
+
+#: app/templates/dashboard.html:228
+msgid "Rain Probability"
+msgstr ""
+
+#: app/templates/dashboard.html:229 app/templates/dashboard_clean.html:202
+msgid "It may rain in the next 24 hours"
+msgstr "अगले 24 घंटों में बारिश हो सकती है"
+
+#: app/templates/dashboard.html:236
+msgid "Weather information is not available"
+msgstr ""
+
+#: app/templates/dashboard.html:237
+msgid "Add farm location to get weather updates"
+msgstr ""
+
+#: app/templates/dashboard.html:244 app/templates/dashboard_clean.html:216
+msgid "Recent Activity"
+msgstr "हाल की गतिविधि"
+
+#: app/templates/dashboard.html:261 app/templates/dashboard_clean.html:233
+msgid "No recent activity"
+msgstr "कोई हाल की गतिविधि नहीं"
+
+#: app/templates/dashboard.html:281
+msgid "Today irrigation has been scheduled!"
+msgstr ""
+
+#: app/templates/dashboard.html:284 app/templates/dashboard_clean.html:256
+msgid "Error"
+msgstr "त्रुटि"
+
+#: app/templates/dashboard.html:289 app/templates/dashboard_clean.html:261
+msgid "Something went wrong. Please try again."
+msgstr "कुछ गलत हुआ है। कृपया पुनः प्रयास करें।"
+
+#: app/templates/dashboard_clean.html:13
+#, python-format
+msgid "Welcome %(name)s!"
+msgstr "नमस्कार %(name)s!"
+
+#: app/templates/dashboard_clean.html:38
+msgid "Add your farm first to get smart agriculture recommendations"
+msgstr "स्मार्ट कृषि सुझाव पाने के लिए पहले अपना खेत जोड़ें"
+
+#: app/templates/dashboard_clean.html:102 app/templates/index.html:56
+msgid "Weather Alerts"
+msgstr "मौसम अलर्ट"
+
+#: app/templates/dashboard_clean.html:134
+msgid "No tasks for today!"
+msgstr "आज कोई काम नहीं है!"
+
+#: app/templates/dashboard_clean.html:146 app/templates/farms/add.html:3
+#: app/templates/farms/add.html:148 app/templates/index.html:115
+#: app/templates/onboarding.html:26
+msgid "Add Farm"
+msgstr "नया खेत जोड़ें"
+
+#: app/templates/crops/add.html:150 app/templates/dashboard_clean.html:151
+#: app/templates/farms/index.html:97
+msgid "Add Crop"
+msgstr "नई फसल जोड़ें"
+
+#: app/templates/crops/view.html:302 app/templates/dashboard_clean.html:156
+msgid "Scan Disease"
+msgstr "रोग स्कैन करें"
+
+#: app/templates/dashboard_clean.html:166
+msgid "Help & Support"
+msgstr "सहायता और समर्थन"
+
+#: app/templates/dashboard_clean.html:201
+msgid "Rain Forecast"
+msgstr "बारिश की संभावना"
+
+#: app/templates/dashboard_clean.html:209
+msgid "Weather information not available"
+msgstr "मौसम की जानकारी उपलब्ध नहीं है"
+
+#: app/templates/dashboard_clean.html:253
+msgid "Today's irrigation has been scheduled!"
+msgstr "आज की सिंचाई शेड्यूल हो गई है!"
+
+#: app/templates/errors/404.html:30 app/templates/help.html:8
+msgid "Help Center"
+msgstr ""
+
+#: app/templates/help.html:12
+msgid "Quick Help"
+msgstr ""
+
+#: app/templates/help.html:15
+#, fuzzy
+msgid "Helpline"
+msgstr "सहायता"
+
+#: app/templates/help.html:16
+#, fuzzy
+msgid "Toll Free"
+msgstr "कुल खेत"
+
+#: app/templates/help.html:19
+msgid "Time"
+msgstr "समय"
+
+#: app/templates/help.html:20
+msgid "9 AM to 6 PM"
+msgstr ""
+
+#: app/templates/help.html:27
+msgid "Frequently Asked Questions"
+msgstr ""
+
+#: app/templates/help.html:31
+msgid "How to use the app?"
+msgstr ""
+
+#: app/templates/help.html:32
+msgid ""
+"First register, then add your farm and crop information. You will "
+"automatically start receiving suggestions."
+msgstr ""
+
+#: app/templates/help.html:36
+msgid "Is this app free?"
+msgstr ""
+
+#: app/templates/help.html:37
+msgid "Yes, all main features are completely free. Our goal is to help farmers."
+msgstr ""
+
+#: app/templates/help.html:41
+#, fuzzy
+msgid "How does the disease scanner work?"
+msgstr "रोग स्कैनर"
+
+#: app/templates/help.html:42
+msgid ""
+"Take a photo of your crop leaf or affected part. Our AI will immediately "
+"identify the disease and suggest treatment."
+msgstr ""
+
+#: app/templates/help.html:46
+#, fuzzy
+msgid "How accurate is the weather information?"
+msgstr "मौसम की जानकारी"
+
+#: app/templates/help.html:47
+msgid "We use reliable weather APIs that are 80-90% accurate."
+msgstr ""
+
+#: app/templates/help.html:54
+msgid "More questions? Contact us"
+msgstr ""
+
+#: app/templates/auth/login.html:25 app/templates/auth/register.html:37
+#: app/templates/help.html:61
+msgid "Mobile Number"
+msgstr ""
+
+#: app/templates/index.html:3
+msgid "Smart solutions for farmers"
+msgstr ""
+
+#: app/templates/index.html:14
+msgid "Make farming easy and profitable with modern technology"
+msgstr ""
+
+#: app/templates/index.html:19
+#, fuzzy
+msgid "Get Started"
+msgstr "शुरुआत करें"
+
+#: app/templates/index.html:34
+msgid "Our Services"
+msgstr ""
+
+#: app/templates/index.html:35
+msgid "Smart solutions specially designed for farmers"
+msgstr ""
+
+#: app/templates/index.html:43
+msgid "Right irrigation information based on weather"
+msgstr ""
+
+#: app/templates/index.html:50
+msgid "Instantly identify crop diseases from photos"
+msgstr ""
+
+#: app/templates/index.html:57
+#, fuzzy
+msgid "Get weather information via SMS"
+msgstr "मौसम की जानकारी"
+
+#: app/templates/index.html:64
+msgid "Keep complete records of your crops"
+msgstr ""
+
+#: app/templates/index.html:74
+msgid "Why Choose Our App?"
+msgstr ""
+
+#: app/templates/index.html:80
+msgid "Easy to Use"
+msgstr ""
+
+#: app/templates/index.html:81
+msgid "Simple Hindi interface, no technical knowledge required"
+msgstr ""
+
+#: app/templates/index.html:86
+msgid "Accurate Suggestions"
+msgstr ""
+
+#: app/templates/index.html:87
+msgid "Personalized advice according to your region and crops"
+msgstr ""
+
+#: app/templates/index.html:92
+msgid "Free Service"
+msgstr ""
+
+#: app/templates/index.html:93
+msgid "All main features completely free"
+msgstr ""
+
+#: app/templates/index.html:103
+msgid "How to Use?"
+msgstr ""
+
+#: app/templates/index.html:110
+msgid "Create your account"
+msgstr ""
+
+#: app/templates/index.html:116
+#, fuzzy
+msgid "Provide your farm information"
+msgstr "मौसम की जानकारी"
+
+#: app/templates/index.html:121 app/templates/onboarding.html:31
+msgid "Add Crops"
+msgstr ""
+
+#: app/templates/index.html:122
+msgid "Tell us what you are growing"
+msgstr ""
+
+#: app/templates/index.html:137
+#, fuzzy
+msgid "Start Today!"
+msgstr "आज कोई काम नहीं है!"
+
+#: app/templates/index.html:138
+msgid "Thousands of farmers are already using it"
+msgstr ""
+
+#: app/templates/index.html:141
+#, fuzzy
+msgid "Register for Free"
+msgstr "पंजीकरण"
+
+#: app/templates/onboarding.html:14
+msgid "Welcome to Smart Agriculture App!"
+msgstr ""
+
+#: app/templates/onboarding.html:17
+msgid "Follow the steps below to start your farming journey"
+msgstr ""
+
+#: app/templates/onboarding.html:36
+msgid "Get Recommendations"
+msgstr ""
+
+#: app/templates/onboarding.html:49
+msgid "Step 1: Add Your Farm First"
+msgstr ""
+
+#: app/templates/onboarding.html:52
+msgid "Add your farm information such as name, area, soil type and location"
+msgstr ""
+
+#: app/templates/crops/add.html:34 app/templates/farms/index.html:138
+#: app/templates/onboarding.html:57
+msgid "Add First Farm"
+msgstr ""
+
+#: app/templates/onboarding.html:68
+msgid "Step 2: Add Crop Information"
+msgstr ""
+
+#: app/templates/onboarding.html:71
+msgid "Add your crop type, variety, and sowing date"
+msgstr ""
+
+#: app/templates/crops/add.html:30 app/templates/onboarding.html:76
+msgid "Add Farm First"
+msgstr ""
+
+#: app/templates/onboarding.html:87
+msgid "Step 3: Get Smart Recommendations"
+msgstr ""
+
+#: app/templates/onboarding.html:90
+msgid ""
+"Get AI-based recommendations for irrigation, fertilizer and disease "
+"management"
+msgstr ""
+
+#: app/templates/onboarding.html:95
+msgid "View Dashboard After Setup"
+msgstr ""
+
+#: app/templates/onboarding.html:103
+msgid "Quick Tips"
+msgstr ""
+
+#: app/templates/onboarding.html:108
+msgid "Add Accurate Location"
+msgstr ""
+
+#: app/templates/onboarding.html:110
+msgid "Adding GPS coordinates will give you better weather-based recommendations"
+msgstr ""
+
+#: app/templates/onboarding.html:117
+msgid "Enable SMS Alerts"
+msgstr ""
+
+#: app/templates/onboarding.html:119
+msgid "Get weather information and irrigation reminders via SMS"
+msgstr ""
+
+#: app/templates/onboarding.html:126
+msgid "Use Disease Scanner"
+msgstr ""
+
+#: app/templates/onboarding.html:128
+msgid "Take photos of plants to instantly identify diseases"
+msgstr ""
+
+#: app/templates/onboarding.html:135
+msgid "Regular Updates"
+msgstr ""
+
+#: app/templates/onboarding.html:137
+msgid "Keep updating when you complete activities"
+msgstr ""
+
+#: app/templates/onboarding.html:147
+msgid "Are you already familiar?"
+msgstr ""
+
+#: app/templates/onboarding.html:151
+msgid "Skip to Dashboard"
+msgstr ""
+
+#: app/templates/auth/login.html:11
+msgid "Login to Smart Agriculture App"
+msgstr ""
+
+#: app/templates/auth/login.html:14
+msgid "Or"
+msgstr ""
+
+#: app/templates/auth/login.html:16
+msgid "create a new account"
+msgstr ""
+
+#: app/templates/auth/login.html:37 app/templates/auth/register.html:109
+msgid "Password"
+msgstr ""
+
+#: app/templates/auth/login.html:43
+msgid "Your password"
+msgstr ""
+
+#: app/templates/auth/login.html:55
+msgid "Remember me"
+msgstr ""
+
+#: app/templates/auth/login.html:61
+msgid "Forgot password?"
+msgstr ""
+
+#: app/templates/auth/login.html:76
+msgid "Smart Agriculture App - Made for farmers"
+msgstr ""
+
+#: app/templates/auth/profile_edit.html:3
+#: app/templates/auth/profile_edit.html:9
+#, fuzzy
+msgid "Edit Profile"
+msgstr "प्रोफाइल"
+
+#: app/templates/auth/register.html:3
+msgid "Create Account"
+msgstr ""
+
+#: app/templates/auth/register.html:11
+msgid "Register with Smart Agriculture App"
+msgstr ""
+
+#: app/templates/auth/register.html:14
+msgid "Already have an account?"
+msgstr ""
+
+#: app/templates/auth/register.html:25
+msgid "Full Name"
+msgstr ""
+
+#: app/templates/auth/register.html:31
+msgid "Your full name"
+msgstr ""
+
+#: app/templates/auth/register.html:46
+msgid "10 digit Indian mobile number"
+msgstr ""
+
+#: app/templates/auth/register.html:51
+msgid "Village/City"
+msgstr ""
+
+#: app/templates/auth/register.html:57
+msgid "Your village or city"
+msgstr ""
+
+#: app/templates/auth/register.html:63
+msgid "State"
+msgstr ""
+
+#: app/templates/auth/register.html:69
+msgid "Select State"
+msgstr ""
+
+#: app/templates/auth/register.html:70
+msgid "Uttar Pradesh"
+msgstr ""
+
+#: app/templates/auth/register.html:71
+msgid "Bihar"
+msgstr ""
+
+#: app/templates/auth/register.html:72
+msgid "Madhya Pradesh"
+msgstr ""
+
+#: app/templates/auth/register.html:73
+msgid "Rajasthan"
+msgstr ""
+
+#: app/templates/auth/register.html:74
+msgid "Punjab"
+msgstr ""
+
+#: app/templates/auth/register.html:75
+msgid "Haryana"
+msgstr ""
+
+#: app/templates/auth/register.html:76
+msgid "Maharashtra"
+msgstr ""
+
+#: app/templates/auth/register.html:77
+msgid "Karnataka"
+msgstr ""
+
+#: app/templates/auth/register.html:78
+msgid "Tamil Nadu"
+msgstr ""
+
+#: app/templates/auth/register.html:79
+msgid "Andhra Pradesh"
+msgstr ""
+
+#: app/templates/auth/register.html:80
+msgid "West Bengal"
+msgstr ""
+
+#: app/templates/auth/register.html:81
+msgid "Gujarat"
+msgstr ""
+
+#: app/templates/auth/register.html:82
+msgid "Odisha"
+msgstr ""
+
+#: app/templates/auth/register.html:83
+msgid "Telangana"
+msgstr ""
+
+#: app/templates/auth/register.html:84
+msgid "Kerala"
+msgstr ""
+
+#: app/templates/auth/register.html:85
+msgid "Jharkhand"
+msgstr ""
+
+#: app/templates/auth/register.html:86
+msgid "Assam"
+msgstr ""
+
+#: app/templates/auth/register.html:87
+msgid "Chhattisgarh"
+msgstr ""
+
+#: app/templates/auth/register.html:88
+msgid "Uttarakhand"
+msgstr ""
+
+#: app/templates/auth/register.html:89
+msgid "Himachal Pradesh"
+msgstr ""
+
+#: app/templates/auth/register.html:90
+msgid "Jammu Kashmir"
+msgstr ""
+
+#: app/templates/auth/register.html:91
+msgid "Other"
+msgstr ""
+
+#: app/templates/auth/register.html:97
+msgid "Language"
+msgstr ""
+
+#: app/templates/auth/register.html:116
+msgid "At least 6 characters"
+msgstr ""
+
+#: app/templates/auth/register.html:122
+msgid "Confirm Password"
+msgstr ""
+
+#: app/templates/auth/register.html:128
+msgid "Re-enter password"
+msgstr ""
+
+#: app/templates/auth/register.html:142
+msgid "By registering you agree to our"
+msgstr ""
+
+#: app/templates/auth/register.html:143
+msgid "Terms"
+msgstr ""
+
+#: app/templates/auth/register.html:144
+msgid "and"
+msgstr ""
+
+#: app/templates/crops/add.html:13
+msgid "Back to Crop List"
+msgstr ""
+
+#: app/templates/crops/add.html:31
+msgid "You need to add your farm before adding crops."
+msgstr ""
+
+#: app/templates/crops/add.html:43 app/templates/crops/add.html:50
+msgid "Select Farm"
+msgstr ""
+
+#: app/templates/crops/add.html:56 app/templates/crops/view.html:21
+#: app/templates/farms/index.html:41 app/templates/farms/index.html:78
+msgid "acres"
+msgstr "एकड़"
+
+#: app/templates/crops/add.html:68
+msgid "Crop Type"
+msgstr "फसल का प्रकार"
+
+#: app/templates/crops/add.html:75
+msgid "Select Crop"
+msgstr ""
+
+#: app/templates/crops/add.html:76
+msgid "Wheat"
+msgstr ""
+
+#: app/templates/crops/add.html:77
+msgid "Rice"
+msgstr ""
+
+#: app/templates/crops/add.html:78
+msgid "Sugarcane"
+msgstr ""
+
+#: app/templates/crops/add.html:79
+msgid "Corn"
+msgstr ""
+
+#: app/templates/crops/add.html:80
+msgid "Cotton"
+msgstr ""
+
+#: app/templates/crops/add.html:81
+msgid "Potato"
+msgstr ""
+
+#: app/templates/crops/add.html:82
+msgid "Tomato"
+msgstr ""
+
+#: app/templates/crops/add.html:83
+msgid "Onion"
+msgstr ""
+
+#: app/templates/crops/add.html:93
+msgid "Variety (Optional)"
+msgstr ""
+
+#: app/templates/crops/add.html:98
+msgid "e.g., HD 2967, PBW 343, etc."
+msgstr ""
+
+#: app/templates/crops/add.html:100
+msgid "Variety name written on seed packet"
+msgstr ""
+
+#: app/templates/crops/add.html:106 app/templates/farms/add.html:44
+msgid "Area (in Acres)"
+msgstr ""
+
+#: app/templates/crops/add.html:114
+msgid "e.g., 1.5"
+msgstr ""
+
+#: app/templates/crops/add.html:122 app/templates/crops/view.html:51
+msgid "Planting Date"
+msgstr "रोपण तारीख"
+
+#: app/templates/crops/add.html:130
+msgid "When was the crop planted"
+msgstr ""
+
+#: app/templates/crops/add.html:136
+msgid "Harvest Information"
+msgstr ""
+
+#: app/templates/crops/add.html:146 app/templates/farms/add.html:144
+msgid "Cancel"
+msgstr "रद्द करें"
+
+#: app/templates/crops/edit.html:4 app/templates/crops/edit.html:14
+#: app/templates/crops/view.html:312
+#, fuzzy
+msgid "Edit Crop"
+msgstr "नई फसल जोड़ें"
+
+#: app/templates/crops/edit.html:34
+msgid "Variety"
+msgstr ""
+
+#: app/templates/crops/edit.html:43
+msgid "Enter the crop variety name"
+msgstr ""
+
+#: app/templates/crops/edit.html:50 app/templates/crops/view.html:85
+msgid "Current Stage"
+msgstr "वर्तमान अवस्था"
+
+#: app/templates/crops/view.html:4
+msgid "Crop Details"
+msgstr "फसल विवरण"
+
+#: app/templates/crops/view.html:20
+msgid "Farm"
+msgstr "खेत"
+
+#: app/templates/crops/view.html:21
+msgid "Area"
+msgstr "क्षेत्रफल"
+
+#: app/templates/crops/view.html:27
+msgid "Edit"
+msgstr "संपादित करें"
+
+#: app/templates/crops/view.html:31
+msgid "Back to Crops"
+msgstr "फसलों की सूची"
+
+#: app/templates/crops/view.html:45
+msgid "Crop Information"
+msgstr "फसल की जानकारी"
+
+#: app/templates/crops/view.html:68
+msgid "Expected Harvest"
+msgstr "अपेक्षित कटाई"
+
+#: app/templates/crops/view.html:87
+msgid "Unknown"
+msgstr "अज्ञात"
+
+#: app/templates/crops/view.html:92
+msgid "Status"
+msgstr "स्थिति"
+
+#: app/templates/crops/view.html:107
+msgid "Days Since Planting"
+msgstr "रोपण के दिन"
+
+#: app/templates/crops/view.html:115
+msgid "Days to Harvest"
+msgstr "कटाई तक दिन"
+
+#: app/templates/crops/view.html:128 app/templates/crops/view.html:330
+msgid "Growth Stage"
+msgstr "वृद्धि अवस्था"
+
+#: app/templates/crops/view.html:134
+msgid "Stage"
+msgstr "अवस्था"
+
+#: app/templates/crops/view.html:144
+msgid "Growth Timeline"
+msgstr "वृद्धि समयरेखा"
+
+#: app/templates/crops/view.html:154
+msgid "Activity Timeline"
+msgstr "गतिविधि समयरेखा"
+
+#: app/templates/crops/view.html:165
+msgid "Yield Prediction"
+msgstr "उत्पादन पूर्वानुमान"
+
+#: app/templates/crops/view.html:176
+msgid "Recent Activities"
+msgstr "हाल की गतिविधियां"
+
+#: app/templates/crops/view.html:180 app/templates/crops/view.html:307
+msgid "Add Activity"
+msgstr "गतिविधि जोड़ें"
+
+#: app/templates/crops/view.html:199
+msgid "Scheduled"
+msgstr ""
+
+#: app/templates/crops/view.html:210
+msgid "Completed"
+msgstr ""
+
+#: app/templates/crops/view.html:219
+msgid "Quantity"
+msgstr ""
+
+#: app/templates/crops/view.html:237
+#, fuzzy
+msgid "View All Activities"
+msgstr "हाल की गतिविधियां"
+
+#: app/templates/crops/view.html:243
+#, fuzzy
+msgid "No activities found"
+msgstr "हाल की गतिविधियां"
+
+#: app/templates/crops/view.html:246
+#, fuzzy
+msgid "Add First Activity"
+msgstr "गतिविधि जोड़ें"
+
+#: app/templates/crops/view.html:260
+msgid "Irrigation Recommendation"
+msgstr ""
+
+#: app/templates/crops/view.html:320
+msgid "Care Tips"
+msgstr ""
+
+#: app/templates/crops/view.html:326
+msgid "Daily Water Requirement"
+msgstr ""
+
+#: app/templates/crops/view.html:334
+#, fuzzy
+msgid "Crop Age"
+msgstr "फसल का प्रकार"
+
+#: app/templates/crops/view.html:334
+msgid "days"
+msgstr ""
+
+#: app/templates/errors/404.html:3 app/templates/errors/404.html:10
+msgid "Page Not Found"
+msgstr ""
+
+#: app/templates/errors/404.html:12
+msgid ""
+"Sorry, the page you are looking for does not exist. It may have been "
+"removed or you may have come to the wrong link."
+msgstr ""
+
+#: app/templates/errors/404.html:18
+msgid "Go to Home Page"
+msgstr ""
+
+#: app/templates/errors/404.html:24
+#, fuzzy
+msgid "Go to Dashboard"
+msgstr "डैशबोर्ड"
+
+#: app/templates/errors/404.html:36
+msgid "If this problem persists, please contact our"
+msgstr ""
+
+#: app/templates/errors/404.html:37
+msgid "support team"
+msgstr ""
+
+#: app/templates/farms/add.html:13
+msgid "Back to Farm List"
+msgstr ""
+
+#: app/templates/farms/add.html:31
+msgid "Farm Name"
+msgstr "खेत का नाम"
+
+#: app/templates/farms/add.html:37
+msgid "e.g., Main Farm, East Field, etc."
+msgstr ""
+
+#: app/templates/farms/add.html:53
+msgid "e.g., 2.5"
+msgstr ""
+
+#: app/templates/farms/add.html:55
+msgid "Enter in decimal format (e.g., 2.5 acres)"
+msgstr ""
+
+#: app/templates/farms/add.html:61
+msgid "Soil Type"
+msgstr ""
+
+#: app/templates/farms/add.html:66
+msgid "Select Soil Type"
+msgstr ""
+
+#: app/templates/farms/add.html:67
+msgid "Clay Soil"
+msgstr ""
+
+#: app/templates/farms/add.html:68
+msgid "Sandy Soil"
+msgstr ""
+
+#: app/templates/farms/add.html:69
+msgid "Loamy Soil"
+msgstr ""
+
+#: app/templates/farms/add.html:70
+msgid "Silt Soil"
+msgstr ""
+
+#: app/templates/farms/add.html:71
+msgid "Black Soil"
+msgstr ""
+
+#: app/templates/farms/add.html:72
+msgid "Red Soil"
+msgstr ""
+
+#: app/templates/farms/add.html:73
+msgid "Alluvial Soil"
+msgstr ""
+
+#: app/templates/farms/add.html:79
+msgid "Location Information (Optional)"
+msgstr ""
+
+#: app/templates/farms/add.html:81
+msgid "Add GPS coordinates for accurate weather information and irrigation advice"
+msgstr ""
+
+#: app/templates/farms/add.html:88
+msgid "Latitude"
+msgstr ""
+
+#: app/templates/farms/add.html:96
+msgid "e.g., 26.8467"
+msgstr ""
+
+#: app/templates/farms/add.html:103
+msgid "Longitude"
+msgstr ""
+
+#: app/templates/farms/add.html:111
+msgid "e.g., 80.9462"
+msgstr ""
+
+#: app/templates/farms/add.html:118
+msgid "How to get GPS coordinates:"
+msgstr ""
+
+#: app/templates/farms/add.html:120
+msgid "Open Google Maps and find your farm location"
+msgstr ""
+
+#: app/templates/farms/add.html:121
+msgid "Long press on the location"
+msgstr ""
+
+#: app/templates/farms/add.html:122
+msgid "Coordinates will appear (e.g., 26.8467, 80.9462)"
+msgstr ""
+
+#: app/templates/farms/add.html:123
+msgid "First number is Latitude, second is Longitude"
+msgstr ""
+
+#: app/templates/farms/add.html:132
+msgid "Get My Current Location"
+msgstr ""
+
+#: app/templates/farms/add.html:135
+msgid "This feature only works when you are at your farm"
+msgstr ""
+
+#: app/templates/farms/add.html:163
+msgid "Location successfully obtained!"
+msgstr ""
+
+#: app/templates/farms/add.html:166
+msgid "Error getting location: "
+msgstr ""
+
+#: app/templates/farms/add.html:170
+msgid "Your browser does not support GPS location."
+msgstr ""
+
+#: app/templates/farms/index.html:3 app/templates/farms/index.html:12
+msgid "My Farms"
+msgstr ""
+
+#: app/templates/farms/index.html:13
+msgid "Information about all your farms"
+msgstr ""
+
+#: app/templates/farms/index.html:60
+msgid "In Use (acres)"
+msgstr ""
+
+#: app/templates/farms/index.html:78
+msgid "available for more crops"
+msgstr ""
+
+#: app/templates/farms/index.html:84
+msgid "100% land"
+msgstr ""
+
+#: app/templates/farms/index.html:84
+msgid "in use"
+msgstr ""
+
+#: app/templates/farms/index.html:93
+msgid "View Details"
+msgstr ""
+
+#: app/templates/farms/index.html:107
+msgid "Total Statistics"
+msgstr ""
+
+#: app/templates/farms/index.html:115
+msgid "Total Area (acres)"
+msgstr ""
+
+#: app/templates/farms/index.html:119
+msgid "Total Crops"
+msgstr ""
+
+#: app/templates/farms/index.html:123
+msgid "Farms with GPS"
+msgstr ""
+
+#: app/templates/farms/index.html:132
+msgid "No farms added yet"
+msgstr ""
+
+#: app/templates/farms/index.html:134
+msgid ""
+"Add your first farm to start smart agriculture. This will help you with "
+"better irrigation and crop management."
+msgstr ""
+
+#: venv/Lib/site-packages/click/_termui_impl.py:600
+#, python-brace-format
+msgid "{editor}: Editing failed"
+msgstr ""
+
+#: venv/Lib/site-packages/click/_termui_impl.py:604
+#, python-brace-format
+msgid "{editor}: Editing failed: {e}"
+msgstr ""
+
+#: venv/Lib/site-packages/click/core.py:1084
+#: venv/Lib/site-packages/click/core.py:1121
+#, python-brace-format
+msgid "{text} {deprecated_message}"
+msgstr ""
+
+#: venv/Lib/site-packages/click/core.py:1140
+msgid "Options"
+msgstr ""
+
+#: venv/Lib/site-packages/click/core.py:1202
+#, python-brace-format
+msgid "Got unexpected extra argument ({args})"
+msgid_plural "Got unexpected extra arguments ({args})"
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/Lib/site-packages/click/core.py:1221
+#, python-brace-format
+msgid "DeprecationWarning: The command {name!r} is deprecated.{extra_message}"
+msgstr ""
+
+#: venv/Lib/site-packages/click/core.py:1405
+msgid "Aborted!"
+msgstr ""
+
+#: venv/Lib/site-packages/click/core.py:1779
+msgid "Commands"
+msgstr ""
+
+#: venv/Lib/site-packages/click/core.py:1810
+msgid "Missing command."
+msgstr ""
+
+#: venv/Lib/site-packages/click/core.py:1888
+#, python-brace-format
+msgid "No such command {name!r}."
+msgstr ""
+
+#: venv/Lib/site-packages/click/core.py:2303
+msgid "Value must be an iterable."
+msgstr ""
+
+#: venv/Lib/site-packages/click/core.py:2324
+#, python-brace-format
+msgid "Takes {nargs} values but 1 was given."
+msgid_plural "Takes {nargs} values but {len} were given."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/Lib/site-packages/click/core.py:2404
+#, python-brace-format
+msgid ""
+"DeprecationWarning: The {param_type} {name!r} is "
+"deprecated.{extra_message}"
+msgstr ""
+
+#: venv/Lib/site-packages/click/core.py:2807
+#, python-brace-format
+msgid "env var: {var}"
+msgstr ""
+
+#: venv/Lib/site-packages/click/core.py:2810
+#, python-brace-format
+msgid "default: {default}"
+msgstr ""
+
+#: venv/Lib/site-packages/click/core.py:2814
+msgid "required"
+msgstr ""
+
+#: venv/Lib/site-packages/click/core.py:2870
+msgid "(dynamic)"
+msgstr ""
+
+#: venv/Lib/site-packages/click/decorators.py:465
+#, python-format
+msgid "%(prog)s, version %(version)s"
+msgstr ""
+
+#: venv/Lib/site-packages/click/decorators.py:522
+msgid "Show the version and exit."
+msgstr ""
+
+#: venv/Lib/site-packages/click/decorators.py:548
+msgid "Show this message and exit."
+msgstr ""
+
+#: venv/Lib/site-packages/click/exceptions.py:50
+#: venv/Lib/site-packages/click/exceptions.py:89
+#, python-brace-format
+msgid "Error: {message}"
+msgstr ""
+
+#: venv/Lib/site-packages/click/exceptions.py:81
+#, python-brace-format
+msgid "Try '{command} {option}' for help."
+msgstr ""
+
+#: venv/Lib/site-packages/click/exceptions.py:130
+#, python-brace-format
+msgid "Invalid value: {message}"
+msgstr ""
+
+#: venv/Lib/site-packages/click/exceptions.py:132
+#, python-brace-format
+msgid "Invalid value for {param_hint}: {message}"
+msgstr ""
+
+#: venv/Lib/site-packages/click/exceptions.py:190
+msgid "Missing argument"
+msgstr ""
+
+#: venv/Lib/site-packages/click/exceptions.py:192
+msgid "Missing option"
+msgstr ""
+
+#: venv/Lib/site-packages/click/exceptions.py:194
+msgid "Missing parameter"
+msgstr ""
+
+#: venv/Lib/site-packages/click/exceptions.py:196
+#, python-brace-format
+msgid "Missing {param_type}"
+msgstr ""
+
+#: venv/Lib/site-packages/click/exceptions.py:203
+#, python-brace-format
+msgid "Missing parameter: {param_name}"
+msgstr ""
+
+#: venv/Lib/site-packages/click/exceptions.py:223
+#, python-brace-format
+msgid "No such option: {name}"
+msgstr ""
+
+#: venv/Lib/site-packages/click/exceptions.py:235
+#, python-brace-format
+msgid "Did you mean {possibility}?"
+msgid_plural "(Possible options: {possibilities})"
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/Lib/site-packages/click/exceptions.py:282
+msgid "unknown error"
+msgstr ""
+
+#: venv/Lib/site-packages/click/exceptions.py:289
+#, python-brace-format
+msgid "Could not open file {filename!r}: {message}"
+msgstr ""
+
+#: venv/Lib/site-packages/click/formatting.py:156
+msgid "Usage:"
+msgstr ""
+
+#: venv/Lib/site-packages/click/parser.py:200
+#, python-brace-format
+msgid "Argument {name!r} takes {nargs} values."
+msgstr ""
+
+#: venv/Lib/site-packages/click/parser.py:383
+#, python-brace-format
+msgid "Option {name!r} does not take a value."
+msgstr ""
+
+#: venv/Lib/site-packages/click/parser.py:444
+#, python-brace-format
+msgid "Option {name!r} requires an argument."
+msgid_plural "Option {name!r} requires {nargs} arguments."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/Lib/site-packages/click/shell_completion.py:326
+msgid "Shell completion is not supported for Bash versions older than 4.4."
+msgstr ""
+
+#: venv/Lib/site-packages/click/shell_completion.py:333
+msgid "Couldn't detect Bash version, shell completion is not supported."
+msgstr ""
+
+#: venv/Lib/site-packages/click/termui.py:162
+msgid "Repeat for confirmation"
+msgstr ""
+
+#: venv/Lib/site-packages/click/termui.py:178
+msgid "Error: The value you entered was invalid."
+msgstr ""
+
+#: venv/Lib/site-packages/click/termui.py:180
+#, python-brace-format
+msgid "Error: {e.message}"
+msgstr ""
+
+#: venv/Lib/site-packages/click/termui.py:191
+msgid "Error: The two entered values do not match."
+msgstr ""
+
+#: venv/Lib/site-packages/click/termui.py:247
+msgid "Error: invalid input"
+msgstr ""
+
+#: venv/Lib/site-packages/click/termui.py:866
+msgid "Press any key to continue..."
+msgstr ""
+
+#: venv/Lib/site-packages/click/types.py:332
+#, python-brace-format
+msgid ""
+"Choose from:\n"
+"\t{choices}"
+msgstr ""
+
+#: venv/Lib/site-packages/click/types.py:369
+#, python-brace-format
+msgid "{value!r} is not {choice}."
+msgid_plural "{value!r} is not one of {choices}."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/Lib/site-packages/click/types.py:460
+#, python-brace-format
+msgid "{value!r} does not match the format {format}."
+msgid_plural "{value!r} does not match the formats {formats}."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/Lib/site-packages/click/types.py:482
+#, python-brace-format
+msgid "{value!r} is not a valid {number_type}."
+msgstr ""
+
+#: venv/Lib/site-packages/click/types.py:538
+#, python-brace-format
+msgid "{value} is not in the range {range}."
+msgstr ""
+
+#: venv/Lib/site-packages/click/types.py:679
+#, python-brace-format
+msgid "{value!r} is not a valid boolean."
+msgstr ""
+
+#: venv/Lib/site-packages/click/types.py:703
+#, python-brace-format
+msgid "{value!r} is not a valid UUID."
+msgstr ""
+
+#: venv/Lib/site-packages/click/types.py:893
+msgid "file"
+msgstr ""
+
+#: venv/Lib/site-packages/click/types.py:895
+msgid "directory"
+msgstr ""
+
+#: venv/Lib/site-packages/click/types.py:897
+msgid "path"
+msgstr ""
+
+#: venv/Lib/site-packages/click/types.py:944
+#, python-brace-format
+msgid "{name} {filename!r} does not exist."
+msgstr ""
+
+#: venv/Lib/site-packages/click/types.py:953
+#, python-brace-format
+msgid "{name} {filename!r} is a file."
+msgstr ""
+
+#: venv/Lib/site-packages/click/types.py:961
+#, python-brace-format
+msgid "{name} {filename!r} is a directory."
+msgstr ""
+
+#: venv/Lib/site-packages/click/types.py:970
+#, python-brace-format
+msgid "{name} {filename!r} is not readable."
+msgstr ""
+
+#: venv/Lib/site-packages/click/types.py:979
+#, python-brace-format
+msgid "{name} {filename!r} is not writable."
+msgstr ""
+
+#: venv/Lib/site-packages/click/types.py:988
+#, python-brace-format
+msgid "{name} {filename!r} is not executable."
+msgstr ""
+
+#: venv/Lib/site-packages/click/types.py:1055
+#, python-brace-format
+msgid "{len_type} values are required, but {len_value} was given."
+msgid_plural "{len_type} values are required, but {len_value} were given."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/Lib/site-packages/flask_wtf/file.py:55
+#: venv/Lib/site-packages/wtforms/validators.py:293
+#: venv/Lib/site-packages/wtforms/validators.py:323
+msgid "This field is required."
+msgstr ""
+
+#: venv/Lib/site-packages/flask_wtf/file.py:94
+#, python-brace-format
+msgid "File does not have an approved extension: {extensions}"
+msgstr ""
+
+#: venv/Lib/site-packages/flask_wtf/file.py:101
+msgid "File does not have an approved extension."
+msgstr ""
+
+#: venv/Lib/site-packages/flask_wtf/file.py:140
+#, python-brace-format
+msgid "File must be between {min_size} and {max_size} bytes."
+msgstr ""
+
+#: venv/Lib/site-packages/wtforms/validators.py:86
+#, python-format
+msgid "Invalid field name '%s'."
+msgstr ""
+
+#: venv/Lib/site-packages/wtforms/validators.py:99
+#, python-format
+msgid "Field must be equal to %(other_name)s."
+msgstr ""
+
+#: venv/Lib/site-packages/wtforms/validators.py:146
+#, python-format
+msgid "Field must be at least %(min)d character long."
+msgid_plural "Field must be at least %(min)d characters long."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/Lib/site-packages/wtforms/validators.py:152
+#, python-format
+msgid "Field cannot be longer than %(max)d character."
+msgid_plural "Field cannot be longer than %(max)d characters."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/Lib/site-packages/wtforms/validators.py:158
+#, python-format
+msgid "Field must be exactly %(max)d character long."
+msgid_plural "Field must be exactly %(max)d characters long."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/Lib/site-packages/wtforms/validators.py:164
+#, python-format
+msgid "Field must be between %(min)d and %(max)d characters long."
+msgstr ""
+
+#: venv/Lib/site-packages/wtforms/validators.py:216
+#, python-format
+msgid "Number must be at least %(min)s."
+msgstr ""
+
+#: venv/Lib/site-packages/wtforms/validators.py:219
+#, python-format
+msgid "Number must be at most %(max)s."
+msgstr ""
+
+#: venv/Lib/site-packages/wtforms/validators.py:222
+#, python-format
+msgid "Number must be between %(min)s and %(max)s."
+msgstr ""
+
+#: venv/Lib/site-packages/wtforms/validators.py:358
+msgid "Invalid input."
+msgstr ""
+
+#: venv/Lib/site-packages/wtforms/validators.py:422
+msgid "Invalid email address."
+msgstr ""
+
+#: venv/Lib/site-packages/wtforms/validators.py:460
+msgid "Invalid IP address."
+msgstr ""
+
+#: venv/Lib/site-packages/wtforms/validators.py:503
+msgid "Invalid Mac address."
+msgstr ""
+
+#: venv/Lib/site-packages/wtforms/validators.py:540
+msgid "Invalid URL."
+msgstr ""
+
+#: venv/Lib/site-packages/wtforms/validators.py:561
+msgid "Invalid UUID."
+msgstr ""
+
+#: venv/Lib/site-packages/wtforms/validators.py:594
+#, python-format
+msgid "Invalid value, must be one of: %(values)s."
+msgstr ""
+
+#: venv/Lib/site-packages/wtforms/validators.py:629
+#, python-format
+msgid "Invalid value, can't be any of: %(values)s."
+msgstr ""
+
+#: venv/Lib/site-packages/wtforms/validators.py:698
+msgid "This field cannot be edited"
+msgstr ""
+
+#: venv/Lib/site-packages/wtforms/validators.py:714
+msgid "This field is disabled and cannot have a value"
+msgstr ""
+
+#: venv/Lib/site-packages/wtforms/csrf/core.py:96
+msgid "Invalid CSRF Token."
+msgstr ""
+
+#: venv/Lib/site-packages/wtforms/csrf/session.py:63
+msgid "CSRF token missing."
+msgstr ""
+
+#: venv/Lib/site-packages/wtforms/csrf/session.py:71
+msgid "CSRF failed."
+msgstr ""
+
+#: venv/Lib/site-packages/wtforms/csrf/session.py:76
+msgid "CSRF token expired."
+msgstr ""
+
+#: venv/Lib/site-packages/wtforms/fields/choices.py:142
+msgid "Invalid Choice: could not coerce."
+msgstr ""
+
+#: venv/Lib/site-packages/wtforms/fields/choices.py:149
+#: venv/Lib/site-packages/wtforms/fields/choices.py:203
+msgid "Choices cannot be None."
+msgstr ""
+
+#: venv/Lib/site-packages/wtforms/fields/choices.py:155
+msgid "Not a valid choice."
+msgstr ""
+
+#: venv/Lib/site-packages/wtforms/fields/choices.py:194
+msgid "Invalid choice(s): one or more data inputs could not be coerced."
+msgstr ""
+
+#: venv/Lib/site-packages/wtforms/fields/choices.py:212
+#, python-format
+msgid "'%(value)s' is not a valid choice for this field."
+msgid_plural "'%(value)s' are not valid choices for this field."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/Lib/site-packages/wtforms/fields/datetime.py:51
+msgid "Not a valid datetime value."
+msgstr ""
+
+#: venv/Lib/site-packages/wtforms/fields/datetime.py:77
+msgid "Not a valid date value."
+msgstr ""
+
+#: venv/Lib/site-packages/wtforms/fields/datetime.py:103
+msgid "Not a valid time value."
+msgstr ""
+
+#: venv/Lib/site-packages/wtforms/fields/datetime.py:148
+msgid "Not a valid week value."
+msgstr ""
+
+#: venv/Lib/site-packages/wtforms/fields/numeric.py:82
+#: venv/Lib/site-packages/wtforms/fields/numeric.py:92
+msgid "Not a valid integer value."
+msgstr ""
+
+#: venv/Lib/site-packages/wtforms/fields/numeric.py:168
+msgid "Not a valid decimal value."
+msgstr ""
+
+#: venv/Lib/site-packages/wtforms/fields/numeric.py:197
+msgid "Not a valid float value."
+msgstr ""
+
+# Navigation
+#~ msgid "Smart Agriculture App"
+#~ msgstr "स्मार्ट कृषि ऐप"
+
+#~ msgid "Smart Agriculture"
+#~ msgstr "स्मार्ट कृषि"
+
+#~ msgid "Dashboard"
+#~ msgstr "डैशबोर्ड"
+
+#~ msgid "Farms"
+#~ msgstr "खेत"
+
+#~ msgid "Crops"
+#~ msgstr "फसलें"
+
+#~ msgid "Disease Scanner"
+#~ msgstr "रोग स्कैनर"
+
+#~ msgid "Profile"
+#~ msgstr "प्रोफाइल"
+
+#~ msgid "Help"
+#~ msgstr "सहायता"
+
+#~ msgid "Logout"
+#~ msgstr "लॉग आउट"
+
+# Dashboard
+#~ msgid "Welcome"
+#~ msgstr "नमस्कार"
+
+#~ msgid "welcome!"
+#~ msgstr "आपका स्वागत है!"
+
+#~ msgid "Smart Agriculture Dashboard"
+#~ msgstr "स्मार्ट कृषि डैशबोर्ड"
+
+#~ msgid "Today's Date"
+#~ msgstr "आज की तारीख"
+
+#~ msgid "Weather"
+#~ msgstr "मौसम"
+
+#~ msgid "Clear"
+#~ msgstr "साफ"
+
+#~ msgid "Getting Started"
+#~ msgstr "शुरुआत करें"
+
+#~ msgid "Add your farm first to get smart agricultural recommendations"
+#~ msgstr "स्मार्ट कृषि सुझाव पाने के लिए पहले अपना खेत जोड़ें"
+
+#~ msgid "Start Setup"
+#~ msgstr "सेटअप शुरू करें"
+
+# Statistics
+#~ msgid "Total Farms"
+#~ msgstr "कुल खेत"
+
+#~ msgid "Active Crops"
+#~ msgstr "सक्रिय फसलें"
+
+#~ msgid "Today's Tasks"
+#~ msgstr "आज के काम"
+
+#~ msgid "Urgent Irrigation"
+#~ msgstr "तुरंत सिंचाई"
+
+# Charts and Data
+#~ msgid "Crop Distribution"
+#~ msgstr "फसल वितरण"
+
+#~ msgid "Monthly Activities"
+#~ msgstr "मासिक गतिविधियां"
+
+#~ msgid "Weather Trends (7 days)"
+#~ msgstr "मौसम की प्रवृत्ति (7 दिन)"
+
+#~ msgid "Today's Activities"
+#~ msgstr "आज के काम"
+
+#~ msgid "No work today!"
+#~ msgstr "आज कोई काम नहीं है!"
+
+#~ msgid "Quick Actions"
+#~ msgstr "त्वरित कार्य"
+
+#~ msgid "Add New Farm"
+#~ msgstr "नया खेत जोड़ें"
+
+#~ msgid "Add New Crop"
+#~ msgstr "नई फसल जोड़ें"
+
+#~ msgid "View Crops"
+#~ msgstr "फसलें देखें"
+
+#~ msgid "Schedule Irrigation"
+#~ msgstr "सिंचाई शेड्यूल करें"
+
+# Weather
+#~ msgid "Weather Information"
+#~ msgstr "मौसम की जानकारी"
+
+#~ msgid "Humidity"
+#~ msgstr "नमी"
+
+#~ msgid "Wind Speed"
+#~ msgstr "हवा की गति"
+
+#~ msgid "Rain Probability"
+#~ msgstr "बारिश की संभावना"
+
+#~ msgid "It may rain in the next 24 hours"
+#~ msgstr "अगले 24 घंटों में बारिश हो सकती है"
+
+#~ msgid "Weather information is not available"
+#~ msgstr "मौसम की जानकारी उपलब्ध नहीं है"
+
+#~ msgid "Add farm location to get weather updates"
+#~ msgstr "मौसम अपडेट के लिए खेत का स्थान जोड़ें"
+
+#~ msgid "Recent Activity"
+#~ msgstr "हाल की गतिविधि"
+
+#~ msgid "No recent activity"
+#~ msgstr "कोई हाल की गतिविधि नहीं"
+
+# JavaScript Messages
+#~ msgid "Today irrigation has been scheduled!"
+#~ msgstr "आज की सिंचाई शेड्यूल हो गई है!"
+
+#~ msgid "Error"
+#~ msgstr "त्रुटि"
+
+#~ msgid "Something went wrong. Please try again."
+#~ msgstr "कुछ गलत हुआ है। कृपया पुनः प्रयास करें।"
+
+# Footer
+#~ msgid "Making agriculture easier for Indian farmers with smart technology."
+#~ msgstr "भारतीय किसानों के लिए स्मार्ट तकनीक से कृषि को आसान बनाना।"
+
+#~ msgid "Services"
+#~ msgstr "सेवाएं"
+
+#~ msgid "Smart Irrigation"
+#~ msgstr "स्मार्ट सिंचाई"
+
+#~ msgid "Disease Detection"
+#~ msgstr "रोग पहचान"
+
+#~ msgid "Crop Management"
+#~ msgstr "फसल प्रबंधन"
+
+#~ msgid "Contact"
+#~ msgstr "संपर्क"
+
+#~ msgid "Contact Us"
+#~ msgstr "संपर्क करें"
+
+#~ msgid "Privacy Policy"
+#~ msgstr "प्राइवेसी पॉलिसी"
+
+#~ msgid "All rights reserved."
+#~ msgstr "सभी अधिकार सुरक्षित।"
+
+# Landing Page
+#~ msgid "Smart solutions for farmers"
+#~ msgstr "किसानों के लिए स्मार्ट समाधान"
+
+#~ msgid "Make farming easy and profitable with modern technology"
+#~ msgstr "आधुनिक तकनीक से खेती को बनाएं आसान और फायदेमंद"
+
+#~ msgid "Get Started"
+#~ msgstr "शुरू करें"
+
+# Authentication
+#~ msgid "Login"
+#~ msgstr "लॉग इन करें"
+
+#~ msgid "Our Services"
+#~ msgstr "हमारी सेवाएं"
+
+#~ msgid "Smart solutions specially designed for farmers"
+#~ msgstr "किसानों के लिए विशेष रूप से बनाए गए स्मार्ट समाधान"
+
+#~ msgid "Right irrigation information based on weather"
+#~ msgstr "मौसम के आधार पर सिंचाई की सही जानकारी"
+
+#~ msgid "Instantly identify crop diseases from photos"
+#~ msgstr "फोटो से तुरंत पहचानें फसल के रोग"
+
+#~ msgid "Weather Alerts"
+#~ msgstr "मौसम चेतावनी"
+
+#~ msgid "Get weather information via SMS"
+#~ msgstr "SMS से मिले मौसम की जानकारी"
+
+#~ msgid "Keep complete records of your crops"
+#~ msgstr "अपनी फसलों का पूरा रिकॉर्ड रखें"
+
+#~ msgid "Why Choose Our App?"
+#~ msgstr "क्यों चुनें हमारा ऐप?"
+
+#~ msgid "Easy to Use"
+#~ msgstr "सरल उपयोग"
+
+#~ msgid "Simple Hindi interface, no technical knowledge required"
+#~ msgstr "आसान हिंदी इंटरफेस, कोई तकनीकी जानकारी की जरूरत नहीं"
+
+#~ msgid "Accurate Suggestions"
+#~ msgstr "सटीक सुझाव"
+
+#~ msgid "Personalized advice according to your region and crops"
+#~ msgstr "आपके क्षेत्र और फसल के अनुसार व्यक्तिगत सलाह"
+
+#~ msgid "Free Service"
+#~ msgstr "फ्री सेवा"
+
+#~ msgid "All main features completely free"
+#~ msgstr "सभी मुख्य सुविधाएं बिल्कुल मुफ्त"
+
+#~ msgid "How to Use?"
+#~ msgstr "कैसे करें उपयोग?"
+
+#~ msgid "Register"
+#~ msgstr "रजिस्टर करें"
+
+#~ msgid "Create your account"
+#~ msgstr "अपना खाता बनाएं"
+
+#~ msgid "Add Farm"
+#~ msgstr "खेत जोड़ें"
+
+#~ msgid "Provide your farm information"
+#~ msgstr "अपने खेत की जानकारी दें"
+
+#~ msgid "Add Crops"
+#~ msgstr "फसल जोड़ें"
+
+#~ msgid "Tell us what you are growing"
+#~ msgstr "क्या उगा रहे हैं बताएं"
+
+#~ msgid "Get Suggestions"
+#~ msgstr "सुझाव पाएं"
+
+#~ msgid "Receive smart advice"
+#~ msgstr "स्मार्ट सलाह मिले"
+
+#~ msgid "Start Today!"
+#~ msgstr "आज ही शुरू करें!"
+
+#~ msgid "Thousands of farmers are already using it"
+#~ msgstr "हजारों किसान पहले से ही इस्तेमाल कर रहे हैं"
+
+#~ msgid "Register for Free"
+#~ msgstr "मुफ्त में रजिस्टर करें"
+
+#~ msgid "Login to Smart Agriculture App"
+#~ msgstr "स्मार्ट कृषि ऐप में लॉग इन करें"
+
+#~ msgid "Or"
+#~ msgstr "या"
+
+#~ msgid "create a new account"
+#~ msgstr "नया खाता बनाएं"
+
+#~ msgid "Mobile Number"
+#~ msgstr "मोबाइल नंबर"
+
+#~ msgid "Password"
+#~ msgstr "पासवर्ड"
+
+#~ msgid "Your password"
+#~ msgstr "आपका पासवर्ड"
+
+#~ msgid "Remember me"
+#~ msgstr "मुझे याद रखें"
+
+#~ msgid "Forgot password?"
+#~ msgstr "पासवर्ड भूल गए?"
+
+#~ msgid "Smart Agriculture App - Made for farmers"
+#~ msgstr "स्मार्ट कृषि ऐप - किसानों के लिए बनाया गया"
+
+#~ msgid "Create Account"
+#~ msgstr "नया खाता बनाएं"
+
+#~ msgid "Register with Smart Agriculture App"
+#~ msgstr "स्मार्ट कृषि ऐप में रजिस्टर करें"
+
+#~ msgid "Already have an account?"
+#~ msgstr "पहले से खाता है?"
+
+#~ msgid "Full Name"
+#~ msgstr "पूरा नाम"
+
+#~ msgid "Your full name"
+#~ msgstr "आपका पूरा नाम"
+
+#~ msgid "10 digit Indian mobile number"
+#~ msgstr "10 अंकों का भारतीय मोबाइल नंबर"
+
+#~ msgid "Village/City"
+#~ msgstr "गाँव/शहर"
+
+#~ msgid "Your village or city"
+#~ msgstr "आपका गाँव या शहर"
+
+#~ msgid "State"
+#~ msgstr "राज्य"
+
+#~ msgid "Select State"
+#~ msgstr "राज्य चुनें"
+
+#~ msgid "Uttar Pradesh"
+#~ msgstr "उत्तर प्रदेश"
+
+#~ msgid "Bihar"
+#~ msgstr "बिहार"
+
+#~ msgid "Madhya Pradesh"
+#~ msgstr "मध्य प्रदेश"
+
+#~ msgid "Rajasthan"
+#~ msgstr "राजस्थान"
+
+#~ msgid "Punjab"
+#~ msgstr "पंजाब"
+
+#~ msgid "Haryana"
+#~ msgstr "हरियाणा"
+
+#~ msgid "Maharashtra"
+#~ msgstr "महाराष्ट्र"
+
+#~ msgid "Karnataka"
+#~ msgstr "कर्नाटक"
+
+#~ msgid "Tamil Nadu"
+#~ msgstr "तमिल नाडु"
+
+#~ msgid "Andhra Pradesh"
+#~ msgstr "आंध्र प्रदेश"
+
+#~ msgid "West Bengal"
+#~ msgstr "पश्चिम बंगाल"
+
+#~ msgid "Gujarat"
+#~ msgstr "गुजरात"
+
+#~ msgid "Odisha"
+#~ msgstr "ओडिशा"
+
+#~ msgid "Telangana"
+#~ msgstr "तेलंगाना"
+
+#~ msgid "Kerala"
+#~ msgstr "केरल"
+
+#~ msgid "Jharkhand"
+#~ msgstr "झारखंड"
+
+#~ msgid "Assam"
+#~ msgstr "असम"
+
+#~ msgid "Chhattisgarh"
+#~ msgstr "छत्तीसगढ़"
+
+#~ msgid "Uttarakhand"
+#~ msgstr "उत्तराखंड"
+
+#~ msgid "Himachal Pradesh"
+#~ msgstr "हिमाचल प्रदेश"
+
+#~ msgid "Jammu Kashmir"
+#~ msgstr "जम्मू कश्मीर"
+
+#~ msgid "Other"
+#~ msgstr "अन्य"
+
+#~ msgid "Language"
+#~ msgstr "भाषा"
+
+#~ msgid "At least 6 characters"
+#~ msgstr "कम से कम 6 अक्षर"
+
+#~ msgid "Confirm Password"
+#~ msgstr "पासवर्ड दोबारा दर्ज करें"
+
+#~ msgid "Re-enter password"
+#~ msgstr "पासवर्ड दोबारा दर्ज करें"
+
+#~ msgid "By registering you agree to our"
+#~ msgstr "रजिस्टर करके आप हमारी"
+
+#~ msgid "Terms"
+#~ msgstr "शर्तों"
+
+#~ msgid "and"
+#~ msgstr "और"
+
+# Authentication Error Messages
+#~ msgid "Name must be at least 2 characters long"
+#~ msgstr "नाम कम से कम 2 अक्षर का होना चाहिए"
+
+#~ msgid "Please enter a valid phone number (10 digits)"
+#~ msgstr "सही फोन नंबर दर्ज करें (10 अंक)"
+
+#~ msgid "This phone number is already registered"
+#~ msgstr "यह फोन नंबर पहले से पंजीकृत है"
+
+#~ msgid "Password must be at least 6 characters long"
+#~ msgstr "पासवर्ड कम से कम 6 अक्षर का होना चाहिए"
+
+#~ msgid "Passwords do not match"
+#~ msgstr "पासवर्ड मेल नहीं खाते"
+
+#~ msgid "Welcome! Let's start by adding your farm."
+#~ msgstr "स्वागत है! आइए पहले अपना खेत जोड़ें।"
+
+#~ msgid "Registration error occurred. Please try again."
+#~ msgstr "पंजीकरण में त्रुटि हुई। कृपया दोबारा कोशिश करें।"
+
+#~ msgid "Please enter phone number and password."
+#~ msgstr "फोन नंबर और पासवर्ड दर्ज करें।"
+
+#~ msgid "Your account is inactive. Please contact support."
+#~ msgstr "आपका खाता निष्क्रिय है। सहायता के लिए संपर्क करें।"
+
+#~ msgid "Incorrect phone number or password."
+#~ msgstr "गलत फोन नंबर या पासवर्ड।"
+
+#~ msgid "You have been logged out successfully."
+#~ msgstr "आप सफलतापूर्वक लॉग आउट हो गए।"
+
+#~ msgid "Name must be at least 2 characters long."
+#~ msgstr "नाम कम से कम 2 अक्षर का होना चाहिए।"
+
+#~ msgid "Profile updated successfully."
+#~ msgstr "प्रोफाइल अपडेट हो गई।"
+
+#~ msgid "Error updating profile."
+#~ msgstr "प्रोफाइल अपडेट करने में त्रुटि।"
+
+#~ msgid "Current password is incorrect."
+#~ msgstr "वर्तमान पासवर्ड गलत है।"
+
+#~ msgid "New password must be at least 6 characters long."
+#~ msgstr "नया पासवर्ड कम से कम 6 अक्षर का होना चाहिए।"
+
+#~ msgid "New passwords do not match."
+#~ msgstr "नए पासवर्ड मेल नहीं खाते।"
+
+#~ msgid "Password changed successfully."
+#~ msgstr "पासवर्ड सफलतापूर्वक बदल गया।"
+
+#~ msgid "Error changing password."
+#~ msgstr "पासवर्ड बदलने में त्रुटि।"
+
+# Farm Management Error Messages
+#~ msgid "Farm name must be at least 2 characters long."
+#~ msgstr "खेत का नाम कम से कम 2 अक्षर का होना चाहिए।"
+
+#~ msgid "Area must be between 0 and 10000 acres."
+#~ msgstr "क्षेत्रफल 0 से 10000 एकड़ के बीच होना चाहिए।"
+
+#~ msgid "Please enter valid area."
+#~ msgstr "सही क्षेत्रफल दर्ज करें।"
+
+#~ msgid "Please enter valid GPS coordinates."
+#~ msgstr "सही GPS निर्देशांक दर्ज करें।"
+
+#~ msgid "GPS coordinates must be numbers."
+#~ msgstr "GPS निर्देशांक संख्या में होना चाहिए।"
+
+#~ msgid "Farm added successfully."
+#~ msgstr "खेत सफलतापूर्वक जोड़ा गया।"
+
+#~ msgid "Error adding farm."
+#~ msgstr "खेत जोड़ने में त्रुटि हुई।"
+
+# Farm Management
+#~ msgid "My Farms"
+#~ msgstr "मेरे खेत"
+
+#~ msgid "Information about all your farms"
+#~ msgstr "आपके सभी खेतों की जानकारी"
+
+#~ msgid "acres"
+#~ msgstr "एकड़"
+
+#~ msgid "In Use (acres)"
+#~ msgstr "उपयोग में (एकड़)"
+
+#~ msgid "available for more crops"
+#~ msgstr "और फसल के लिए उपलब्ध"
+
+#~ msgid "100% land"
+#~ msgstr "100% भूमि"
+
+#~ msgid "in use"
+#~ msgstr "उपयोग में है"
+
+#~ msgid "View Details"
+#~ msgstr "विवरण देखें"
+
+#~ msgid "Add Crop"
+#~ msgstr "फसल जोड़ें"
+
+#~ msgid "Total Statistics"
+#~ msgstr "कुल आंकड़े"
+
+#~ msgid "Total Area (acres)"
+#~ msgstr "कुल क्षेत्र (एकड़)"
+
+#~ msgid "Total Crops"
+#~ msgstr "कुल फसलें"
+
+#~ msgid "Farms with GPS"
+#~ msgstr "GPS वाले खेत"
+
+#~ msgid "No farms added yet"
+#~ msgstr "अभी तक कोई खेत नहीं जोड़ा गया"
+
+#~ msgid ""
+#~ "Add your first farm to start smart"
+#~ " agriculture. This will help you with"
+#~ " better irrigation and crop management."
+#~ msgstr ""
+#~ "स्मार्ट कृषि की शुरुआत करने के लिए"
+#~ " अपना पहला खेत जोड़ें। यह आपको "
+#~ "बेहतर सिंचाई और फसल प्रबंधन में "
+#~ "मदद करेगा।"
+
+#~ msgid "Add First Farm"
+#~ msgstr "पहला खेत जोड़ें"
+

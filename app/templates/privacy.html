@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block title %}प्राइवेसी पॉलिसी - स्मार्ट कृषि ऐप{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gradient-to-br from-green-50 to-blue-50">
+    <div class="container mx-auto px-4 py-8">
+        <div class="bg-white rounded-lg shadow-lg p-8 max-w-4xl mx-auto">
+            <h1 class="text-4xl font-bold text-gray-800 mb-8 text-center">प्राइवेसी पॉलिसी</h1>
+            
+            <div class="prose max-w-none">
+                <p class="text-sm text-gray-500 mb-6">अंतिम अपडेट: दिसंबर 2024</p>
+                
+                <h2 class="text-2xl font-semibold text-gray-700 mb-4">परिचय</h2>
+                <p class="text-gray-600 mb-6">
+                    स्मार्ट कृषि ऐप में हम आपकी प्राइवेसी का सम्मान करते हैं। यह प्राइवेसी पॉलिसी बताती है कि हम 
+                    आपकी व्यक्तिगत जानकारी कैसे एकत्र करते हैं, उपयोग करते हैं, और सुरक्षित रखते हैं।
+                </p>
+                
+                <h2 class="text-2xl font-semibold text-gray-700 mb-4">जानकारी का संग्रह</h2>
+                <p class="text-gray-600 mb-4">हम निम्नलिखित प्रकार की जानकारी एकत्र करते हैं:</p>
+                <ul class="list-disc list-inside text-gray-600 mb-6">
+                    <li>व्यक्तिगत जानकारी (नाम, ईमेल, फोन नंबर)</li>
+                    <li>खेत और फसल की जानकारी</li>
+                    <li>डिवाइस और उपयोग की जानकारी</li>
+                    <li>स्थान की जानकारी (वैकल्पिक)</li>
+                </ul>
+                
+                <h2 class="text-2xl font-semibold text-gray-700 mb-4">जानकारी का उपयोग</h2>
+                <p class="text-gray-600 mb-4">हम आपकी जानकारी का उपयोग निम्नलिखित उद्देश्यों के लिए करते हैं:</p>
+                <ul class="list-disc list-inside text-gray-600 mb-6">
+                    <li>ऐप की सेवाएं प्रदान करने के लिए</li>
+                    <li>कृषि सलाह और रिपोर्ट्स देने के लिए</li>
+                    <li>मौसम और बाजार की जानकारी देने के लिए</li>
+                    <li>तकनीकी सहायता प्रदान करने के लिए</li>
+                </ul>
+                
+                <h2 class="text-2xl font-semibold text-gray-700 mb-4">डेटा की सुरक्षा</h2>
+                <p class="text-gray-600 mb-6">
+                    हम आपकी व्यक्तिगत जानकारी की सुरक्षा के लिए उद्योग-मानक सुरक्षा उपायों का उपयोग करते हैं।
+                    आपका डेटा एन्क्रिप्टेड तरीके से संग्रहीत किया जाता है।
+                </p>
+                
+                <h2 class="text-2xl font-semibold text-gray-700 mb-4">डेटा साझाकरण</h2>
+                <p class="text-gray-600 mb-6">
+                    हम आपकी व्यक्तिगत जानकारी को तीसरे पक्ष के साथ तब तक साझा नहीं करते जब तक कि 
+                    आपकी सहमति न हो या कानूनी आवश्यकता न हो।
+                </p>
+                
+                <h2 class="text-2xl font-semibold text-gray-700 mb-4">कुकीज़</h2>
+                <p class="text-gray-600 mb-6">
+                    हमारा ऐप बेहतर उपयोगकर्ता अनुभव प्रदान करने के लिए कुकीज़ का उपयोग करता है।
+                    आप अपनी ब्राउज़र सेटिंग्स में कुकीज़ को अक्षम कर सकते हैं।
+                </p>
+                
+                <h2 class="text-2xl font-semibold text-gray-700 mb-4">आपके अधिकार</h2>
+                <p class="text-gray-600 mb-4">आपके पास निम्नलिखित अधिकार हैं:</p>
+                <ul class="list-disc list-inside text-gray-600 mb-6">
+                    <li>अपनी व्यक्तिगत जानकारी तक पहुंच</li>
+                    <li>अपनी जानकारी को सुधारने का अधिकार</li>
+                    <li>अपनी जानकारी को हटाने का अधिकार</li>
+                    <li>डेटा प्रोसेसिंग पर आपत्ति करने का अधिकार</li>
+                </ul>
+                
+                <h2 class="text-2xl font-semibold text-gray-700 mb-4">संपर्क</h2>
+                <p class="text-gray-600 mb-6">
+                    यदि आपके कोई प्रश्न हैं या आप अपने अधिकारों का उपयोग करना चाहते हैं, तो कृपया हमसे
+                    <a href="{{ url_for('main.contact') }}" class="text-green-600 hover:text-green-800 underline">संपर्क करें</a>।
+                </p>
+                
+                <div class="bg-green-50 border-l-4 border-green-400 p-4 mt-8">
+                    <p class="text-green-700">
+                        <strong>नोट:</strong> हम इस प्राइवेसी पॉलिसी को समय-समय पर अपडेट कर सकते हैं।
+                        महत्वपूर्ण बदलावों के बारे में हम आपको सूचित करेंगे।
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

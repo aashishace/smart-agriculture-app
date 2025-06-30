@@ -1,0 +1,275 @@
+{% extends "base.html" %}
+
+{% block title %}{{ _('Add New Crop') }} - {{ _('Smart Agriculture App') }}{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-50">
+    <div class="max-w-2xl mx-auto px-4 py-8">
+        <div class="bg-white rounded-lg shadow p-8">
+            <div class="flex items-center justify-between mb-6">
+                <h1 class="text-2xl font-bold text-gray-900">{{ _('Add New Crop') }}</h1>
+                <a href="{{ url_for('crops.index') }}" 
+                   class="text-blue-600 hover:text-blue-800 flex items-center">
+                    ← {{ _('Back to Crop List') }}
+                </a>
+            </div>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="mb-4 p-4 rounded-lg {% if category == 'success' %}bg-green-100 border border-green-400 text-green-700{% else %}bg-red-100 border border-red-400 text-red-700{% endif %}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            {% if not farms %}
+                <div class="text-center py-8">
+                    <div class="text-4xl mb-4">🏞️</div>
+                    <h2 class="text-xl font-semibold text-gray-900 mb-4">{{ _('Add Farm First') }}</h2>
+                    <p class="text-gray-600 mb-6">{{ _('You need to add your farm before adding crops.') }}</p>
+                    <a href="{{ url_for('farms.add') }}" 
+                       class="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition duration-300">
+                        {{ _('Add First Farm') }}
+                    </a>
+                </div>
+            {% else %}
+
+            <form method="POST" class="space-y-6">
+                <!-- Farm Selection -->
+                <div>
+                    <label for="farm_id" class="block text-sm font-medium text-gray-700 mb-2">
+                        {{ _('Select Farm') }} *
+                    </label>
+                    <select id="farm_id" 
+                            name="farm_id" 
+                            required
+                            onchange="updateFarmInfo()"
+                            class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                        <option value="">{{ _('Select Farm') }}</option>
+                        {% for farm in farms %}
+                            <option value="{{ farm.id }}" 
+                                    data-area="{{ farm.area_acres }}"
+                                    data-available="{{ farm.get_available_area() }}"
+                                    {{ 'selected' if request.args.get('farm_id') == farm.id|string }}>
+                                {{ farm.farm_name }} ({{ farm.area_acres }} {{ _('acres') }})
+                            </option>
+                        {% endfor %}
+                    </select>
+                    <div id="farmInfo" class="mt-2 text-sm text-gray-600 hidden">
+                        <!-- Farm info will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Crop Type -->
+                <div>
+                    <label for="crop_type" class="block text-sm font-medium text-gray-700 mb-2">
+                        {{ _('Crop Type') }} *
+                    </label>
+                    <select id="crop_type" 
+                            name="crop_type" 
+                            required
+                            onchange="updateCropInfo()"
+                            class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                        <option value="">{{ _('Select Crop') }}</option>
+                        <option value="wheat">{{ _('Wheat') }}</option>
+                        <option value="rice">{{ _('Rice') }}</option>
+                        <option value="sugarcane">{{ _('Sugarcane') }}</option>
+                        <option value="corn">{{ _('Corn') }}</option>
+                        <option value="cotton">{{ _('Cotton') }}</option>
+                        <option value="potato">{{ _('Potato') }}</option>
+                        <option value="tomato">{{ _('Tomato') }}</option>
+                        <option value="onion">{{ _('Onion') }}</option>
+                    </select>
+                    <div id="cropInfo" class="mt-2 text-sm text-blue-600 hidden">
+                        <!-- Crop info will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Variety -->
+                <div>
+                    <label for="variety" class="block text-sm font-medium text-gray-700 mb-2">
+                        {{ _('Variety (Optional)') }}
+                    </label>
+                    <input type="text" 
+                           id="variety" 
+                           name="variety" 
+                           placeholder="{{ _('e.g., HD 2967, PBW 343, etc.') }}"
+                           class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                    <p class="text-sm text-gray-600 mt-1">{{ _('Variety name written on seed packet') }}</p>
+                </div>
+
+                <!-- Area -->
+                <div>
+                    <label for="area_acres" class="block text-sm font-medium text-gray-700 mb-2">
+                        {{ _('Area (in Acres)') }} *
+                    </label>
+                    <input type="number" 
+                           id="area_acres" 
+                           name="area_acres" 
+                           step="0.1" 
+                           min="0.1"
+                           required
+                           placeholder="{{ _('e.g., 1.5') }}"
+                           class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                    <p id="areaWarning" class="text-sm text-red-600 mt-1 hidden"></p>
+                </div>
+
+                <!-- Planting Date -->
+                <div>
+                    <label for="planting_date" class="block text-sm font-medium text-gray-700 mb-2">
+                        {{ _('Planting Date') }} *
+                    </label>
+                    <input type="date" 
+                           id="planting_date" 
+                           name="planting_date" 
+                           required
+                           max="{{ date.today() }}"
+                           class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                    <p class="text-sm text-gray-600 mt-1">{{ _('When was the crop planted') }}</p>
+                </div>
+
+                <!-- Expected Harvest (Auto-calculated) -->
+                <div id="harvestInfo" class="hidden">
+                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                        <h3 class="font-medium text-blue-900 mb-2">{{ _('Harvest Information') }}</h3>
+                        <p id="harvestDate" class="text-blue-800 text-sm"></p>
+                        <p id="harvestDays" class="text-blue-800 text-sm"></p>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="flex justify-end space-x-4 pt-6">
+                    <a href="{{ url_for('crops.index') }}" 
+                       class="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition duration-300">
+                        {{ _('Cancel') }}
+                    </a>
+                    <button type="submit" 
+                            class="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition duration-300">
+                        {{ _('Add Crop') }}
+                    </button>
+                </div>
+            </form>
+
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<script>
+// Crop duration data (in days)
+const cropDurations = {
+    'wheat': 140,
+    'rice': 150,
+    'sugarcane': 365,
+    'corn': 120,
+    'cotton': 180,
+    'potato': 90,
+    'tomato': 120,
+    'onion': 130
+};
+
+// Crop information
+const cropInfo = {
+    'wheat': 'सर्दी की फसल • 140 दिन • कम पानी',
+    'rice': 'खरीफ फसल • 150 दिन • अधिक पानी',
+    'sugarcane': 'वार्षिक फसल • 12 महीने • नियमित सिंचाई',
+    'corn': 'खरीफ/रबी • 120 दिन • मध्यम पानी',
+    'cotton': 'खरीफ फसल • 180 दिन • मध्यम पानी',
+    'potato': 'रबी फसल • 90 दिन • कम पानी',
+    'tomato': 'सभी मौसम • 120 दिन • नियमित पानी',
+    'onion': 'रबी फसल • 130 दिन • कम पानी'
+};
+
+function updateFarmInfo() {
+    const farmSelect = document.getElementById('farm_id');
+    const farmInfo = document.getElementById('farmInfo');
+    const areaInput = document.getElementById('area_acres');
+    
+    if (farmSelect.value) {
+        const option = farmSelect.selectedOptions[0];
+        const totalArea = parseFloat(option.dataset.area);
+        const availableArea = parseFloat(option.dataset.available);
+        
+        farmInfo.innerHTML = `
+            <strong>उपलब्ध क्षेत्र:</strong> ${availableArea.toFixed(1)} एकड़ (कुल: ${totalArea} एकड़)
+        `;
+        farmInfo.classList.remove('hidden');
+        
+        // Set max area for input
+        areaInput.max = availableArea;
+        
+        // Check area on input
+        areaInput.addEventListener('input', function() {
+            const areaWarning = document.getElementById('areaWarning');
+            if (parseFloat(this.value) > availableArea) {
+                areaWarning.textContent = `उपलब्ध क्षेत्र केवल ${availableArea.toFixed(1)} एकड़ है।`;
+                areaWarning.classList.remove('hidden');
+            } else {
+                areaWarning.classList.add('hidden');
+            }
+        });
+    } else {
+        farmInfo.classList.add('hidden');
+    }
+}
+
+function updateCropInfo() {
+    const cropSelect = document.getElementById('crop_type');
+    const cropInfoDiv = document.getElementById('cropInfo');
+    const plantingDate = document.getElementById('planting_date');
+    
+    if (cropSelect.value) {
+        cropInfoDiv.textContent = cropInfo[cropSelect.value] || '';
+        cropInfoDiv.classList.remove('hidden');
+        
+        // Update harvest info when both crop and date are selected
+        updateHarvestInfo();
+    } else {
+        cropInfoDiv.classList.add('hidden');
+        document.getElementById('harvestInfo').classList.add('hidden');
+    }
+}
+
+function updateHarvestInfo() {
+    const cropSelect = document.getElementById('crop_type');
+    const plantingDate = document.getElementById('planting_date');
+    const harvestInfo = document.getElementById('harvestInfo');
+    
+    if (cropSelect.value && plantingDate.value) {
+        const plantDate = new Date(plantingDate.value);
+        const duration = cropDurations[cropSelect.value] || 120;
+        const harvestDate = new Date(plantDate);
+        harvestDate.setDate(harvestDate.getDate() + duration);
+        
+        const today = new Date();
+        const daysRemaining = Math.ceil((harvestDate - today) / (1000 * 60 * 60 * 24));
+        
+        document.getElementById('harvestDate').textContent = 
+            `अनुमानित कटाई: ${harvestDate.toLocaleDateString('hi-IN')}`;
+        
+        if (daysRemaining > 0) {
+            document.getElementById('harvestDays').textContent = 
+                `कटाई में ${daysRemaining} दिन बाकी`;
+        } else {
+            document.getElementById('harvestDays').textContent = 
+                `कटाई का समय हो गया है!`;
+        }
+        
+        harvestInfo.classList.remove('hidden');
+    }
+}
+
+// Add event listener for planting date
+document.getElementById('planting_date').addEventListener('change', updateHarvestInfo);
+
+// Set default date to today
+document.getElementById('planting_date').valueAsDate = new Date();
+
+// Initialize if farm is pre-selected
+if (document.getElementById('farm_id').value) {
+    updateFarmInfo();
+}
+</script>
+{% endblock %}

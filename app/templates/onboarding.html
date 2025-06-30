@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ _('Welcome') }} - {{ _('Smart Agriculture App') }}
+{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gradient-to-br from-green-50 to-blue-50">
+    <div class="container mx-auto px-4 py-8">
+        <div class="max-w-4xl mx-auto">
+            <!-- Welcome Header -->
+            <div class="text-center mb-8">
+                <h1 class="text-4xl font-bold text-green-800 mb-4">
+                    {{ _('Welcome to Smart Agriculture App!') }} 🌾
+                </h1>
+                <p class="text-xl text-gray-600">
+                    {{ _('Follow the steps below to start your farming journey') }}
+                </p>
+            </div>
+
+            <!-- Progress Steps -->
+            <div class="mb-8">
+                <div class="flex items-center justify-center space-x-4">
+                    <div class="flex items-center">
+                        <div class="w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center font-bold">1</div>
+                        <span class="ml-2 text-green-600 font-medium">{{ _('Add Farm') }}</span>
+                    </div>
+                    <div class="w-8 h-1 bg-gray-300"></div>
+                    <div class="flex items-center">
+                        <div class="w-8 h-8 bg-gray-300 text-gray-600 rounded-full flex items-center justify-center font-bold">2</div>
+                        <span class="ml-2 text-gray-600">{{ _('Add Crops') }}</span>
+                    </div>
+                    <div class="w-8 h-1 bg-gray-300"></div>
+                    <div class="flex items-center">
+                        <div class="w-8 h-8 bg-gray-300 text-gray-600 rounded-full flex items-center justify-center font-bold">3</div>
+                        <span class="ml-2 text-gray-600">{{ _('Get Recommendations') }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Onboarding Cards -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Step 1: Add Farm -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-green-500">
+                    <div class="text-center mb-4">
+                        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-3xl">🏞️</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800">{{ _('Step 1: Add Your Farm First') }}</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4 text-center">
+                        {{ _('Add your farm information such as name, area, soil type and location') }}
+                    </p>
+                    <div class="text-center">
+                        <a href="{{ url_for('farms.add_farm') }}" 
+                           class="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition duration-300 inline-block">
+                            {{ _('Add First Farm') }} →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Step 2: Add Crops -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-blue-500 opacity-60">
+                    <div class="text-center mb-4">
+                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-3xl">🌱</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800">{{ _('Step 2: Add Crop Information') }}</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4 text-center">
+                        {{ _('Add your crop type, variety, and sowing date') }}
+                    </p>
+                    <div class="text-center">
+                        <button disabled 
+                                class="bg-gray-400 text-white px-6 py-3 rounded-lg cursor-not-allowed inline-block">
+                            {{ _('Add Farm First') }}
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Get Recommendations -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-purple-500 opacity-60">
+                    <div class="text-center mb-4">
+                        <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-3xl">📊</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800">{{ _('Step 3: Get Smart Recommendations') }}</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4 text-center">
+                        {{ _('Get AI-based recommendations for irrigation, fertilizer and disease management') }}
+                    </p>
+                    <div class="text-center">
+                        <button disabled 
+                                class="bg-gray-400 text-white px-6 py-3 rounded-lg cursor-not-allowed inline-block">
+                            {{ _('View Dashboard After Setup') }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Tips -->
+            <div class="mt-8 bg-white rounded-lg shadow-lg p-6">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">{{ _('Quick Tips') }}</h3>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="flex items-start space-x-3">
+                        <span class="text-2xl">💡</span>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">{{ _('Add Accurate Location') }}</h4>
+                            <p class="text-gray-600 text-sm">
+                                {{ _('Adding GPS coordinates will give you better weather-based recommendations') }}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <span class="text-2xl">📱</span>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">{{ _('Enable SMS Alerts') }}</h4>
+                            <p class="text-gray-600 text-sm">
+                                {{ _('Get weather information and irrigation reminders via SMS') }}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <span class="text-2xl">🔍</span>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">{{ _('Use Disease Scanner') }}</h4>
+                            <p class="text-gray-600 text-sm">
+                                {{ _('Take photos of plants to instantly identify diseases') }}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <span class="text-2xl">📈</span>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">{{ _('Regular Updates') }}</h4>
+                            <p class="text-gray-600 text-sm">
+                                {{ _('Keep updating when you complete activities') }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Skip Onboarding -->
+            <div class="mt-8 text-center">
+                <p class="text-gray-600 mb-4">
+                    {{ _('Are you already familiar?') }}
+                </p>
+                <a href="{{ url_for('main.dashboard') }}" 
+                   class="text-green-600 hover:text-green-800 font-medium">
+                    {{ _('Skip to Dashboard') }} →
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
