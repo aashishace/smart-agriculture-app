@@ -42,60 +42,53 @@ class Crop(db.Model):
         return None
     
     def get_growth_stage_info(self):
-        """Get detailed information about current growth stage."""
-        # Crop-specific growth stages based on days since planting
-        growth_stages = {
-            'wheat': [
-                {'stage': 'germination', 'days': 7, 'description': 'अंकुरण'},
-                {'stage': 'tillering', 'days': 40, 'description': 'कल्ले निकलना'},
-                {'stage': 'jointing', 'days': 70, 'description': 'गांठ बनना'},
-                {'stage': 'flowering', 'days': 100, 'description': 'फूल आना'},
-                {'stage': 'grain_filling', 'days': 120, 'description': 'दाना भरना'},
-                {'stage': 'maturity', 'days': 140, 'description': 'पकना'}
-            ],
-            'rice': [
-                {'stage': 'germination', 'days': 10, 'description': 'अंकुरण'},
-                {'stage': 'vegetative', 'days': 50, 'description': 'वानस्पतिक वृद्धि'},
-                {'stage': 'tillering', 'days': 80, 'description': 'कल्ले निकलना'},
-                {'stage': 'flowering', 'days': 110, 'description': 'फूल आना'},
-                {'stage': 'grain_filling', 'days': 130, 'description': 'दाना भरना'},
-                {'stage': 'maturity', 'days': 150, 'description': 'पकना'}
-            ],
-            'sugarcane': [
-                {'stage': 'germination', 'days': 30, 'description': 'अंकुरण'},
-                {'stage': 'tillering', 'days': 90, 'description': 'कल्ले निकलना'},
-                {'stage': 'grand_growth', 'days': 240, 'description': 'तेज वृद्धि'},
-                {'stage': 'maturity', 'days': 365, 'description': 'पकना'}
-            ]
-        }
+        """Get detailed information about current growth stage from database."""
+        from app.models.crop_data import CropInfo, GrowthStage
         
         days_planted = self.get_days_since_planting()
-        stages = growth_stages.get(self.crop_type.lower(), [])
         
-        current_stage = stages[0] if stages else {'stage': 'unknown', 'description': 'अज्ञात'}
+        crop_info = CropInfo.query.filter_by(name=self.crop_type.lower()).first()
+        if not crop_info:
+            return {'stage': 'unknown', 'description': 'अज्ञात'}
         
-        for stage in stages:
-            if days_planted >= stage['days']:
-                current_stage = stage
+        current_stage = GrowthStage.query.filter(
+            GrowthStage.crop_info_id == crop_info.id,
+            GrowthStage.start_day <= days_planted,
+            GrowthStage.end_day >= days_planted
+        ).first()
         
-        return current_stage
+        if current_stage:
+            return {
+                'stage': current_stage.stage_name,
+                'description': current_stage.stage_description_hi
+            }
+        
+        return {'stage': 'unknown', 'description': 'अज्ञात'}
     
     def get_recent_activities(self, limit=5):
         """Get recent activities for this crop."""
         return self.activities.order_by(Activity.scheduled_date.desc()).limit(limit).all()
     
     def get_water_requirement(self):
-        """Get daily water requirement based on crop type and stage."""
-        water_requirements = {
-            'wheat': {'germination': 2, 'tillering': 4, 'jointing': 6, 'flowering': 6, 'grain_filling': 5, 'maturity': 2},
-            'rice': {'germination': 5, 'vegetative': 8, 'tillering': 10, 'flowering': 10, 'grain_filling': 8, 'maturity': 4},
-            'sugarcane': {'germination': 4, 'tillering': 6, 'grand_growth': 8, 'maturity': 4}
-        }
+        """Get daily water requirement based on crop type and stage from database."""
+        from app.models.crop_data import CropInfo, GrowthStage
         
-        stage_info = self.get_growth_stage_info()
-        crop_reqs = water_requirements.get(self.crop_type.lower(), {})
+        days_planted = self.get_days_since_planting()
         
-        return crop_reqs.get(stage_info['stage'], 5)  # Default 5mm if not found
+        crop_info = CropInfo.query.filter_by(name=self.crop_type.lower()).first()
+        if not crop_info:
+            return 5  # Default value
+        
+        current_stage = GrowthStage.query.filter(
+            GrowthStage.crop_info_id == crop_info.id,
+            GrowthStage.start_day <= days_planted,
+            GrowthStage.end_day >= days_planted
+        ).first()
+        
+        if current_stage and current_stage.water_requirement_mm_day:
+            return float(current_stage.water_requirement_mm_day)
+        
+        return 5  # Default value
     
     def to_dict(self):
         """Convert crop to dictionary for JSON responses."""

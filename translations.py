@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Translation Management Script for Smart Agriculture App
+Translation Management Script for Smart Crop Care Assistant
 """
 
 import os

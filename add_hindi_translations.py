@@ -8,7 +8,7 @@ import re
 # Dictionary of English to Hindi translations for common terms
 HINDI_TRANSLATIONS = {
     # Navigation and Basic UI
-    "Smart Agriculture": "स्मार्ट कृषि",
+    "Smart Crop Care Assistant": "स्मार्ट फसल देखभाल सहायक",
     "Dashboard": "डैशबोर्ड",
     "Farms": "खेत",
     "Crops": "फसलें",
@@ -25,12 +25,12 @@ HINDI_TRANSLATIONS = {
     
     # Dashboard specific
     "Welcome %(name)s!": "नमस्कार %(name)s!",
-    "Smart Agriculture Dashboard": "स्मार्ट कृषि डैशबोर्ड",
+    "Smart Crop Care Assistant Dashboard": "स्मार्ट फसल देखभाल सहायक डैशबोर्ड",
     "Today's Date": "आज की तारीख",
     "Weather": "मौसम",
     "Clear": "साफ",
     "Getting Started": "शुरुआत करें",
-    "Add your farm first to get smart agriculture recommendations": "स्मार्ट कृषि सुझाव पाने के लिए पहले अपना खेत जोड़ें",
+    "Add your farm first to get smart crop care recommendations": "स्मार्ट फसल देखभाल सुझाव पाने के लिए पहले अपना खेत जोड़ें",
     "Start Setup": "सेटअप शुरू करें",
     
     # Statistics and Cards
@@ -79,7 +79,7 @@ HINDI_TRANSLATIONS = {
     "Back to Crops": "फसलों की सूची",
     "Crop Information": "फसल की जानकारी",
     "Crop Details": "फसल विवरण",
-    "Smart Agriculture App": "स्मार्ट कृषि ऐप",
+    "Smart Crop Care Assistant": "स्मार्ट फसल देखभाल सहायक",
     
     # Weather and Environment
     "Humidity": "नमी",

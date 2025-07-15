@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Smart Agriculture App - Main Application Entry Point
+Smart Crop Care Assistant - Main Application Entry Point
 Run this file to start the Flask development server.
 """
 

@@ -1,4 +1,4 @@
-# Production requirements for Smart Agriculture App
+# Production requirements for Smart Crop Care Assistant
 
 # Core Flask Framework
 Flask==3.0.3

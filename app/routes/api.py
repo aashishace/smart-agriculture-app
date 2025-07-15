@@ -3,7 +3,7 @@ API Routes for Data Visualization
 Provides data endpoints for charts and graphs
 """
 
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, current_app
 from flask_login import login_required, current_user
 from app.models.user import User
 from app.models.farm import Farm
@@ -12,8 +12,103 @@ from app import db
 from sqlalchemy import func, desc
 from datetime import datetime, timedelta, date
 import calendar
+import os
+import uuid
+import requests
+from werkzeug.utils import secure_filename
 
 api_bp = Blueprint('api', __name__)
+
+def call_plantnet_api(image_path):
+    """Calls the PlantNet API to identify a plant from an image."""
+    api_key = current_app.config.get('PLANTNET_API_KEY')
+    if not api_key:
+        current_app.logger.error("PLANTNET_API_KEY not configured.")
+        return None, "API key is missing."
+
+    api_url = f"https://my-api.plantnet.org/v2/identify/all?api-key={api_key}"
+    
+    try:
+        with open(image_path, 'rb') as image_file:
+            files = {
+                'images': (os.path.basename(image_path), image_file, 'image/jpeg'),
+            }
+            params = {
+                'include-related-images': 'false',
+                'no-reject': 'false',
+                'lang': 'en'
+            }
+            
+            response = requests.post(api_url, files=files, params=params)
+            response.raise_for_status()  # Raise an exception for bad status codes
+            
+            data = response.json()
+            
+            if data and data.get('results'):
+                return data, None
+            else:
+                return None, "No results found in API response."
+    except requests.exceptions.RequestException as e:
+        current_app.logger.error(f"PlantNet API request failed: {e}")
+        return None, "API request failed."
+    except Exception as e:
+        current_app.logger.error(f"An unexpected error occurred during PlantNet API call: {e}")
+        return None, "An unexpected error occurred."
+
+@api_bp.route('/plant-identify', methods=['POST'])
+@login_required
+def identify_plant():
+    """Identifies a plant using the PlantNet API."""
+    if 'image' not in request.files:
+        return jsonify({'success': False, 'error': 'No image uploaded'}), 400
+
+    file = request.files['image']
+    if file.filename == '':
+        return jsonify({'success': False, 'error': 'No file selected'}), 400
+
+    # Use the same validation logic as the disease scanner
+    allowed_extensions = current_app.config.get('ALLOWED_EXTENSIONS', {'png', 'jpg', 'jpeg'})
+    if not ('.' in file.filename and file.filename.rsplit('.', 1)[1].lower() in allowed_extensions):
+        return jsonify({'success': False, 'error': 'Invalid image format'}), 400
+
+    try:
+        filename = secure_filename(file.filename)
+        unique_filename = f"{uuid.uuid4()}_{filename}"
+        upload_dir = current_app.config.get('UPLOAD_FOLDER', 'app/static/uploads')
+        os.makedirs(upload_dir, exist_ok=True)
+        file_path = os.path.join(upload_dir, unique_filename)
+        file.save(file_path)
+
+        # Call the PlantNet API
+        api_result, error = call_plantnet_api(file_path)
+
+        # Clean up the uploaded file
+        os.remove(file_path)
+
+        if error:
+            return jsonify({'success': False, 'error': error}), 500
+
+        if not api_result or not api_result.get('results'):
+            return jsonify({'success': False, 'error': 'Plant not identified'})
+
+        # Process the first and best result
+        best_match = api_result['results'][0]
+        species_info = best_match.get('species', {})
+        
+        response_data = {
+            "plant_name": species_info.get('scientificNameWithoutAuthor', 'N/A'),
+            "common_names": species_info.get('commonNames', []),
+            "confidence": round(best_match.get('score', 0) * 100, 2),
+            "family": species_info.get('family', {}).get('scientificNameWithoutAuthor', 'N/A'),
+            "genus": species_info.get('genus', {}).get('scientificNameWithoutAuthor', 'N/A'),
+            "success": True
+        }
+        
+        return jsonify(response_data)
+
+    except Exception as e:
+        current_app.logger.error(f"Error in plant identification endpoint: {e}")
+        return jsonify({'success': False, 'error': 'An internal error occurred.'}), 500
 
 @api_bp.route('/test')
 def test_endpoint():

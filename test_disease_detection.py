@@ -3,8 +3,8 @@
 Test script for Enhanced Disease Detection System
 """
 
-import sys
 import os
+import sys
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 from PIL import Image, ImageDraw
@@ -88,7 +88,7 @@ def test_disease_detection():
         try:
             # Create test image
             img = create_test_image(**test_case['image_config'])
-            test_image_path = f"app/static/test_images/test_{i}.jpg"
+            test_image_path = os.path.abspath(f"D:/25WebProjects/SmartAgriculture/smart_agriculture_app/app/static/test_images/test_{i}.jpg")
             img.save(test_image_path)
             
             # Run disease detection
@@ -170,7 +170,7 @@ def test_specific_features():
     
     for img_test in test_images:
         img = Image.new('RGB', (224, 224), img_test['color'])
-        test_path = f"app/static/test_images/quality_{img_test['brightness']}.jpg"
+        test_path = os.path.abspath(f"D:/25WebProjects/SmartAgriculture/smart_agriculture_app/app/static/test_images/quality_{img_test['brightness']}.jpg")
         img.save(test_path)
         
         result = process_disease_detection(test_path, 'wheat')
@@ -185,7 +185,7 @@ def test_specific_features():
     
     for crop in crop_types:
         img = create_test_image(spots=True)
-        test_path = f"app/static/test_images/coverage_{crop}.jpg"
+        test_path = os.path.abspath(f"D:/25WebProjects/SmartAgriculture/smart_agriculture_app/app/static/test_images/coverage_{crop}.jpg")
         img.save(test_path)
         
         # Run detection multiple times to see variety
@@ -206,7 +206,7 @@ def test_specific_features():
     confidences = []
     for i in range(5):
         img = create_test_image(spots=True)
-        test_path = f"app/static/test_images/conf_test_{i}.jpg"
+        test_path = os.path.abspath(f"D:/25WebProjects/SmartAgriculture/smart_agriculture_app/app/static/test_images/conf_test_{i}.jpg")
         img.save(test_path)
         
         result = process_disease_detection(test_path, 'wheat')
@@ -221,7 +221,7 @@ if __name__ == "__main__":
     print("=" * 60)
     
     # Ensure test directory exists
-    os.makedirs("app/static/test_images", exist_ok=True)
+    os.makedirs("D:/25WebProjects/SmartAgriculture/smart_agriculture_app/app/static/test_images", exist_ok=True)
     
     # Run main tests
     results = test_disease_detection()

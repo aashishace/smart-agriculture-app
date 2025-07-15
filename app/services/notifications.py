@@ -81,9 +81,21 @@ class NotificationService:
         try:
             # Format message based on language
             if language == 'hi':
-                formatted_message = f"🌾 किसान साथी\n\nफसल: {crop_name}\n{message}\n\nधन्यवाद,\nस्मार्ट कृषि ऐप"
+                formatted_message = f"""🌾 किसान साथी
+
+फसल: {crop_name}
+{message}
+
+धन्यवाद,
+स्मार्ट फसल देखभाल सहायक"""
             else:
-                formatted_message = f"🌾 Dear Farmer\n\nCrop: {crop_name}\n{message}\n\nThanks,\nSmart Agriculture App"
+                formatted_message = f"""🌾 Dear Farmer
+
+Crop: {crop_name}
+{message}
+
+Thanks,
+Smart Crop Care Assistant"""
             
             message = self.client.messages.create(
                 body=formatted_message,
@@ -136,9 +148,19 @@ class NotificationService:
             icon = icons.get(alert_type, '⚠️')
             
             if language == 'hi':
-                formatted_message = f"{icon} मौसम चेतावनी\n\n{message}\n\nसावधान रहें,\nस्मार्ट कृषि ऐप"
+                formatted_message = f"""{icon} मौसम चेतावनी
+
+{message}
+
+सावधान रहें,
+स्मार्ट फसल देखभाल सहायक"""
             else:
-                formatted_message = f"{icon} Weather Alert\n\n{message}\n\nStay safe,\nSmart Agriculture App"
+                formatted_message = f"""{icon} Weather Alert
+
+{message}
+
+Stay safe,
+Smart Crop Care Assistant"""
             
             message = self.client.messages.create(
                 body=formatted_message,
@@ -183,21 +205,29 @@ class NotificationService:
         try:
             if language == 'hi':
                 formatted_message = (
-                    f"🔍 रोग पहचान\n\n"
-                    f"फसल: {crop_name}\n"
-                    f"रोग: {disease_name}\n"
-                    f"सटीकता: {confidence:.0f}%\n\n"
-                    f"उपचार: {treatment}\n\n"
-                    f"तुरंत कार्रवाई करें,\nस्मार्ट कृषि ऐप"
+                    f"""🔍 रोग पहचान
+
+फसल: {crop_name}
+रोग: {disease_name}
+सटीकता: {confidence:.0f}%
+
+उपचार: {treatment}
+
+तुरंत कार्रवाई करें,
+स्मार���ट फसल देखभाल सहायक"""
                 )
             else:
                 formatted_message = (
-                    f"🔍 Disease Detection\n\n"
-                    f"Crop: {crop_name}\n"
-                    f"Disease: {disease_name}\n"
-                    f"Confidence: {confidence:.0f}%\n\n"
-                    f"Treatment: {treatment}\n\n"
-                    f"Take immediate action,\nSmart Agriculture App"
+                    f"""🔍 Disease Detection
+
+Crop: {crop_name}
+Disease: {disease_name}
+Confidence: {confidence:.0f}%
+
+Treatment: {treatment}
+
+Take immediate action,
+Smart Crop Care Assistant"""
                 )
             
             message = self.client.messages.create(
@@ -242,19 +272,25 @@ class NotificationService:
         try:
             if language == 'hi':
                 formatted_message = (
-                    f"🌱 खाद अनुस्मारक\n\n"
-                    f"फसल: {crop_name}\n"
-                    f"खाद: {fertilizer_type}\n"
-                    f"मात्रा: {quantity}\n\n"
-                    f"आज डालें,\nस्मार्ट कृषि ऐप"
+                    f"""🌱 खाद अनुस्मारक
+
+फसल: {crop_name}
+खाद: {fertilizer_type}
+मात्रा: {quantity}
+
+आज डालें,
+स्मार्ट फसल देखभाल सहायक"""
                 )
             else:
                 formatted_message = (
-                    f"🌱 Fertilizer Reminder\n\n"
-                    f"Crop: {crop_name}\n"
-                    f"Fertilizer: {fertilizer_type}\n"
-                    f"Quantity: {quantity}\n\n"
-                    f"Apply today,\nSmart Agriculture App"
+                    f"""🌱 Fertilizer Reminder
+
+Crop: {crop_name}
+Fertilizer: {fertilizer_type}
+Quantity: {quantity}
+
+Apply today,
+Smart Crop Care Assistant"""
                 )
             
             message = self.client.messages.create(

@@ -14,7 +14,7 @@ from app.models.user import User
 
 def test_api_endpoints():
     """Test API endpoints with session authentication."""
-    print("=== Smart Agriculture App - Chart Integration Test ===\n")
+    print("=== Smart Crop Care Assistant - Chart Integration Test ===\n")
     
     app = create_app('development')
     

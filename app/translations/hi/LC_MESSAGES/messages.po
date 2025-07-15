@@ -1,13 +1,13 @@
-# Hindi translations for Smart Agriculture App
+# Hindi translations for Smart Crop Care Assistant
 # Copyright (C) 2024
 # This file is distributed under the same license as the Smart Agriculture
 # App project.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Smart Agriculture App 1.0\n"
+"Project-Id-Version: Smart Crop Care Assistant 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-01 01:54+0530\n"
+"POT-Creation-Date: 2025-07-01 15:30+0530\n"
 "PO-Revision-Date: 2024-12-30 10:00+0000\n"
 "Last-Translator: \n"
 "Language: hi\n"
@@ -292,19 +292,18 @@ msgstr ""
 
 #: app/templates/about.html:3 app/templates/about.html:12
 #: app/templates/auth/profile_edit.html:3 app/templates/base.html:7
-#: app/templates/base.html:220 app/templates/base.html:248
+#: app/templates/base.html:218 app/templates/base.html:246
 #: app/templates/contact.html:3 app/templates/contact.html:51
 #: app/templates/crops/add.html:3 app/templates/crops/edit.html:4
 #: app/templates/crops/view.html:4 app/templates/errors/404.html:3
 #: app/templates/farms/add.html:3 app/templates/farms/index.html:3
-#: app/templates/index.html:3 app/templates/index.html:11
 #: app/templates/onboarding.html:4
-msgid "Smart Agriculture App"
-msgstr "स्मार्ट कृषि ऐप"
+msgid "Smart Crop Care Assistant"
+msgstr "स्मार्ट फसल देखभाल सहायक"
 
 #: app/templates/about.html:14
 msgid ""
-"Smart Agriculture App is a modern agricultural management platform that "
+"Smart Crop Care Assistant is a modern agricultural management platform that "
 "helps farmers make better decisions in their farming. This app provides "
 "features like weather information, crop monitoring, disease "
 "identification, and irrigation management."
@@ -351,7 +350,7 @@ msgid ""
 "to be able to take advantage of digital agriculture."
 msgstr ""
 
-#: app/templates/about.html:34 app/templates/base.html:239
+#: app/templates/about.html:34 app/templates/base.html:237
 #: app/templates/contact.html:3 app/templates/contact.html:9
 msgid "Contact Us"
 msgstr ""
@@ -369,7 +368,7 @@ msgstr "संपर्क"
 msgid "."
 msgstr ""
 
-#: app/templates/base.html:65 app/templates/base.html:146
+#: app/templates/base.html:65 app/templates/base.html:145
 #: app/templates/dashboard.html:3 app/templates/dashboard_clean.html:3
 msgid "Smart Agriculture"
 msgstr "स्मार्ट कृषि"
@@ -391,64 +390,62 @@ msgstr "फसलें"
 msgid "Disease Scanner"
 msgstr "रोग स्कैनर"
 
-#: app/templates/base.html:123
+#: app/templates/base.html:122
 msgid "Profile"
 msgstr "प्रोफाइल"
 
-#: app/templates/base.html:126 app/templates/base.html:240
+#: app/templates/base.html:125 app/templates/base.html:238
 #: app/templates/dashboard.html:193 app/templates/help.html:3
 msgid "Help"
 msgstr "सहायता"
 
-#: app/templates/base.html:130
+#: app/templates/base.html:129
 msgid "Logout"
 msgstr "लॉगआउट"
 
 #: app/templates/auth/login.html:3 app/templates/auth/login.html:69
-#: app/templates/auth/register.html:16 app/templates/base.html:176
-#: app/templates/index.html:23
+#: app/templates/auth/register.html:16 app/templates/base.html:174
 msgid "Login"
 msgstr "लॉगिन"
 
-#: app/templates/auth/register.html:136 app/templates/base.html:180
-#: app/templates/index.html:109
+#: app/templates/auth/register.html:136 app/templates/base.html:178
 msgid "Register"
 msgstr "पंजीकरण"
 
-#: app/templates/base.html:222
+#: app/templates/base.html:220
 msgid "Making agriculture easier for Indian farmers with smart technology."
 msgstr ""
 
-#: app/templates/base.html:227
+#: app/templates/base.html:225
 msgid "Services"
 msgstr ""
 
-#: app/templates/base.html:229 app/templates/index.html:42
+#: app/templates/base.html:227
 msgid "Smart Irrigation"
-msgstr ""
+msgstr "स्मार्ट सिंचाई"
 
-#: app/templates/base.html:230 app/templates/index.html:49
+#: app/templates/base.html:228
 msgid "Disease Detection"
-msgstr ""
+msgstr "रोग की पहचान"
 
-#: app/templates/base.html:231 app/templates/dashboard.html:208
+#: app/templates/base.html:229 app/templates/dashboard.html:208
 #: app/templates/dashboard_clean.html:181
 msgid "Weather Information"
 msgstr "मौसम की जानकारी"
 
-#: app/templates/base.html:232 app/templates/index.html:63
+#: app/templates/base.html:230
 msgid "Crop Management"
-msgstr ""
+msgstr "फसल प्रबंधन"
 
-#: app/templates/base.html:237
+#: app/templates/base.html:235
 msgid "Contact"
 msgstr "संपर्क"
 
-#: app/templates/auth/register.html:145 app/templates/base.html:241
+#: app/templates/auth/register.html:145 app/templates/base.html:239
 msgid "Privacy Policy"
 msgstr ""
 
-#: app/templates/base.html:248
+#: app/templates/base.html:246
 msgid "All rights reserved."
 msgstr ""
 
@@ -648,7 +645,7 @@ msgstr "नमस्कार %(name)s!"
 msgid "Add your farm first to get smart agriculture recommendations"
 msgstr "स्मार्ट कृषि सुझाव पाने के लिए पहले अपना खेत जोड़ें"
 
-#: app/templates/dashboard_clean.html:102 app/templates/index.html:56
+#: app/templates/dashboard_clean.html:102
 msgid "Weather Alerts"
 msgstr "मौसम अलर्ट"
 
@@ -657,8 +654,7 @@ msgid "No tasks for today!"
 msgstr "आज कोई काम नहीं है!"
 
 #: app/templates/dashboard_clean.html:146 app/templates/farms/add.html:3
-#: app/templates/farms/add.html:148 app/templates/index.html:115
-#: app/templates/onboarding.html:26
+#: app/templates/farms/add.html:148 app/templates/onboarding.html:26
 msgid "Add Farm"
 msgstr "नया खेत जोड़ें"
 
@@ -711,29 +707,31 @@ msgstr "समय"
 
 #: app/templates/help.html:20
 msgid "9 AM to 6 PM"
-msgstr ""
+msgstr "सुबह 9 बजे से शाम 6 बजे तक"
 
 #: app/templates/help.html:27
 msgid "Frequently Asked Questions"
-msgstr ""
+msgstr "अक्सर पूछे जाने वाले प्रश्न"
 
 #: app/templates/help.html:31
 msgid "How to use the app?"
-msgstr ""
+msgstr "ऐप का उपयोग कैसे करें?"
 
 #: app/templates/help.html:32
 msgid ""
 "First register, then add your farm and crop information. You will "
 "automatically start receiving suggestions."
 msgstr ""
+"पहले पंजीकरण करें, फिर अपनी खेती और फसल की जानकारी जोड़ें। आपको "
+"स्वचालित रूप से सुझाव मिलना शुरू हो जाएंगे।"
 
 #: app/templates/help.html:36
 msgid "Is this app free?"
-msgstr ""
+msgstr "क्या यह ऐप निःशुल्क है?"
 
 #: app/templates/help.html:37
 msgid "Yes, all main features are completely free. Our goal is to help farmers."
-msgstr ""
+msgstr "हां, सभी मुख्य सुविधाएं पूरी तरह निःशुल्क हैं। हमारा लक्ष्य किसानों की मदद करना है।"
 
 #: app/templates/help.html:41
 #, fuzzy
@@ -745,6 +743,8 @@ msgid ""
 "Take a photo of your crop leaf or affected part. Our AI will immediately "
 "identify the disease and suggest treatment."
 msgstr ""
+"अपनी फसल के पत्ते या प्रभावित भाग की तस्वीर लें। हमारी AI तुरंत रोग की "
+"पहचान करेगी और उपचार सुझाएगी।"
 
 #: app/templates/help.html:46
 #, fuzzy
@@ -753,150 +753,53 @@ msgstr "मौसम की जानकारी"
 
 #: app/templates/help.html:47
 msgid "We use reliable weather APIs that are 80-90% accurate."
-msgstr ""
+msgstr "हम विश्वसनीय मौसम APIs का उपयोग करते हैं जो 80-90% सटीक हैं।"
 
 #: app/templates/help.html:54
 msgid "More questions? Contact us"
-msgstr ""
+msgstr "और प्रश्न? हमसे संपर्क करें"
 
 #: app/templates/auth/login.html:25 app/templates/auth/register.html:37
 #: app/templates/help.html:61
 msgid "Mobile Number"
-msgstr ""
-
-#: app/templates/index.html:3
-msgid "Smart solutions for farmers"
-msgstr ""
-
-#: app/templates/index.html:14
-msgid "Make farming easy and profitable with modern technology"
-msgstr ""
-
-#: app/templates/index.html:19
-#, fuzzy
-msgid "Get Started"
-msgstr "शुरुआत करें"
-
-#: app/templates/index.html:34
-msgid "Our Services"
-msgstr ""
-
-#: app/templates/index.html:35
-msgid "Smart solutions specially designed for farmers"
-msgstr ""
-
-#: app/templates/index.html:43
-msgid "Right irrigation information based on weather"
-msgstr ""
-
-#: app/templates/index.html:50
-msgid "Instantly identify crop diseases from photos"
-msgstr ""
-
-#: app/templates/index.html:57
-#, fuzzy
-msgid "Get weather information via SMS"
-msgstr "मौसम की जानकारी"
-
-#: app/templates/index.html:64
-msgid "Keep complete records of your crops"
-msgstr ""
-
-#: app/templates/index.html:74
-msgid "Why Choose Our App?"
-msgstr ""
-
-#: app/templates/index.html:80
-msgid "Easy to Use"
-msgstr ""
-
-#: app/templates/index.html:81
-msgid "Simple Hindi interface, no technical knowledge required"
-msgstr ""
-
-#: app/templates/index.html:86
-msgid "Accurate Suggestions"
-msgstr ""
-
-#: app/templates/index.html:87
-msgid "Personalized advice according to your region and crops"
-msgstr ""
-
-#: app/templates/index.html:92
-msgid "Free Service"
-msgstr ""
-
-#: app/templates/index.html:93
-msgid "All main features completely free"
-msgstr ""
-
-#: app/templates/index.html:103
-msgid "How to Use?"
-msgstr ""
-
-#: app/templates/index.html:110
-msgid "Create your account"
-msgstr ""
-
-#: app/templates/index.html:116
-#, fuzzy
-msgid "Provide your farm information"
-msgstr "मौसम की जानकारी"
-
-#: app/templates/index.html:121 app/templates/onboarding.html:31
-msgid "Add Crops"
-msgstr ""
-
-#: app/templates/index.html:122
-msgid "Tell us what you are growing"
-msgstr ""
-
-#: app/templates/index.html:137
-#, fuzzy
-msgid "Start Today!"
-msgstr "आज कोई काम नहीं है!"
-
-#: app/templates/index.html:138
-msgid "Thousands of farmers are already using it"
-msgstr ""
-
-#: app/templates/index.html:141
-#, fuzzy
-msgid "Register for Free"
-msgstr "पंजीकरण"
+msgstr "मोबाइल नंबर"
 
 #: app/templates/onboarding.html:14
-msgid "Welcome to Smart Agriculture App!"
-msgstr ""
+msgid "Welcome to Smart Crop Care Assistant!"
+msgstr "स्मार्ट फसल देखभाल सहायक में आपका स्वागत है!"
 
 #: app/templates/onboarding.html:17
 msgid "Follow the steps below to start your farming journey"
-msgstr ""
+msgstr "अपनी कृषि यात्रा शुरू करने के लिए नीचे दिए गए चरणों का पालन करें"
+
+#: app/templates/onboarding.html:31
+msgid "Add Crops"
+msgstr "फसल जोड़ें"
 
 #: app/templates/onboarding.html:36
 msgid "Get Recommendations"
-msgstr ""
+msgstr "सुझाव प्राप्त करें"
 
 #: app/templates/onboarding.html:49
 msgid "Step 1: Add Your Farm First"
-msgstr ""
+msgstr "चरण 1: पहले अपना खेत जोड़ें"
 
 #: app/templates/onboarding.html:52
 msgid "Add your farm information such as name, area, soil type and location"
-msgstr ""
+msgstr "अपने खेत की जानकारी जैसे नाम, क्षेत्रफल, मिट्टी का प्रकार और स्थान जोड़ें"
 
 #: app/templates/crops/add.html:34 app/templates/farms/index.html:138
 #: app/templates/onboarding.html:57
 msgid "Add First Farm"
-msgstr ""
+msgstr "पहला खेत जोड़ें"
 
 #: app/templates/onboarding.html:68
 msgid "Step 2: Add Crop Information"
-msgstr ""
+msgstr "चरण 2: फसल की जानकारी जोड़ें"
 
 #: app/templates/onboarding.html:71
 msgid "Add your crop type, variety, and sowing date"
-msgstr ""
+msgstr "अपनी फसल का प्रकार, किस्म और बुवाई की तारीख जोड़ें"
 
 #: app/templates/crops/add.html:30 app/templates/onboarding.html:76
 msgid "Add Farm First"
@@ -961,7 +864,7 @@ msgid "Skip to Dashboard"
 msgstr ""
 
 #: app/templates/auth/login.html:11
-msgid "Login to Smart Agriculture App"
+msgid "Login to Smart Crop Care Assistant"
 msgstr ""
 
 #: app/templates/auth/login.html:14
@@ -989,7 +892,7 @@ msgid "Forgot password?"
 msgstr ""
 
 #: app/templates/auth/login.html:76
-msgid "Smart Agriculture App - Made for farmers"
+msgid "Smart Crop Care Assistant - Made for farmers"
 msgstr ""
 
 #: app/templates/auth/profile_edit.html:3
@@ -1003,7 +906,7 @@ msgid "Create Account"
 msgstr ""
 
 #: app/templates/auth/register.html:11
-msgid "Register with Smart Agriculture App"
+msgid "Register with Smart Crop Care Assistant"
 msgstr ""
 
 #: app/templates/auth/register.html:14
@@ -2075,8 +1978,8 @@ msgid "Not a valid float value."
 msgstr ""
 
 # Navigation
-#~ msgid "Smart Agriculture App"
-#~ msgstr "स्मार्ट कृषि ऐप"
+#~ msgid "Smart Crop Care Assistant"
+#~ msgstr "स्मार्ट फसल देखभाल सहायक"
 
 #~ msgid "Smart Agriculture"
 #~ msgstr "स्मार्ट कृषि"
@@ -2240,15 +2143,14 @@ msgstr ""
 #~ msgid "All rights reserved."
 #~ msgstr "सभी अधिकार सुरक्षित।"
 
-# Landing Page
 #~ msgid "Smart solutions for farmers"
-#~ msgstr "किसानों के लिए स्मार्ट समाधान"
+#~ msgstr ""
 
 #~ msgid "Make farming easy and profitable with modern technology"
-#~ msgstr "आधुनिक तकनीक से खेती को बनाएं आसान और फायदेमंद"
+#~ msgstr ""
 
 #~ msgid "Get Started"
-#~ msgstr "शुरू करें"
+#~ msgstr "शुरुआत करें"
 
 # Authentication
 #~ msgid "Login"
@@ -2258,64 +2160,64 @@ msgstr ""
 #~ msgstr "हमारी सेवाएं"
 
 #~ msgid "Smart solutions specially designed for farmers"
-#~ msgstr "किसानों के लिए विशेष रूप से बनाए गए स्मार्ट समाधान"
+#~ msgstr "किसानों के लिए विशेष रूप से डिज़ाइन किए गए स्मार्ट समाधान"
 
 #~ msgid "Right irrigation information based on weather"
-#~ msgstr "मौसम के आधार पर सिंचाई की सही जानकारी"
+#~ msgstr "मौसम के आधार पर सही सिंचाई की जानकारी"
 
 #~ msgid "Instantly identify crop diseases from photos"
-#~ msgstr "फोटो से तुरंत पहचानें फसल के रोग"
+#~ msgstr "तस्वीरों से तुरंत फसल के रोगों की पहचान करें"
 
 #~ msgid "Weather Alerts"
 #~ msgstr "मौसम चेतावनी"
 
 #~ msgid "Get weather information via SMS"
-#~ msgstr "SMS से मिले मौसम की जानकारी"
+#~ msgstr "मौसम की जानकारी"
 
 #~ msgid "Keep complete records of your crops"
-#~ msgstr "अपनी फसलों का पूरा रिकॉर्ड रखें"
+#~ msgstr ""
 
 #~ msgid "Why Choose Our App?"
-#~ msgstr "क्यों चुनें हमारा ऐप?"
+#~ msgstr "हमारा ऐप क्यों चुनें?"
 
 #~ msgid "Easy to Use"
-#~ msgstr "सरल उपयोग"
+#~ msgstr "उपयोग में आसान"
 
 #~ msgid "Simple Hindi interface, no technical knowledge required"
-#~ msgstr "आसान हिंदी इंटरफेस, कोई तकनीकी जानकारी की जरूरत नहीं"
+#~ msgstr "सरल हिंदी इंटरफेस, किसी तकनीकी ज्ञान की आवश्यकता नहीं"
 
 #~ msgid "Accurate Suggestions"
 #~ msgstr "सटीक सुझाव"
 
 #~ msgid "Personalized advice according to your region and crops"
-#~ msgstr "आपके क्षेत्र और फसल के अनुसार व्यक्तिगत सलाह"
+#~ msgstr "आपके क्षेत्र और फसलों के अनुसार व्यक्तिगत सलाह"
 
 #~ msgid "Free Service"
-#~ msgstr "फ्री सेवा"
+#~ msgstr "निःशुल्क सेवा"
 
 #~ msgid "All main features completely free"
-#~ msgstr "सभी मुख्य सुविधाएं बिल्कुल मुफ्त"
+#~ msgstr "सभी मुख्य सुविधाएं पूर्णतः निःशुल्क"
 
 #~ msgid "How to Use?"
-#~ msgstr "कैसे करें उपयोग?"
+#~ msgstr ""
 
 #~ msgid "Register"
 #~ msgstr "रजिस्टर करें"
 
 #~ msgid "Create your account"
-#~ msgstr "अपना खाता बनाएं"
+#~ msgstr ""
 
 #~ msgid "Add Farm"
 #~ msgstr "खेत जोड़ें"
 
 #~ msgid "Provide your farm information"
-#~ msgstr "अपने खेत की जानकारी दें"
+#~ msgstr "मौसम की जानकारी"
 
 #~ msgid "Add Crops"
 #~ msgstr "फसल जोड़ें"
 
 #~ msgid "Tell us what you are growing"
-#~ msgstr "क्या उगा रहे हैं बताएं"
+#~ msgstr ""
 
 #~ msgid "Get Suggestions"
 #~ msgstr "सुझाव पाएं"
@@ -2324,16 +2226,16 @@ msgstr ""
 #~ msgstr "स्मार्ट सलाह मिले"
 
 #~ msgid "Start Today!"
-#~ msgstr "आज ही शुरू करें!"
+#~ msgstr "आज कोई काम नहीं है!"
 
 #~ msgid "Thousands of farmers are already using it"
-#~ msgstr "हजारों किसान पहले से ही इस्तेमाल कर रहे हैं"
+#~ msgstr ""
 
 #~ msgid "Register for Free"
-#~ msgstr "मुफ्त में रजिस्टर करें"
+#~ msgstr "पंजीकरण"
 
-#~ msgid "Login to Smart Agriculture App"
-#~ msgstr "स्मार्ट कृषि ऐप में लॉग इन करें"
+#~ msgid "Login to Smart Crop Care Assistant"
+#~ msgstr "स्मार्ट फसल देखभाल सहायक में लॉग इन करें"
 
 #~ msgid "Or"
 #~ msgstr "या"
@@ -2356,14 +2258,14 @@ msgstr ""
 #~ msgid "Forgot password?"
 #~ msgstr "पासवर्ड भूल गए?"
 
-#~ msgid "Smart Agriculture App - Made for farmers"
-#~ msgstr "स्मार्ट कृषि ऐप - किसानों के लिए बनाया गया"
+#~ msgid "Smart Crop Care Assistant - Made for farmers"
+#~ msgstr "स्मार्ट फसल देखभाल सहायक - किसानों के लिए बनाया गया"
 
 #~ msgid "Create Account"
 #~ msgstr "नया खाता बनाएं"
 
-#~ msgid "Register with Smart Agriculture App"
-#~ msgstr "स्मार्ट कृषि ऐप में रजिस्टर करें"
+#~ msgid "Register with Smart Crop Care Assistant"
+#~ msgstr "स्मार्ट फसल देखभाल सहायक में रजिस्टर करें"
 
 #~ msgid "Already have an account?"
 #~ msgstr "पहले से खाता है?"

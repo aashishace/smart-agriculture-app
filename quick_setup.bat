@@ -1,5 +1,5 @@
 @echo off
-echo 🌾 Smart Agriculture App - Quick Setup for Windows
+echo 🌾 Smart Crop Care Assistant - Quick Setup for Windows
 echo ================================================
 
 echo.

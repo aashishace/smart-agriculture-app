@@ -17,73 +17,74 @@ from PIL import Image, ImageDraw
 from datetime import date, datetime
 import json
 
-def create_test_data():
+def create_test_data(app):
     """Create test user, farm, and crop data."""
     
     print("🌱 CREATING TEST DATA")
     print("=" * 30)
     
-    # Create test user
-    test_user = User.query.filter_by(phone='9999999999').first()
-    if not test_user:
-        test_user = User(
-            name='Test Farmer',
-            phone='9999999999',
-            village='Test Village',
-            state='Test State',
-            preferred_language='hi'
-        )
-        test_user.set_password('testpass123')
-        db.session.add(test_user)
-        db.session.commit()
-        print("✅ Test user created")
-    else:
-        print("✅ Test user exists")
-    
-    # Create test farm
-    test_farm = Farm.query.filter_by(user_id=test_user.id).first()
-    if not test_farm:
-        test_farm = Farm(
-            user_id=test_user.id,
-            farm_name='Test Farm',
-            area_acres=10.5,
-            soil_type='Loamy',
-            latitude=28.6139,  # Delhi coordinates
-            longitude=77.2090
-        )
-        db.session.add(test_farm)
-        db.session.commit()
-        print("✅ Test farm created")
-    else:
-        print("✅ Test farm exists")
-    
-    # Create test crops
-    crop_types = ['wheat', 'rice', 'sugarcane']
-    test_crops = []
-    
-    for crop_type in crop_types:
-        existing_crop = Crop.query.filter_by(
-            farm_id=test_farm.id, 
-            crop_type=crop_type,
-            status='active'
-        ).first()
-        
-        if not existing_crop:
-            test_crop = Crop(
-                farm_id=test_farm.id,
-                crop_type=crop_type,
-                variety=f'{crop_type.title()} Variety 1',
-                area_acres=3.0,
-                planting_date=date(2024, 10, 1),
-                current_stage='flowering'
+    with app.app_context():
+        # Create test user
+        test_user = User.query.filter_by(phone='9999999999').first()
+        if not test_user:
+            test_user = User(
+                name='Test Farmer',
+                phone='9999999999',
+                village='Test Village',
+                state='Test State',
+                preferred_language='hi'
             )
-            db.session.add(test_crop)
-            test_crops.append(test_crop)
+            test_user.set_password('testpass123')
+            db.session.add(test_user)
+            db.session.commit()
+            print("✅ Test user created")
         else:
-            test_crops.append(existing_crop)
-    
-    db.session.commit()
-    print(f"✅ {len(test_crops)} test crops available")
+            print("✅ Test user exists")
+        
+        # Create test farm
+        test_farm = Farm.query.filter_by(user_id=test_user.id).first()
+        if not test_farm:
+            test_farm = Farm(
+                user_id=test_user.id,
+                farm_name='Test Farm',
+                area_acres=10.5,
+                soil_type='Loamy',
+                latitude=28.6139,  # Delhi coordinates
+                longitude=77.2090
+            )
+            db.session.add(test_farm)
+            db.session.commit()
+            print("✅ Test farm created")
+        else:
+            print("✅ Test farm exists")
+        
+        # Create test crops
+        crop_types = ['wheat', 'rice', 'sugarcane']
+        test_crops = []
+        
+        for crop_type in crop_types:
+            existing_crop = Crop.query.filter_by(
+                farm_id=test_farm.id, 
+                crop_type=crop_type,
+                status='active'
+            ).first()
+            
+            if not existing_crop:
+                test_crop = Crop(
+                    farm_id=test_farm.id,
+                    crop_type=crop_type,
+                    variety=f'{crop_type.title()} Variety 1',
+                    area_acres=3.0,
+                    planting_date=date(2024, 10, 1),
+                    current_stage='flowering'
+                )
+                db.session.add(test_crop)
+                test_crops.append(test_crop)
+            else:
+                test_crops.append(existing_crop)
+        
+        db.session.commit()
+        print(f"✅ {len(test_crops)} test crops available")
     
     return test_user, test_farm, test_crops
 
@@ -121,14 +122,14 @@ def create_disease_test_images():
     print(f"✅ Created {len(test_images)} test images")
     return test_images
 
-def test_disease_detection_full_cycle():
+def run_disease_detection_full_cycle(app):
     """Test complete disease detection cycle with database storage."""
     
     print("\n🔬 TESTING FULL DISEASE DETECTION CYCLE")
     print("=" * 50)
     
     # Get test data
-    test_user, test_farm, test_crops = create_test_data()
+    test_user, test_farm, test_crops = create_test_data(app)
     test_images = create_disease_test_images()
     
     results = []
@@ -183,45 +184,46 @@ def test_disease_detection_full_cycle():
     
     return results
 
-def test_database_queries():
+def run_database_queries(app):
     """Test database queries for disease detection data."""
     
     print("\n💾 TESTING DATABASE QUERIES")
     print("=" * 35)
     
-    # Test user's total detections
-    test_user = User.query.filter_by(phone='9999999999').first()
-    total_detections = DiseaseDetection.query.join(Crop).join(Farm).filter(
-        Farm.user_id == test_user.id
-    ).count()
-    print(f"✅ Total detections for test user: {total_detections}")
-    
-    # Test disease detections by crop type
-    crop_detection_counts = {}
-    for crop_type in ['wheat', 'rice', 'sugarcane']:
-        count = DiseaseDetection.query.join(Crop).filter(
-            Crop.crop_type == crop_type
+    with app.app_context():
+        # Test user's total detections
+        test_user = User.query.filter_by(phone='9999999999').first()
+        total_detections = DiseaseDetection.query.join(Crop).join(Farm).filter(
+            Farm.user_id == test_user.id
         ).count()
-        crop_detection_counts[crop_type] = count
-        print(f"✅ {crop_type.title()} detections: {count}")
-    
-    # Test recent detections
-    recent_detections = DiseaseDetection.query.join(Crop).join(Farm).filter(
-        Farm.user_id == test_user.id
-    ).order_by(DiseaseDetection.detected_at.desc()).limit(5).all()
-    
-    print(f"✅ Recent detections: {len(recent_detections)}")
-    for detection in recent_detections[:3]:
-        print(f"   • {detection.predicted_disease} ({detection.confidence_score:.2%})")
-    
-    # Test healthy vs diseased ratio
-    healthy_count = DiseaseDetection.query.filter_by(is_healthy=True).count()
-    diseased_count = DiseaseDetection.query.filter_by(is_healthy=False).count()
-    total = healthy_count + diseased_count
-    
-    if total > 0:
-        print(f"✅ Health ratio: {healthy_count}/{total} healthy ({healthy_count/total:.1%})")
-        print(f"✅ Disease ratio: {diseased_count}/{total} diseased ({diseased_count/total:.1%})")
+        print(f"✅ Total detections for test user: {total_detections}")
+        
+        # Test disease detections by crop type
+        crop_detection_counts = {}
+        for crop_type in ['wheat', 'rice', 'sugarcane']:
+            count = DiseaseDetection.query.join(Crop).filter(
+                Crop.crop_type == crop_type
+            ).count()
+            crop_detection_counts[crop_type] = count
+            print(f"✅ {crop_type.title()} detections: {count}")
+        
+        # Test recent detections
+        recent_detections = DiseaseDetection.query.join(Crop).join(Farm).filter(
+            Farm.user_id == test_user.id
+        ).order_by(DiseaseDetection.detected_at.desc()).limit(5).all()
+        
+        print(f"✅ Recent detections: {len(recent_detections)}")
+        for detection in recent_detections[:3]:
+            print(f"   • {detection.predicted_disease} ({detection.confidence_score:.2%})")
+        
+        # Test healthy vs diseased ratio
+        healthy_count = DiseaseDetection.query.filter_by(is_healthy=True).count()
+        diseased_count = DiseaseDetection.query.filter_by(is_healthy=False).count()
+        total = healthy_count + diseased_count
+        
+        if total > 0:
+            print(f"✅ Health ratio: {healthy_count}/{total} healthy ({healthy_count/total:.1%})")
+            print(f"✅ Disease ratio: {diseased_count}/{total} diseased ({diseased_count/total:.1%})")
 
 def generate_test_report(results):
     """Generate comprehensive test report."""
@@ -299,11 +301,14 @@ if __name__ == "__main__":
         # Ensure test directories exist
         os.makedirs("app/static/test_images", exist_ok=True)
         
+        # Create test data
+        test_user, test_farm, test_crops = create_test_data(app)
+        
         # Run comprehensive tests
-        results = test_disease_detection_full_cycle()
+        results = run_disease_detection_full_cycle(app)
         
         # Test database functionality
-        test_database_queries()
+        run_database_queries(app)
         
         # Generate final report
         generate_test_report(results)

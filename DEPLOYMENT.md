@@ -124,7 +124,7 @@ Create `/etc/systemd/system/smart-agriculture.service`:
 
 ```ini
 [Unit]
-Description=Smart Agriculture Flask App
+Description=Smart Crop Care Assistant Flask App
 After=network.target
 
 [Service]

@@ -1,11 +1,11 @@
-# English translations for Smart Agriculture App
+# English translations for Smart Crop Care Assistant
 # Copyright (C) 2024
 # This file is distributed under the same license as the Smart Agriculture
 # App project.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Smart Agriculture App 1.0\n"
+"Project-Id-Version: Smart Crop Care Assistant 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-01 01:54+0530\n"
 "PO-Revision-Date: 2024-12-30 10:00+0000\n"
@@ -298,12 +298,12 @@ msgstr ""
 #: app/templates/farms/add.html:3 app/templates/farms/index.html:3
 #: app/templates/index.html:3 app/templates/index.html:11
 #: app/templates/onboarding.html:4
-msgid "Smart Agriculture App"
+msgid "Smart Crop Care Assistant"
 msgstr ""
 
 #: app/templates/about.html:14
 msgid ""
-"Smart Agriculture App is a modern agricultural management platform that "
+"Smart Crop Care Assistant is a modern agricultural management platform that "
 "helps farmers make better decisions in their farming. This app provides "
 "features like weather information, crop monitoring, disease "
 "identification, and irrigation management."
@@ -853,7 +853,7 @@ msgid "Register for Free"
 msgstr ""
 
 #: app/templates/onboarding.html:14
-msgid "Welcome to Smart Agriculture App!"
+msgid "Welcome to Smart Crop Care Assistant!"
 msgstr ""
 
 #: app/templates/onboarding.html:17
@@ -948,7 +948,7 @@ msgid "Skip to Dashboard"
 msgstr ""
 
 #: app/templates/auth/login.html:11
-msgid "Login to Smart Agriculture App"
+msgid "Login to Smart Crop Care Assistant"
 msgstr ""
 
 #: app/templates/auth/login.html:14
@@ -976,7 +976,7 @@ msgid "Forgot password?"
 msgstr ""
 
 #: app/templates/auth/login.html:76
-msgid "Smart Agriculture App - Made for farmers"
+msgid "Smart Crop Care Assistant - Made for farmers"
 msgstr ""
 
 #: app/templates/auth/profile_edit.html:3
@@ -989,7 +989,7 @@ msgid "Create Account"
 msgstr ""
 
 #: app/templates/auth/register.html:11
-msgid "Register with Smart Agriculture App"
+msgid "Register with Smart Crop Care Assistant"
 msgstr ""
 
 #: app/templates/auth/register.html:14
@@ -2056,8 +2056,8 @@ msgid "Not a valid float value."
 msgstr ""
 
 # Navigation
-#~ msgid "Smart Agriculture App"
-#~ msgstr "Smart Agriculture App"
+#~ msgid "Smart Crop Care Assistant"
+#~ msgstr "Smart Crop Care Assistant"
 
 #~ msgid "Smart Agriculture"
 #~ msgstr "Smart Agriculture"
@@ -2313,8 +2313,8 @@ msgstr ""
 #~ msgid "Register for Free"
 #~ msgstr "Register for Free"
 
-#~ msgid "Login to Smart Agriculture App"
-#~ msgstr "Login to Smart Agriculture App"
+#~ msgid "Login to Smart Crop Care Assistant"
+#~ msgstr "Login to Smart Crop Care Assistant"
 
 #~ msgid "Or"
 #~ msgstr "Or"
@@ -2337,14 +2337,14 @@ msgstr ""
 #~ msgid "Forgot password?"
 #~ msgstr "Forgot password?"
 
-#~ msgid "Smart Agriculture App - Made for farmers"
-#~ msgstr "Smart Agriculture App - Made for farmers"
+#~ msgid "Smart Crop Care Assistant - Made for farmers"
+#~ msgstr "Smart Crop Care Assistant - Made for farmers"
 
 #~ msgid "Create Account"
 #~ msgstr "Create Account"
 
-#~ msgid "Register with Smart Agriculture App"
-#~ msgstr "Register with Smart Agriculture App"
+#~ msgid "Register with Smart Crop Care Assistant"
+#~ msgstr "Register with Smart Crop Care Assistant"
 
 #~ msgid "Already have an account?"
 #~ msgstr "Already have an account?"

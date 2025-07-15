@@ -1,5 +1,5 @@
 """
-Pytest configuration for Smart Agriculture App.
+Pytest configuration for Smart Crop Care Assistant.
 """
 
 import pytest
@@ -9,6 +9,7 @@ from app import create_app, db
 from app.models.user import User
 from app.models.farm import Farm
 from app.models.crop import Crop
+from app.models.crop_data import CropInfo, GrowthStage
 
 @pytest.fixture
 def app():
@@ -24,11 +25,30 @@ def app():
     
     with app.app_context():
         db.create_all()
+        populate_crop_data(app)
         yield app
         db.drop_all()
     
     os.close(db_fd)
     os.unlink(db_path)
+
+def populate_crop_data(app):
+    """Populate the database with initial crop data for tests."""
+    with app.app_context():
+        wheat = CropInfo(name='wheat', avg_harvest_days=140)
+        db.session.add(wheat)
+        db.session.commit()
+        
+        wheat_stages = [
+            GrowthStage(crop_info_id=wheat.id, stage_name='germination', stage_description_hi='अंकुरण', start_day=0, end_day=7, water_requirement_mm_day=2),
+            GrowthStage(crop_info_id=wheat.id, stage_name='tillering', stage_description_hi='कल्ले निकलना', start_day=8, end_day=40, water_requirement_mm_day=4),
+            GrowthStage(crop_info_id=wheat.id, stage_name='jointing', stage_description_hi='गांठ बनना', start_day=41, end_day=70, water_requirement_mm_day=6),
+            GrowthStage(crop_info_id=wheat.id, stage_name='flowering', stage_description_hi='फूल आना', start_day=71, end_day=100, water_requirement_mm_day=6),
+            GrowthStage(crop_info_id=wheat.id, stage_name='grain_filling', stage_description_hi='दाना भरना', start_day=101, end_day=120, water_requirement_mm_day=5),
+            GrowthStage(crop_info_id=wheat.id, stage_name='maturity', stage_description_hi='पकना', start_day=121, end_day=140, water_requirement_mm_day=2)
+        ]
+        db.session.bulk_save_objects(wheat_stages)
+        db.session.commit()
 
 @pytest.fixture
 def client(app):

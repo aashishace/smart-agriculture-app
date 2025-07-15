@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Smart Agriculture App Setup Script
+Smart Crop Care Assistant Setup Script
 Run this script to set up the development environment
 """
 
@@ -130,7 +130,7 @@ with app.app_context():
 
 def main():
     """Main setup function."""
-    print("🌾 Smart Agriculture App Setup")
+    print("🌾 Smart Crop Care Assistant Setup")
     print("=" * 50)
     
     # Check Python version

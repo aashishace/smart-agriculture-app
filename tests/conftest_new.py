@@ -1,5 +1,5 @@
 """
-Pytest configuration for Smart Agriculture App.
+Pytest configuration for Smart Crop Care Assistant.
 """
 
 import pytest

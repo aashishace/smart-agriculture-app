@@ -10,7 +10,7 @@ When adding new translatable strings, provide context using comments:
 {{ _('Save') }}
 
 {# Translators: Title for the main navigation #}
-{{ _('Smart Agriculture') }}
+{{ _('Smart Crop Care Assistant') }}
 ```
 
 ### For Python Code:

@@ -1,9 +1,10 @@
 """
-Smart Agriculture App - Flask Application Factory
+Smart Crop Care Assistant - Flask Application Factory
 """
 
 from flask import Flask, request, g, session
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 from flask_login import LoginManager, current_user
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
@@ -12,15 +13,40 @@ import os
 import logging
 from logging.handlers import RotatingFileHandler
 from datetime import datetime, timezone
+import tensorflow as tf
+import json
 
 # Initialize extensions
 db = SQLAlchemy()
+migrate = Migrate()
 login_manager = LoginManager()
 babel = Babel()
 limiter = Limiter(
     key_func=get_remote_address,
     default_limits=["100 per hour", "20 per minute"]
 )
+
+def load_ml_model(app):
+    """Load the machine learning model and class indices."""
+    app.ml_model = None
+    app.ml_class_names = None
+    try:
+        model_path = app.config['ML_MODEL_PATH']
+        class_indices_path = app.config['ML_CLASS_INDICES_PATH']
+
+        if os.path.exists(model_path) and os.path.exists(class_indices_path):
+            app.ml_model = tf.keras.models.load_model(model_path)
+            with open(class_indices_path, 'r') as f:
+                class_indices = json.load(f)
+            # Convert keys to integers before creating the dictionary
+            app.ml_class_names = {int(k): v for k, v in class_indices.items()}
+            app.logger.info("Successfully loaded ML model and class indices.")
+        else:
+            app.logger.error(f"ML model not found at {model_path} or class indices not found at {class_indices_path}.")
+            app.logger.error("Disease detection feature will be disabled.")
+    except Exception as e:
+        app.logger.error(f"An unexpected error occurred while loading the ML model: {e}", exc_info=True)
+        app.logger.error("Disease detection feature will be disabled.")
 
 def create_app(config_name='development'):
     """Application factory pattern."""
@@ -34,15 +60,14 @@ def create_app(config_name='development'):
     # Configure logging
     configure_logging(app)
     
-    # Ensure upload directory exists
-    upload_dir = app.config.get('UPLOAD_FOLDER')
-    if upload_dir and not os.path.exists(upload_dir):
-        os.makedirs(upload_dir)
-    
     # Initialize extensions with app
     db.init_app(app)
+    migrate.init_app(app, db)
     login_manager.init_app(app)
     limiter.init_app(app)
+    
+    # Load ML model
+    load_ml_model(app)
     
     # Configure Babel locale selector
     def get_locale():
@@ -181,4 +206,4 @@ def configure_logging(app):
         app.logger.addHandler(file_handler)
         
         app.logger.setLevel(logging.INFO)
-        app.logger.info('Smart Agriculture application startup')
+        app.logger.info('Smart Crop Care Assistant application startup')

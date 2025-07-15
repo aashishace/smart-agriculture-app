@@ -1,4 +1,4 @@
-# 🌾 Smart Agriculture App - Complete Demo Guide
+# 🌾 Smart Crop Care Assistant - Complete Demo Guide
 
 ## 📱 Login Information
 - **Phone**: `9876543210`
@@ -187,4 +187,4 @@
 
 ---
 
-**Happy Farming! 🌾** Your Smart Agriculture App is loaded with realistic data and ready for comprehensive testing!
+**Happy Farming! 🌾** Your Smart Crop Care Assistant is loaded with realistic data and ready for comprehensive testing!

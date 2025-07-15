@@ -142,4 +142,4 @@ screenshots/
 4. Test that all image links work in the report
 5. Add any necessary annotations or callouts
 
-The project report now includes comprehensive screenshot placeholders and detailed descriptions that demonstrate the full functionality of the Smart Agriculture App.
+The project report now includes comprehensive screenshot placeholders and detailed descriptions that demonstrate the full functionality of the Smart Crop Care Assistant.

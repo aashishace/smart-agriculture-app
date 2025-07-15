@@ -2,7 +2,7 @@
 Main Routes - Dashboard, Home, and General Pages
 """
 
-from flask import Blueprint, render_template, request, jsonify, redirect, url_for, flash
+from flask import Blueprint, render_template, request, jsonify, redirect, url_for, flash, session
 from flask_login import login_required, current_user
 from flask_babel import _
 from app.models.user import User
@@ -251,6 +251,15 @@ def readiness_check():
             'timestamp': datetime.now(timezone.utc).isoformat(),
             'error': str(e)
         }), 503
+
+@main_bp.route('/set-language/<language>')
+def set_language(language):
+    """Set user language preference and reload page."""
+    session['language'] = language
+    if current_user.is_authenticated:
+        current_user.preferred_language = language
+        db.session.commit()
+    return redirect(request.referrer or url_for('main.index'))
 
 # Error handlers
 @main_bp.errorhandler(404)

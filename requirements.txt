@@ -13,19 +13,16 @@ Jinja2==3.1.3
 python-dotenv==1.0.0
 
 # ML and Image Processing (Optimized versions)
-tensorflow==2.17.0
-opencv-python==4.9.0.80
+opencv-python-headless==4.9.0.80
 Pillow==10.3.0
 numpy==1.26.4
 scikit-learn==1.4.2
+transformers==4.35.2
+torch==2.2.0
 
 # API Integrations
 requests==2.32.3
 twilio==9.0.1
-
-# Task Queue (Optional - we can skip these for MVP)
-# celery==5.4.0
-# redis==5.0.4
 
 # Validation and Security
 marshmallow==3.21.1
