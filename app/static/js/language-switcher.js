@@ -127,52 +127,25 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Auto-apply saved language preference - DISABLED to prevent auto-rollback
+    // Auto-apply saved language preference - COMPLETELY DISABLED
     function applySavedLanguagePreference() {
-        // Disabled automatic language switching to prevent conflicts with manual switching
-        // Language will only change when user explicitly selects it
-        console.log('Auto language switching disabled to prevent rollback issues');
+        // COMPLETELY DISABLED: No automatic language switching to prevent server conflicts
+        // Language is now controlled entirely by server-side Flask-Babel
+        // User language preference is handled by the Flask route /set-language/<language>
+        console.log('Auto language switching completely disabled - using server-side language only');
         return;
-        
-        const savedLang = localStorage.getItem('preferredLanguage');
-        const currentLang = document.documentElement.lang || 'hi';
-        const urlParams = new URLSearchParams(window.location.search);
-        const urlLang = urlParams.get('lang');
-        
-        // Don't redirect if:
-        // 1. We're already on a language switching page
-        // 2. There's a lang parameter in URL (user is actively switching)
-        // 3. We just switched languages (prevent infinite loops)
-        if (window.location.pathname.includes('/set-language/') || 
-            urlLang || 
-            sessionStorage.getItem('justSwitchedLanguage')) {
-            
-            // Clear the switching flag after a delay
-            if (sessionStorage.getItem('justSwitchedLanguage')) {
-                setTimeout(() => {
-                    sessionStorage.removeItem('justSwitchedLanguage');
-                }, 1000);
-            }
-            return;
-        }
-        
-        // Only redirect if the saved preference differs from current
-        if (savedLang && savedLang !== currentLang && 
-            (savedLang === 'hi' || savedLang === 'en')) {
-            
-            console.log(`Applying saved language preference: ${savedLang}`);
-            sessionStorage.setItem('justSwitchedLanguage', 'true');
-            window.location.href = `/set-language/${savedLang}`;
-        }
     }
     
-    // Initialize saved language preference
-    applySavedLanguagePreference();
+    // DISABLED: Don't initialize saved language preference
+    // applySavedLanguagePreference();
     
-    // Update language button states
+    // Update language button states based on server-side language
     function updateLanguageButtonStates() {
-        const currentLang = document.documentElement.lang || 'hi';
+        // Use server-set language from window.currentLanguage (set in base.html)
+        const currentLang = window.currentLanguage || document.documentElement.lang || 'hi';
         const languageButtons = document.querySelectorAll('[onclick*="toggleLanguageDropdown"]');
+        
+        console.log('Updating language buttons for language:', currentLang);
         
         languageButtons.forEach(button => {
             const text = currentLang === 'hi' ? '🇮🇳 हिंदी' : '🇺🇸 English';
@@ -182,10 +155,13 @@ document.addEventListener('DOMContentLoaded', function() {
     
     updateLanguageButtonStates();
     
-    // Set document language attribute
+    // Set document language attribute from server-side setting
     function setDocumentLanguage() {
-        const currentLang = document.documentElement.lang || 'hi';
+        // Use server-set language from window.currentLanguage
+        const currentLang = window.currentLanguage || document.documentElement.lang || 'hi';
         document.documentElement.setAttribute('lang', currentLang);
+        
+        console.log('Document language set to:', currentLang);
         
         // Set text direction for future RTL support
         document.documentElement.setAttribute('dir', 'ltr');
@@ -196,13 +172,17 @@ document.addEventListener('DOMContentLoaded', function() {
     // Debug function for development
     window.debugLanguageSystem = function() {
         console.log('=== Language System Debug ===');
-        console.log('Document language:', document.documentElement.lang);
-        console.log('Saved preference:', localStorage.getItem('preferredLanguage'));
+        console.log('Server-side language (window.currentLanguage):', window.currentLanguage);
+        console.log('Document language attribute:', document.documentElement.lang);
+        console.log('LocalStorage preference:', localStorage.getItem('preferredLanguage'));
+        console.log('Session switching flag:', sessionStorage.getItem('justSwitchedLanguage'));
+        console.log('Language auto-switching: DISABLED');
         console.log('Current URL:', window.location.href);
         console.log('Language dropdowns:', {
             auth: !!document.getElementById('authLanguageDropdown'),
             guest: !!document.getElementById('guestLanguageDropdown')
         });
+        console.log('==============================');
     };
 });
 

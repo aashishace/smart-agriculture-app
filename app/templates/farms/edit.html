@@ -1,16 +1,16 @@
 {% extends "base.html" %}
 
-{% block title %}{{ farm.farm_name }} संपादित करें - स्मार्ट फसल देखभाल सहायक{% endblock %}
+{% block title %}{{ _("Edit Farm") }} - {{ farm.farm_name }} - {{ _("Smart Crop Care Assistant") }}{% endblock %}
 
 {% block content %}
 <div class="min-h-screen bg-gray-50">
     <div class="max-w-2xl mx-auto px-4 py-8">
         <div class="bg-white rounded-lg shadow p-8">
             <div class="flex items-center justify-between mb-6">
-                <h1 class="text-2xl font-bold text-gray-900">खेत संपादित करें</h1>
+                <h1 class="text-2xl font-bold text-gray-900">{{ _("Edit Farm") }}</h1>
                 <a href="{{ url_for('farms.view', farm_id=farm.id) }}" 
                    class="text-blue-600 hover:text-blue-800 flex items-center">
-                    ← वापस खेत विवरण में
+                    ← {{ _("Back to Farm Details") }}
                 </a>
             </div>
 
@@ -28,27 +28,27 @@
                 <!-- Farm Name -->
                 <div>
                     <label for="farm_name" class="block text-sm font-medium text-gray-700 mb-2">
-                        खेत का नाम *
+                        {{ _("Farm Name") }} *
                     </label>
                     <input type="text" 
                            id="farm_name" 
                            name="farm_name" 
                            value="{{ farm.farm_name }}"
                            required
-                           placeholder="जैसे: मुख्य खेत, पूर्वी खेत, आदि"
+                           placeholder="{{ _("e.g.: Main Farm, East Farm, etc") }}"
                            class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
                 </div>
 
                 <!-- Area (Read-only) -->
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">
-                        क्षेत्रफल (एकड़ में)
+                        {{ _("Area (in acres)") }}
                     </label>
                     <div class="w-full p-3 bg-gray-100 border border-gray-300 rounded-lg text-gray-600">
-                        {{ farm.area_acres }} एकड़
+                        {{ farm.area_acres }} acres
                     </div>
                     <p class="text-sm text-gray-500 mt-1">
-                        क्षेत्रफल बदलने के लिए नया खेत बनाएं। (फसलों की सुरक्षा के लिए)
+                        {{ _("Create a new farm to change area. (For crop safety)") }}
                     </p>
                 </div>
 
@@ -138,12 +138,12 @@
 
                     <!-- Location Helper -->
                     <div class="mt-4 p-4 bg-blue-50 rounded-lg">
-                        <h4 class="font-medium text-blue-900 mb-2">GPS निर्देशांक कैसे प्राप्त करें:</h4>
+                        <h4 class="font-medium text-blue-900 mb-2">{{ _("How to get GPS coordinates:") }}</h4>
                         <ul class="text-sm text-blue-800 space-y-1">
-                            <li>• Google Maps खोलें और अपने खेत का स्थान खोजें</li>
-                            <li>• स्थान पर लंबा दबाएं (Long press)</li>
-                            <li>• निर्देशांक दिखाई देंगे (जैसे: 26.8467, 80.9462)</li>
-                            <li>• पहला नंबर Latitude है, दूसरा Longitude</li>
+                            <li>• {{ _("Open Google Maps and find your farm location") }}</li>
+                            <li>• {{ _("Long press on the location") }}</li>
+                            <li>• {{ _("Coordinates will appear (e.g.: 26.8467, 80.9462)") }}</li>
+                            <li>• {{ _("First number is Latitude, second is Longitude") }}</li>
                         </ul>
                     </div>
 
@@ -186,14 +186,23 @@ document.getElementById('getCurrentLocation').addEventListener('click', function
             function(position) {
                 document.getElementById('latitude').value = position.coords.latitude.toFixed(6);
                 document.getElementById('longitude').value = position.coords.longitude.toFixed(6);
-                alert('स्थान सफलतापूर्वक प्राप्त हुआ!');
+                const successText = window.currentLanguage === 'hi' ? 
+                    'स्थान सफलतापूर्वक प्राप्त हुआ!' :
+                    'Location obtained successfully!';
+                alert(successText);
             },
             function(error) {
-                alert('स्थान प्राप्त करने में त्रुटि: ' + error.message);
+                const errorText = window.currentLanguage === 'hi' ? 
+                    'स्थान प्राप्त करने में त्रुटि: ' + error.message :
+                    'Error getting location: ' + error.message;
+                alert(errorText);
             }
         );
     } else {
-        alert('आपका ब्राउज़र GPS स्थान का समर्थन नहीं करता।');
+        const noSupportText = window.currentLanguage === 'hi' ? 
+            'आपका ब्राउज़र GPS स्थान का समर्थन नहीं करता।' :
+            'Your browser does not support GPS location.';
+        alert(noSupportText);
     }
 });
 
@@ -201,7 +210,10 @@ document.getElementById('getCurrentLocation').addEventListener('click', function
 document.getElementById('clearLocation').addEventListener('click', function() {
     document.getElementById('latitude').value = '';
     document.getElementById('longitude').value = '';
-    alert('स्थान की जानकारी हटा दी गई।');
+    const clearText = window.currentLanguage === 'hi' ? 
+        'Location information cleared.' :
+        'Location information cleared.';
+    alert(clearText);
 });
 </script>
 {% endblock %}

@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}फसल प्रबंधन - स्मार्ट फसल देखभाल सहायक{% endblock %}
+{% block title %}{{ _('Crop Management') }} - {{ _('Smart Crop Care Assistant') }}{% endblock %}
 
 {% block content %}
 <div class="min-h-screen bg-gradient-to-br from-green-50 to-blue-50">
@@ -9,11 +9,11 @@
         <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
             <div class="flex justify-between items-center">
                 <div>
-                    <h1 class="text-3xl font-bold text-gray-800 mb-2">🌱 फसल प्रबंधन</h1>
-                    <p class="text-gray-600">अपनी सभी फसलों को एक जगह देखें और प्रबंधित करें</p>
+                    <h1 class="text-3xl font-bold text-gray-800 mb-2">🌱 {{ _('Crop Management') }}</h1>
+                    <p class="text-gray-600">{{ _('View and manage all your crops in one place') }}</p>
                 </div>
                 <a href="{{ url_for('crops.add_crop') }}" class="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition duration-300">
-                    + नई फसल जोड़ें
+                    + {{ _('Add New Crop') }}
                 </a>
             </div>
         </div>
@@ -24,7 +24,7 @@
                 <div class="flex items-center">
                     <div class="text-3xl mr-4">🌾</div>
                     <div>
-                        <p class="text-sm font-medium text-gray-600">कुल फसलें</p>
+                        <p class="text-sm font-medium text-gray-600">{{ _('Total Crops') }}</p>
                         <p class="text-2xl font-bold text-gray-900">{{ crops|length }}</p>
                     </div>
                 </div>
@@ -34,7 +34,7 @@
                 <div class="flex items-center">
                     <div class="text-3xl mr-4">✅</div>
                     <div>
-                        <p class="text-sm font-medium text-gray-600">स्वस्थ फसलें</p>
+                        <p class="text-sm font-medium text-gray-600">{{ _('Healthy Crops') }}</p>
                         <p class="text-2xl font-bold text-green-600">{{ crops|selectattr('health_status', 'equalto', 'good')|list|length }}</p>
                     </div>
                 </div>
@@ -44,7 +44,7 @@
                 <div class="flex items-center">
                     <div class="text-3xl mr-4">⚠️</div>
                     <div>
-                        <p class="text-sm font-medium text-gray-600">ध्यान चाहिए</p>
+                        <p class="text-sm font-medium text-gray-600">{{ _('Need Attention') }}</p>
                         <p class="text-2xl font-bold text-yellow-600">{{ crops|selectattr('health_status', 'equalto', 'warning')|list|length }}</p>
                     </div>
                 </div>
@@ -54,7 +54,7 @@
                 <div class="flex items-center">
                     <div class="text-3xl mr-4">🏠</div>
                     <div>
-                        <p class="text-sm font-medium text-gray-600">कुल खेत</p>
+                        <p class="text-sm font-medium text-gray-600">{{ _('Total Farms') }}</p>
                         <p class="text-2xl font-bold text-blue-600">{{ farms|length }}</p>
                     </div>
                 </div>
@@ -70,21 +70,21 @@
                     <div class="flex justify-between items-start mb-4">
                         <div>
                             <h3 class="text-xl font-semibold text-gray-800">{{ crop.name }}</h3>
-                            <p class="text-gray-600">{{ crop.variety or 'सामान्य किस्म' }}</p>
+                            <p class="text-gray-600">{{ crop.variety or _('General Variety') }}</p>
                         </div>
                         <span class="px-3 py-1 rounded-full text-sm font-medium
                             {% if crop.health_status == 'good' %}bg-green-100 text-green-800
                             {% elif crop.health_status == 'warning' %}bg-yellow-100 text-yellow-800
                             {% else %}bg-red-100 text-red-800{% endif %}">
-                            {% if crop.health_status == 'good' %}स्वस्थ
-                            {% elif crop.health_status == 'warning' %}सावधान
-                            {% else %}समस्या{% endif %}
+                            {% if crop.health_status == 'good' %}{{ _('Healthy') }}
+                            {% elif crop.health_status == 'warning' %}{{ _('Caution') }}
+                            {% else %}{{ _('Problem') }}{% endif %}
                         </span>
                     </div>
                     
                     <div class="space-y-2 mb-4">
                         <div class="flex justify-between">
-                            <span class="text-gray-600">बोने की तारीख:</span>
+                            <span class="text-gray-600">{{ _('Planting Date') }}:</span>
                             <span class="font-medium">
                                 {% if crop.planting_date %}
                                     {% if crop.planting_date.strftime %}
@@ -93,13 +93,13 @@
                                         {{ crop.planting_date }}
                                     {% endif %}
                                 {% else %}
-                                    नहीं दी गई
+                                    {{ _('Not provided') }}
                                 {% endif %}
                             </span>
                         </div>
                         
                         <div class="flex justify-between">
-                            <span class="text-gray-600">कटाई अनुमान:</span>
+                            <span class="text-gray-600">{{ _('Harvest Estimate') }}:</span>
                             <span class="font-medium">
                                 {% if crop.expected_harvest_date %}
                                     {% if crop.expected_harvest_date.strftime %}
@@ -108,25 +108,25 @@
                                         {{ crop.expected_harvest_date }}
                                     {% endif %}
                                 {% else %}
-                                    अनुमानित नहीं
+                                    {{ _('Not estimated') }}
                                 {% endif %}
                             </span>
                         </div>
                         
                         <div class="flex justify-between">
-                            <span class="text-gray-600">खेत:</span>
-                            <span class="font-medium">{{ crop.farm.name if crop.farm else 'अज्ञात' }}</span>
+                            <span class="text-gray-600">{{ _('Farm') }}:</span>
+                            <span class="font-medium">{{ crop.farm.name if crop.farm else _('Unknown') }}</span>
                         </div>
                     </div>
                     
                     <div class="flex space-x-2">
                         <a href="{{ url_for('crops.view', crop_id=crop.id) }}" 
                            class="flex-1 bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300 text-center">
-                            विवरण देखें
+                            {{ _('View Details') }}
                         </a>
                         <a href="{{ url_for('crops.add_activity', crop_id=crop.id) }}" 
                            class="flex-1 bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 transition duration-300 text-center">
-                            गतिविधि जोड़ें
+                            {{ _('Add Activity') }}
                         </a>
                     </div>
                 </div>
@@ -137,17 +137,17 @@
         <!-- Empty State -->
         <div class="bg-white rounded-lg shadow-lg p-12 text-center">
             <div class="text-6xl mb-4">🌱</div>
-            <h3 class="text-2xl font-semibold text-gray-800 mb-4">अभी तक कोई फसल नहीं</h3>
-            <p class="text-gray-600 mb-8">अपनी पहली फसल जोड़कर शुरुआत करें</p>
+            <h3 class="text-2xl font-semibold text-gray-800 mb-4">{{ _('No crops yet') }}</h3>
+            <p class="text-gray-600 mb-8">{{ _('Start by adding your first crop') }}</p>
             
             <div class="space-y-4">
                 <a href="{{ url_for('crops.add_crop') }}" class="block w-full max-w-sm mx-auto bg-green-600 text-white py-3 px-6 rounded-lg hover:bg-green-700 transition duration-300">
-                    नई फसल जोड़ें
+                    {{ _('Add New Crop') }}
                 </a>
                 
                 {% if farms|length == 0 %}
                 <a href="{{ url_for('farms.add') }}" class="block w-full max-w-sm mx-auto border border-gray-300 text-gray-700 py-3 px-6 rounded-lg hover:bg-gray-50 transition duration-300">
-                    पहले खेत जोड़ें
+                    {{ _('Add Farm First') }}
                 </a>
                 {% endif %}
             </div>

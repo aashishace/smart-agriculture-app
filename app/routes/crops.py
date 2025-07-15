@@ -221,13 +221,13 @@ def add_activity(crop_id):
         # Validation
         if not activity_type or activity_type not in ['irrigation', 'fertilizer', 'pesticide', 'harvesting', 'other']:
             flash(_('Please select activity type.'), 'error')
-            return render_template('crops/add_activity.html', crop=crop)
+            return render_template('crops/add_activity.html', crop=crop, today=date.today())
         
         try:
             scheduled_date = datetime.strptime(scheduled_date, '%Y-%m-%d').date()
         except (ValueError, TypeError):
             flash(_('Please enter valid date.'), 'error')
-            return render_template('crops/add_activity.html', crop=crop)
+            return render_template('crops/add_activity.html', crop=crop, today=date.today())
         
         try:
             activity = Activity(
@@ -248,7 +248,7 @@ def add_activity(crop_id):
             db.session.rollback()
             flash(_('Error adding activity.'), 'error')
     
-    return render_template('crops/add_activity.html', crop=crop)
+    return render_template('crops/add_activity.html', crop=crop, today=date.today())
 
 @crops_bp.route('/bulk-activities', methods=['GET', 'POST'])
 @login_required
@@ -265,17 +265,17 @@ def bulk_activities():
         
         if not selected_crops:
             flash(_('Please select at least one crop.'), 'error')
-            return render_template('crops/bulk_activities.html', farms=farms)
+            return render_template('crops/bulk_activities.html', farms=farms, date=date)
         
         if not activity_type:
             flash(_('Please select activity type.'), 'error')
-            return render_template('crops/bulk_activities.html', farms=farms)
+            return render_template('crops/bulk_activities.html', farms=farms, date=date)
         
         try:
             scheduled_date = datetime.strptime(scheduled_date, '%Y-%m-%d').date()
         except (ValueError, TypeError):
             flash(_('Please enter valid date.'), 'error')
-            return render_template('crops/bulk_activities.html', farms=farms)
+            return render_template('crops/bulk_activities.html', farms=farms, date=date)
         
         # Create activities for selected crops
         created_count = 0
@@ -308,7 +308,7 @@ def bulk_activities():
     activity_service = ActivityTemplateService()
     activity_types = activity_service.get_activity_types()
     
-    return render_template('crops/bulk_activities.html', farms=farms, activity_types=activity_types)
+    return render_template('crops/bulk_activities.html', farms=farms, activity_types=activity_types, date=date)
 
 @crops_bp.route('/api/activity-suggestions/<int:crop_id>')
 @login_required  

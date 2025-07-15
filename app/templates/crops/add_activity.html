@@ -200,7 +200,7 @@ function updateActivityForm() {
             break;
             
         case 'pesticide':
-            descriptionHelp.innerHTML = '<span data-translate="pesticide_desc_help">कीटनाशक का नाम और छिड़काव की विधि बताएं</span>';
+            descriptionHelp.innerHTML = '<span data-translate="pesticide_desc_help">{{ _("Specify pesticide name and spraying method") }}</span>';
             quantityHelp.innerHTML = '<span data-translate="pesticide_quantity_help">कीटनाशक की मात्रा लीटर में दें</span>';
             recommendationsDiv.classList.remove('hidden');
             recommendationContent.innerHTML = `
@@ -214,7 +214,7 @@ function updateActivityForm() {
             
         case 'harvesting':
             descriptionHelp.innerHTML = '<span data-translate="harvesting_desc_help">कटाई की विधि और समय का विवरण दें</span>';
-            quantityHelp.innerHTML = '<span data-translate="harvesting_quantity_help">कटाई का क्षेत्रफल एकड़ में दें</span>';
+            quantityHelp.innerHTML = '<span data-translate="harvesting_quantity_help">कटाई का क्षेत्रफल acres में दें</span>';
             break;
             
         default:

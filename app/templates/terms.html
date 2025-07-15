@@ -1,56 +1,56 @@
 {% extends "base.html" %}
 
-{% block title %}नियम और शर्तें - स्मार्ट फसल देखभाल सहायक{% endblock %}
+{% block title %}{{ _("Terms and Conditions") }} - {{ _("Smart Crop Care Assistant") }}{% endblock %}
 
 {% block content %}
 <div class="min-h-screen bg-gradient-to-br from-green-50 to-blue-50">
     <div class="container mx-auto px-4 py-8">
         <div class="bg-white rounded-lg shadow-lg p-8 max-w-4xl mx-auto">
-            <h1 class="text-4xl font-bold text-gray-800 mb-8 text-center">नियम और शर्तें</h1>
+            <h1 class="text-4xl font-bold text-gray-800 mb-8 text-center">{{ _("Terms and Conditions") }}</h1>
             
             <div class="prose max-w-none">
-                <p class="text-sm text-gray-500 mb-6">अंतिम अपडेट: दिसंबर 2024</p>
+                <p class="text-sm text-gray-500 mb-6">{{ _("Last Updated: December 2024") }}</p>
                 
-                <h2 class="text-2xl font-semibold text-gray-700 mb-4">स्वीकृति की शर्तें</h2>
+                <h2 class="text-2xl font-semibold text-gray-700 mb-4">{{ _("Terms of Acceptance") }}</h2>
                 <p class="text-gray-600 mb-6">
-                    स्मार्ट फसल देखभाल सहायक का उपयोग करके, आप इन नियमों और शर्तों से सहमत होते हैं।
-                    यदि आप इन शर्तों से सहमत नहीं हैं, तो कृपया इस ऐप का उपयोग न करें।
+                    {{ _("By using Smart Crop Care Assistant, you agree to these terms and conditions.") }}
+                    {{ _("If you do not agree to these terms, please do not use this app.") }}
                 </p>
                 
-                <h2 class="text-2xl font-semibold text-gray-700 mb-4">सेवा का विवरण</h2>
+                <h2 class="text-2xl font-semibold text-gray-700 mb-4">{{ _("Service Description") }}</h2>
                 <p class="text-gray-600 mb-6">
-                    स्मार्ट फसल देखभाल सहायक एक कृषि प्रबंधन प्लेटफॉर्म है जो किसानों को खेती में सहायता प्रदान करता है।
-                    हम मौसम की जानकारी, फसल की निगरानी, और कृषि सलाह जैसी सेवाएं देते हैं।
+                    {{ _("Smart Crop Care Assistant is an agricultural management platform that helps farmers with farming.") }}
+                    {{ _("We provide services like weather information, crop monitoring, and agricultural advice.") }}
                 </p>
                 
-                <h2 class="text-2xl font-semibold text-gray-700 mb-4">उपयोगकर्ता की जिम्मेदारियां</h2>
-                <p class="text-gray-600 mb-4">उपयोगकर्ता के रूप में, आप निम्नलिखित के लिए जिम्मेदार हैं:</p>
+                <h2 class="text-2xl font-semibold text-gray-700 mb-4">{{ _("User Responsibilities") }}</h2>
+                <p class="text-gray-600 mb-4">{{ _("As a user, you are responsible for the following:") }}</p>
                 <ul class="list-disc list-inside text-gray-600 mb-6">
-                    <li>सटीक और अद्यतन जानकारी प्रदान करना</li>
-                    <li>अपने खाते की सुरक्षा बनाए रखना</li>
-                    <li>कानूनी और नैतिक तरीके से ऐप का उपयोग करना</li>
-                    <li>अन्य उपयोगकर्ताओं के अधिकारों का सम्मान करना</li>
+                    <li>{{ _("Providing accurate and updated information") }}</li>
+                    <li>{{ _("Maintaining the security of your account") }}</li>
+                    <li>{{ _("Using the app in a legal and ethical manner") }}</li>
+                    <li>{{ _("Respecting the rights of other users") }}</li>
                 </ul>
                 
                 <h2 class="text-2xl font-semibold text-gray-700 mb-4">प्रतिबंधित गतिविधियां</h2>
                 <p class="text-gray-600 mb-4">निम्नलिखित गतिविधियां प्रतिबंधित हैं:</p>
                 <ul class="list-disc list-inside text-gray-600 mb-6">
-                    <li>ऐप की सुरक्षा में हस्तक्षेप करना</li>
-                    <li>झूठी या भ्रामक जानकारी प्रदान करना</li>
-                    <li>अन्य उपयोगकर्ताओं को परेशान करना</li>
-                    <li>बिना अनुमति के डेटा का दुरुपयोग करना</li>
+                    <li>{{ _("Interfering with app security") }}</li>
+                    <li>{{ _("Providing false or misleading information") }}</li>
+                    <li>{{ _("Harassing other users") }}</li>
+                    <li>{{ _("Misusing data without permission") }}</li>
                 </ul>
                 
-                <h2 class="text-2xl font-semibold text-gray-700 mb-4">सेवा की उपलब्धता</h2>
+                <h2 class="text-2xl font-semibold text-gray-700 mb-4">{{ _("Service Availability") }}</h2>
                 <p class="text-gray-600 mb-6">
-                    हम 24/7 सेवा प्रदान करने का प्रयास करते हैं, लेकिन तकनीकी रखरखाव या अन्य कारणों से 
+                    {{ _("We strive to provide 24/7 service, but due to technical maintenance or other reasons") }} 
                     सेवा में व्यवधान हो सकता है। हम इसके लिए पूर्व सूचना देने का प्रयास करेंगे।
                 </p>
                 
                 <h2 class="text-2xl font-semibold text-gray-700 mb-4">डेटा की सटीकता</h2>
                 <p class="text-gray-600 mb-6">
                     हम सटीक जानकारी प्रदान करने का प्रयास करते हैं, लेकिन मौसम और बाजार की जानकारी 
-                    में बदलाव हो सकते हैं। महत्वपूर्ण निर्णय लेने से पहले जानकारी की पुष्टि करें।
+                    में बदलाव हो सकते हैं। महत्वपूर्ण {{ _("verify information before making important decisions") }}।
                 </p>
                 
                 <h2 class="text-2xl font-semibold text-gray-700 mb-4">बौद्धिक संपदा</h2>
@@ -67,7 +67,7 @@
                 
                 <h2 class="text-2xl font-semibold text-gray-700 mb-4">नियमों में बदलाव</h2>
                 <p class="text-gray-600 mb-6">
-                    हम इन नियमों और शर्तों को समय-समय पर अपडेट कर सकते हैं। महत्वपूर्ण बदलावों 
+                    हम इन नियमों और शर्तों को {{ _("may be updated from time to time") }}। {{ _("significant changes") }} 
                     के बारे में हम उपयोगकर्ताओं को सूचित करेंगे।
                 </p>
                 
@@ -79,7 +79,7 @@
                 
                 <div class="bg-blue-50 border-l-4 border-blue-400 p-4 mt-8">
                     <p class="text-blue-700">
-                        <strong>कानूनी अधिकार क्षेत्र:</strong> ये नियम और शर्तें भारतीय कानून के अंतर्गत आती हैं।
+                        <strong>कानूनी अधिकार क्षेत्र:</strong> ये {{ _("Terms and Conditions") }} भारतीय कानून के अंतर्गत आती हैं।
                         किसी भी विवाद का समाधान भारतीय न्यायालयों में होगा।
                     </p>
                 </div>

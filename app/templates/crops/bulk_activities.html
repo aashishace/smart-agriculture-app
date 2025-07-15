@@ -47,7 +47,7 @@
                                     {% if farm_crops %}
                                         <div class="border-b border-gray-100 pb-3 mb-3">
                                             <h4 class="font-medium text-gray-800 mb-2">
-                                                🏞️ {{ farm.farm_name }} ({{ farm.area_acres }} <span data-translate="acres">एकड़</span>)
+                                                🏞️ {{ farm.farm_name }} ({{ farm.area_acres }} <span data-translate="acres">acres</span>)
                                             </h4>
                                             <div class="space-y-2">
                                                 {% for crop in farm_crops %}
@@ -57,9 +57,9 @@
                                                         <span class="ml-2 text-sm text-gray-700">
                                                             🌱 {{ crop.crop_type|title }} 
                                                             {% if crop.variety %}({{ crop.variety }}){% endif %}
-                                                            - {{ crop.area_acres }} <span data-translate="acres">एकड़</span>
+                                                            - {{ crop.area_acres }} <span data-translate="acres">acres</span>
                                                             <span class="text-xs text-gray-500">
-                                                                ({{ crop.get_days_since_planting() }} <span data-translate="days_old">दिन पुराना</span>)
+                                                                ({{ crop.get_days_since_planting() }} <span data-translate="days_old">{{ _("days old") }}</span>)
                                                             </span>
                                                         </span>
                                                     </label>
@@ -84,10 +84,10 @@
                         {% else %}
                             <div class="text-center py-8 text-gray-500">
                                 <span class="text-4xl">🌱</span>
-                                <p class="mt-2" data-translate="no_crops_available">कोई फसल उपलब्ध नहीं</p>
+                                <p class="mt-2" data-translate="no_crops_available">{{ _("No crops available") }}</p>
                                 <a href="{{ url_for('farms.add') }}" 
                                    class="mt-3 inline-block bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
-                                    <span data-translate="add_first_farm">पहला खेत जोड़ें</span>
+                                    <span data-translate="add_first_farm">{{ _("Add first farm") }}</span>
                                 </a>
                             </div>
                         {% endif %}

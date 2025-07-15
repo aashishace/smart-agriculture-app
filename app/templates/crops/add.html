@@ -170,16 +170,16 @@ const cropDurations = {
     'onion': 130
 };
 
-// Crop information
+// Crop information with translations
 const cropInfo = {
-    'wheat': 'सर्दी की फसल • 140 दिन • कम पानी',
-    'rice': 'खरीफ फसल • 150 दिन • अधिक पानी',
-    'sugarcane': 'वार्षिक फसल • 12 महीने • नियमित सिंचाई',
-    'corn': 'खरीफ/रबी • 120 दिन • मध्यम पानी',
-    'cotton': 'खरीफ फसल • 180 दिन • मध्यम पानी',
-    'potato': 'रबी फसल • 90 दिन • कम पानी',
-    'tomato': 'सभी मौसम • 120 दिन • नियमित पानी',
-    'onion': 'रबी फसल • 130 दिन • कम पानी'
+    'wheat': window.currentLanguage === 'hi' ? 'सर्दी की फसल • 140 दिन • कम पानी' : 'Winter crop • 140 days • Low water',
+    'rice': window.currentLanguage === 'hi' ? 'खरीफ फसल • 150 दिन • अधिक पानी' : 'Kharif crop • 150 days • High water',
+    'sugarcane': window.currentLanguage === 'hi' ? 'वार्षिक फसल • 12 महीने • नियमित सिंचाई' : 'Annual crop • 12 months • Regular irrigation',
+    'corn': window.currentLanguage === 'hi' ? 'खरीफ/रबी • 120 दिन • मध्यम पानी' : 'Kharif/Rabi • 120 days • Medium water',
+    'cotton': window.currentLanguage === 'hi' ? 'खरीफ फसल • 180 दिन • मध्यम पानी' : 'Kharif crop • 180 days • Medium water',
+    'potato': window.currentLanguage === 'hi' ? 'रबी फसल • 90 दिन • कम पानी' : 'Rabi crop • 90 days • Low water',
+    'tomato': window.currentLanguage === 'hi' ? 'सभी मौसम • 120 दिन • नियमित पानी' : 'All seasons • 120 days • Regular water',
+    'onion': window.currentLanguage === 'hi' ? 'रबी फसल • 130 दिन • कम पानी' : 'Rabi crop • 130 days • Low water'
 };
 
 function updateFarmInfo() {
@@ -192,8 +192,12 @@ function updateFarmInfo() {
         const totalArea = parseFloat(option.dataset.area);
         const availableArea = parseFloat(option.dataset.available);
         
+        const availableText = window.currentLanguage === 'hi' ? 'उपलब्ध क्षेत्र:' : 'Available Area:';
+        const totalText = window.currentLanguage === 'hi' ? 'कुल:' : 'Total:';
+        const acresText = window.currentLanguage === 'hi' ? 'acres' : 'acres';
+        
         farmInfo.innerHTML = `
-            <strong>उपलब्ध क्षेत्र:</strong> ${availableArea.toFixed(1)} एकड़ (कुल: ${totalArea} एकड़)
+            <strong>${availableText}</strong> ${availableArea.toFixed(1)} ${acresText} (${totalText} ${totalArea} ${acresText})
         `;
         farmInfo.classList.remove('hidden');
         
@@ -204,7 +208,10 @@ function updateFarmInfo() {
         areaInput.addEventListener('input', function() {
             const areaWarning = document.getElementById('areaWarning');
             if (parseFloat(this.value) > availableArea) {
-                areaWarning.textContent = `उपलब्ध क्षेत्र केवल ${availableArea.toFixed(1)} एकड़ है।`;
+                const warningText = window.currentLanguage === 'hi' ? 
+                    `उपलब्ध क्षेत्र केवल ${availableArea.toFixed(1)} acres है।` :
+                    `Available area is only ${availableArea.toFixed(1)} acres.`;
+                areaWarning.textContent = warningText;
                 areaWarning.classList.remove('hidden');
             } else {
                 areaWarning.classList.add('hidden');
@@ -246,15 +253,20 @@ function updateHarvestInfo() {
         const today = new Date();
         const daysRemaining = Math.ceil((harvestDate - today) / (1000 * 60 * 60 * 24));
         
+        const harvestLabel = window.currentLanguage === 'hi' ? 'अनुमानित कटाई:' : 'Expected Harvest:';
         document.getElementById('harvestDate').textContent = 
-            `अनुमानित कटाई: ${harvestDate.toLocaleDateString('hi-IN')}`;
+            `${harvestLabel} ${harvestDate.toLocaleDateString(window.currentLanguage === 'hi' ? 'hi-IN' : 'en-IN')}`;
         
         if (daysRemaining > 0) {
-            document.getElementById('harvestDays').textContent = 
-                `कटाई में ${daysRemaining} दिन बाकी`;
+            const daysText = window.currentLanguage === 'hi' ? 
+                `कटाई में ${daysRemaining} {{ _("days remaining") }}` :
+                `${daysRemaining} days until harvest`;
+            document.getElementById('harvestDays').textContent = daysText;
         } else {
-            document.getElementById('harvestDays').textContent = 
-                `कटाई का समय हो गया है!`;
+            const readyText = window.currentLanguage === 'hi' ? 
+                'कटाई का समय हो गया है!' :
+                'Ready for harvest!';
+            document.getElementById('harvestDays').textContent = readyText;
         }
         
         harvestInfo.classList.remove('hidden');

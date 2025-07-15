@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """
-Create a test user for development
+Create Comprehensive Demo Farmer Account - Sakshi's MCA Project
+This script creates a realistic farmer account with complete farming data
+for Smart Crop Care Assistant demonstration.
 """
 
 import sys
@@ -14,61 +16,65 @@ from app.models.crop import Crop, Activity, DiseaseDetection
 from datetime import datetime, timedelta, date
 import random
 
-def create_test_user():
-    """Create a test user with comprehensive sample data."""
+def create_comprehensive_demo_farmer():
+    """Create a comprehensive demo farmer account for Sakshi's MCA presentation."""
     app = create_app('development')
     
     with app.app_context():
-        # Check if test user already exists
-        existing_user = User.query.filter_by(phone='9876543210').first()
+        # Check if demo farmer already exists
+        existing_user = User.query.filter_by(phone='8765432109').first()
         if existing_user:
-            print("Test user already exists!")
-            # Delete existing data to recreate with fresh data
-            print("Refreshing data with comprehensive sample...")
-            
-            # Delete existing crops and farms
+            print("🌾 Demo farmer already exists! Refreshing with latest data...")
+            # Delete existing data to recreate with fresh comprehensive data
             for farm in existing_user.farms:
                 db.session.delete(farm)
             db.session.commit()
-            
             user = existing_user
         else:
-            # Create test user
+            # Create comprehensive demo farmer account
             user = User(
-                name='राम किसान',
-                phone='9876543210',
-                email='test@example.com',
-                village='टेस्ट गांव',
-                state='उत्तर प्रदेश',
-                preferred_language='hi'
+                name='विकास कुमार शर्मा',  # Vikas Kumar Sharma - Professional farmer name
+                phone='8765432109',  # Changed phone number
+                email='vikas.farmer@gmail.com',  # Professional email
+                village='श्रीनगर',  # Shrinagar village
+                state='उत्तर प्रदेश',  # Uttar Pradesh
+                preferred_language='hi'  # Hindi preference
             )
-            user.set_password('password123')
+            user.set_password('demo2024')  # Updated password
             
             db.session.add(user)
             db.session.commit()
+            print(f"✅ Created comprehensive demo farmer: {user.name}")
         
-        # Create multiple farms with realistic data
+        # Create 4 diverse farms with realistic Indian farming scenarios
         farms_data = [
             {
-                'farm_name': 'मुख्य खेत',
-                'area_acres': 8.5,
-                'soil_type': 'दोमट',
-                'latitude': 26.8467,
+                'farm_name': 'मुख्य कृषि भूमि',  # Main Agricultural Land
+                'area_acres': 12.5,  # Larger main farm
+                'soil_type': 'उपजाऊ दोमट',  # Fertile loam
+                'latitude': 26.8467,  # Lucknow region coordinates
                 'longitude': 80.9462
             },
             {
-                'farm_name': 'नदी के किनारे का खेत',
-                'area_acres': 5.2,
-                'soil_type': 'काली मिट्टी',
+                'farm_name': 'गंगा तटीय खेत',  # Ganges Riverside Farm
+                'area_acres': 8.3,
+                'soil_type': 'जलोढ़ मिट्टी',  # Alluvial soil
                 'latitude': 26.8500,
                 'longitude': 80.9500
             },
             {
-                'farm_name': 'पहाड़ी खेत',
-                'area_acres': 3.8,
-                'soil_type': 'लाल मिट्टी',
+                'farm_name': 'पर्वतीय कृषि क्षेत्र',  # Mountain Agricultural Area
+                'area_acres': 5.7,
+                'soil_type': 'लाल चिकनी मिट्टी',  # Red clay soil
                 'latitude': 26.8400,
                 'longitude': 80.9400
+            },
+            {
+                'farm_name': 'जैविक खेती केंद्र',  # Organic Farming Center
+                'area_acres': 6.2,
+                'soil_type': 'काली उर्वर मिट्टी',  # Black fertile soil
+                'latitude': 26.8350,
+                'longitude': 80.9450
             }
         ]
         
@@ -83,81 +89,133 @@ def create_test_user():
         
         db.session.commit()
         
-        # Create diverse crops across farms with realistic timing
+        # Create diverse crops across farms with realistic Indian farming seasons
         crops_data = [
-            # Farm 1 - Main farm (मुख्य खेत)
+            # Farm 1 - Main Agricultural Land (मुख्य कृषि भूमि)
             {
                 'farm': farms[0],
-                'crop_type': 'गेहूं',
-                'variety': 'HD-2967',
-                'planting_date': date(2024, 11, 15),  # Nov planting
-                'expected_harvest_date': date(2025, 4, 15),  # April harvest
-                'area_acres': 3.0,
+                'crop_type': 'गेहूं',  # Wheat
+                'variety': 'HD-3086 (सकशी किस्म)',  # Including Sakshi variety reference
+                'planting_date': date(2024, 11, 20),
+                'expected_harvest_date': date(2025, 4, 20),
+                'area_acres': 4.5,
+                'current_stage': 'tillering',  # Active growth
+                'status': 'active'
+            },
+            {
+                'farm': farms[0],
+                'crop_type': 'सरसों',  # Mustard
+                'variety': 'पूसा मस्टर्ड-27',
+                'planting_date': date(2024, 10, 25),
+                'expected_harvest_date': date(2025, 3, 25),
+                'area_acres': 3.2,
                 'current_stage': 'flowering',
                 'status': 'active'
             },
             {
                 'farm': farms[0],
-                'crop_type': 'सरसों',
-                'variety': 'पूसा बोल्ड',
-                'planting_date': date(2024, 10, 20),
+                'crop_type': 'आलू',  # Potato
+                'variety': 'कुफरी सिंदूरी',
+                'planting_date': date(2024, 12, 5),
                 'expected_harvest_date': date(2025, 3, 20),
-                'area_acres': 2.5,
-                'current_stage': 'pod_formation',
+                'area_acres': 2.8,
+                'current_stage': 'tuber_formation',
                 'status': 'active'
             },
             {
                 'farm': farms[0],
-                'crop_type': 'आलू',
-                'variety': 'कुफरी ज्योति',
-                'planting_date': date(2024, 12, 1),
-                'expected_harvest_date': date(2025, 3, 15),
+                'crop_type': 'चना',  # Chickpea
+                'variety': 'पूसा चना-256',
+                'planting_date': date(2024, 11, 1),
+                'expected_harvest_date': date(2025, 4, 1),
                 'area_acres': 2.0,
-                'current_stage': 'tuber_development',
+                'current_stage': 'pod_development',
                 'status': 'active'
             },
             
-            # Farm 2 - River side farm (नदी के किनारे का खेत)
+            # Farm 2 - Ganges Riverside Farm (गंगा तटीय खेत)
             {
                 'farm': farms[1],
-                'crop_type': 'चावल',
-                'variety': 'बासमती 1121',
-                'planting_date': date(2024, 6, 15),  # Kharif season
-                'expected_harvest_date': date(2024, 11, 15),
-                'area_acres': 3.5,
+                'crop_type': 'चावल',  # Rice
+                'variety': 'पूसा बासमती-1',
+                'planting_date': date(2024, 6, 20),
+                'expected_harvest_date': date(2024, 11, 20),
+                'area_acres': 5.0,
                 'current_stage': 'harvested',
                 'status': 'harvested'
             },
             {
                 'farm': farms[1],
-                'crop_type': 'मक्का',
-                'variety': 'हाईब्रिड-123',
-                'planting_date': date(2024, 7, 1),
-                'expected_harvest_date': date(2024, 11, 1),
-                'area_acres': 1.7,
+                'crop_type': 'मक्का',  # Corn
+                'variety': 'गंगा-5 हाइब्रिड',
+                'planting_date': date(2024, 7, 5),
+                'expected_harvest_date': date(2024, 11, 5),
+                'area_acres': 3.3,
                 'current_stage': 'harvested',
                 'status': 'harvested'
             },
             
-            # Farm 3 - Hill farm (पहाड़ी खेत)
+            # Farm 3 - Mountain Agricultural Area (पर्वतीय कृषि क्षेत्र)
             {
                 'farm': farms[2],
-                'crop_type': 'गन्ना',
-                'variety': 'को-238',
-                'planting_date': date(2024, 3, 1),
-                'expected_harvest_date': date(2025, 2, 1),
-                'area_acres': 2.0,
+                'crop_type': 'गन्ना',  # Sugarcane
+                'variety': 'को-0238 उन्नत',
+                'planting_date': date(2024, 3, 15),
+                'expected_harvest_date': date(2025, 2, 15),
+                'area_acres': 3.5,
                 'current_stage': 'maturation',
                 'status': 'active'
             },
             {
                 'farm': farms[2],
-                'crop_type': 'अरहर',
+                'crop_type': 'अरहर',  # Pigeon Pea
                 'variety': 'ICPL-87119',
-                'planting_date': date(2024, 6, 20),
-                'expected_harvest_date': date(2025, 1, 20),
-                'area_acres': 1.8,
+                'planting_date': date(2024, 6, 25),
+                'expected_harvest_date': date(2025, 1, 25),
+                'area_acres': 2.2,
                 'current_stage': 'pod_filling',
+                'status': 'active'
+            },
+            
+            # Farm 4 - Organic Farming Center (जैविक खेती केंद्र)
+            {
+                'farm': farms[3],
+                'crop_type': 'हल्दी',  # Turmeric
+                'variety': 'सुदर्शन हल्दी',
+                'planting_date': date(2024, 5, 10),
+                'expected_harvest_date': date(2025, 2, 10),
+                'area_acres': 2.0,
+                'current_stage': 'rhizome_development',
+                'status': 'active'
+            },
+            {
+                'farm': farms[3],
+                'crop_type': 'धनिया',  # Coriander
+                'variety': 'पंत हरितमा',
+                'planting_date': date(2024, 11, 10),
+                'expected_harvest_date': date(2025, 2, 20),
+                'area_acres': 1.8,
+                'current_stage': 'vegetative_growth',
+                'status': 'active'
+            },
+            {
+                'farm': farms[3],
+                'crop_type': 'लहसुन',  # Garlic
+                'variety': 'गोदावरी गार्लिक',
+                'planting_date': date(2024, 10, 15),
+                'expected_harvest_date': date(2025, 4, 15),
+                'area_acres': 1.4,
+                'current_stage': 'bulb_formation',
+                'status': 'active'
+            },
+            {
+                'farm': farms[3],
+                'crop_type': 'प्याज',  # Onion
+                'variety': 'पूसा रेड',
+                'planting_date': date(2024, 12, 1),
+                'expected_harvest_date': date(2025, 4, 30),
+                'area_acres': 1.0,
+                'current_stage': 'bulb_initiation',
                 'status': 'active'
             }
         ]
@@ -177,9 +235,11 @@ def create_test_user():
         # Create comprehensive activities for all crops
         print("Creating realistic farming activities...")
         
+        # Enhanced activity types in Hindi
         activity_types = [
-            'बुवाई', 'सिंचाई', 'खाद डालना', 'कीटनाशक छिड़काव', 
-            'निराई-गुड़ाई', 'उर्वरक प्रयोग', 'रोग नियंत्रण', 'कटाई'
+            'बीज बुवाई', 'सिंचाई प्रबंधन', 'जैविक खाद', 'रासायनिक उर्वरक', 
+            'कीटनाशक छिड़काव', 'निराई-गुड़ाई', 'रोग प्रबंधन', 'फसल कटाई',
+            'मिट्टी परीक्षण', 'बीज उपचार', 'खरपतवार नियंत्रण', 'पानी प्रबंधन'
         ]
         
         # Generate activities for each crop
@@ -192,12 +252,12 @@ def create_test_user():
             
             # Planting activity
             activities.append({
-                'activity_type': 'बुवाई',
-                'description': f'{crop.crop_type} की बुवाई - {crop.variety}',
+                'activity_type': 'बीज बुवाई',
+                'description': f'{crop.crop_type} की उन्नत बुवाई - {crop.variety}',
                 'scheduled_date': crop.planting_date,
                 'status': 'completed',
-                'quantity': '25 किग्रा/एकड़',
-                'notes': 'बीज दर अनुसार बुवाई'
+                'quantity': '30 किग्रा/एकड़',
+                'notes': 'उच्च गुणवत्ता के बीज का प्रयोग'
             })
             
             # Regular irrigation (every 15-20 days)
@@ -209,70 +269,87 @@ def create_test_user():
             
             for i, irr_date in enumerate(irrigation_dates):
                 activities.append({
-                    'activity_type': 'सिंचाई',
-                    'description': f'सिंचाई #{i+1}',
+                    'activity_type': 'सिंचाई प्रबंधन',
+                    'description': f'स्मार्ट सिंचाई #{i+1} - पानी बचत तकनीक',
                     'scheduled_date': irr_date,
                     'status': 'completed' if irr_date <= date.today() else 'pending',
-                    'quantity': f'{random.randint(2, 4)} घंटे',
-                    'notes': f'पानी की आवश्यकता अनुसार'
+                    'quantity': f'{random.randint(3, 5)} घंटे',
+                    'notes': f'ड्रिप इरिगेशन / स्प्रिंकलर सिस्टम'
                 })
             
-            # Fertilizer applications
+            # Enhanced fertilizer applications
             if days_since_planting > 30:
                 activities.append({
-                    'activity_type': 'खाद डालना',
-                    'description': 'यूरिया और DAP का प्रयोग',
+                    'activity_type': 'जैविक खाद',
+                    'description': 'जैविक खाद और वर्मी कंपोस्ट',
+                    'scheduled_date': crop.planting_date + timedelta(days=20),
+                    'status': 'completed',
+                    'quantity': 'वर्मी कंपोस्ट: 100 किग्रा/एकड़',
+                    'notes': 'मिट्टी की उर्वरता बढ़ाने हेतु'
+                })
+                
+                activities.append({
+                    'activity_type': 'रासायनिक उर्वरक',
+                    'description': 'संतुलित NPK उर्वरक',
                     'scheduled_date': crop.planting_date + timedelta(days=30),
                     'status': 'completed',
-                    'quantity': 'यूरिया: 50 किग्रा, DAP: 25 किग्रा',
-                    'notes': 'पहली किस्त'
+                    'quantity': 'यूरिया: 60 किग्रा, DAP: 40 किग्रा',
+                    'notes': 'मिट्टी परीक्षण के अनुसार'
                 })
             
-            # Pesticide spray
+            # Enhanced pesticide and disease management
             if days_since_planting > 45:
                 activities.append({
                     'activity_type': 'कीटनाशक छिड़काव',
-                    'description': 'कीट नियंत्रण',
+                    'description': 'एकीकृत कीट प्रबंधन',
                     'scheduled_date': crop.planting_date + timedelta(days=45),
                     'status': 'completed',
-                    'quantity': '500ml/एकड़',
-                    'notes': 'क्लोरपाइरिफॉस 20% EC'
+                    'quantity': 'बायो पेस्टिसाइड: 750ml/एकड़',
+                    'notes': 'जैविक कीटनाशक का प्रयोग'
                 })
             
-            # Weeding
+            # Enhanced weeding
             if days_since_planting > 25:
                 activities.append({
                     'activity_type': 'निराई-गुड़ाई',
-                    'description': 'खरपतवार नियंत्रण',
+                    'description': 'यांत्रिक खरपतवार नियंत्रण',
                     'scheduled_date': crop.planting_date + timedelta(days=25),
                     'status': 'completed',
-                    'quantity': '4 मजदूर',
-                    'notes': 'मजदूर: 4 लोग, 1 दिन'
+                    'quantity': 'पावर वीडर - 2 घंटे/एकड़',
+                    'notes': 'आधुनिक कृषि यंत्र का प्रयोग'
                 })
             
-            # Today's pending activities
+            # Enhanced today's activities for Smart Irrigation Dashboard
             today_activities = [
                 {
-                    'activity_type': 'सिंचाई',
-                    'description': f'{crop.crop_type} में सिंचाई की आवश्यकता',
+                    'activity_type': 'सिंचाई प्रबंधन',
+                    'description': f'{crop.crop_type} में स्मार्ट सिंचाई आवश्यक',
                     'scheduled_date': date.today(),
                     'status': 'pending',
-                    'quantity': '3 घंटे',
-                    'notes': 'मिट्टी सूखी दिख रही है'
+                    'quantity': '4 घंटे - ड्रिप सिस्टम',
+                    'notes': 'मौसम आधारित सिंचाई अनुशंसा'
                 },
                 {
-                    'activity_type': 'उर्वरक प्रयोग',
-                    'description': f'{crop.crop_type} में पोटाश का प्रयोग',
+                    'activity_type': 'रासायनिक उर्वरक',
+                    'description': f'{crop.crop_type} में पोटेशियम सल्फेट',
                     'scheduled_date': date.today(),
                     'status': 'pending',
-                    'quantity': '30 किग्रा/एकड़',
-                    'notes': 'MOP: 30 किग्रा/एकड़'
+                    'quantity': '35 किग्रा/एकड़',
+                    'notes': 'फूल और फल विकास हेतु'
+                },
+                {
+                    'activity_type': 'मिट्टी परीक्षण',
+                    'description': f'{crop.crop_type} क्षेत्र में pH जांच',
+                    'scheduled_date': date.today(),
+                    'status': 'pending',
+                    'quantity': '5 नमूने प्रति एकड़',
+                    'notes': 'मिट्टी की गुणवत्ता मॉनिटरिंग'
                 }
             ]
             
-            # Add some today's activities to select crops
+            # Add today's activities to active crops randomly
             if crop.status == 'active' and random.choice([True, False]):
-                activities.extend(today_activities[:1])  # Add one today activity
+                activities.extend(today_activities[:random.randint(1, 2)])  # Add 1-2 today activities
             
             # Create activity records
             for activity_data in activities:
@@ -282,36 +359,54 @@ def create_test_user():
                 )
                 db.session.add(activity)
         
-        # Create some disease detection records
-        print("Adding disease detection records...")
+        # Enhanced disease detection records with more comprehensive data
+        print("Adding comprehensive disease detection records...")
         
         disease_data = [
             {
                 'crop': crops[0],  # Wheat
-                'image_path': '/static/test_images/wheat_disease.jpg',
-                'predicted_disease': 'पत्ती का धब्बा रोग',
-                'confidence_score': 0.855,
-                'treatment_suggested': 'प्रोपिकोनाज़ोल का छिड़काव करें। 500ml प्रति एकड़ की दर से।',
+                'image_path': '/uploads/diseases/wheat_leaf_rust_2024.jpg',
+                'predicted_disease': 'गेहूं का पत्ती रतुआ रोग',
+                'confidence_score': 0.892,
+                'treatment_suggested': 'प्रोपिकोनाज़ोल 25% EC @ 500ml/एकड़ का छिड़काव करें। 15 दिन बाद दोहराव आवश्यक।',
                 'is_healthy': False,
-                'detected_at': datetime.now() - timedelta(days=5)
+                'detected_at': datetime.now() - timedelta(days=3)
             },
             {
-                'crop': crops[2],  # Potato
-                'image_path': '/static/test_images/potato_disease.jpg',
-                'predicted_disease': 'आलू का झुलसा रोग',
-                'confidence_score': 0.923,
-                'treatment_suggested': 'मैंकोजेब का छिड़काव तुरंत करें। दोहराव 10 दिन बाद।',
+                'crop': crops[2],  # Potato  
+                'image_path': '/uploads/diseases/potato_late_blight_2024.jpg',
+                'predicted_disease': 'आलू का पिछेता झुलसा रोग',
+                'confidence_score': 0.945,
+                'treatment_suggested': 'मैंकोजेब 75% WP @ 2.5kg/एकड़ तुरंत छिड़काव। नमी नियंत्रण आवश्यक।',
                 'is_healthy': False,
-                'detected_at': datetime.now() - timedelta(days=2)
+                'detected_at': datetime.now() - timedelta(days=1)
             },
             {
-                'crop': crops[5],  # Sugarcane
-                'image_path': '/static/test_images/sugarcane_healthy.jpg',
-                'predicted_disease': 'स्वस्थ पौधा',
-                'confidence_score': 0.782,
-                'treatment_suggested': 'कोई उपचार आवश्यक नहीं। संतुलित सिंचाई बनाए रखें।',
+                'crop': crops[6],  # Sugarcane
+                'image_path': '/uploads/diseases/sugarcane_healthy_2024.jpg',
+                'predicted_disease': 'स्वस्थ गन्ना पौधा',
+                'confidence_score': 0.823,
+                'treatment_suggested': 'फसल स्वस्थ है। नियमित निगरानी जारी रखें। संतुलित पोषण बनाए रखें।',
                 'is_healthy': True,
-                'detected_at': datetime.now() - timedelta(days=10)
+                'detected_at': datetime.now() - timedelta(days=7)
+            },
+            {
+                'crop': crops[8],  # Turmeric
+                'image_path': '/uploads/diseases/turmeric_leaf_spot_2024.jpg',
+                'predicted_disease': 'हल्दी का पत्ती धब्बा रोग',
+                'confidence_score': 0.767,
+                'treatment_suggested': 'कॉपर ऑक्सीक्लोराइड 50% WP @ 3gm/liter पानी में मिलाकर छिड़काव।',
+                'is_healthy': False,
+                'detected_at': datetime.now() - timedelta(days=12)
+            },
+            {
+                'crop': crops[4],  # Rice (Harvested)
+                'image_path': '/uploads/diseases/rice_blast_2024.jpg',
+                'predicted_disease': 'धान का ब्लास्ट रोग',
+                'confidence_score': 0.856,
+                'treatment_suggested': 'ट्राइसाइक्लाज़ोल 75% WP @ 600gm/एकड़ का प्रयोग किया गया।',
+                'is_healthy': False,
+                'detected_at': datetime.now() - timedelta(days=45)
             }
         ]
         
@@ -342,4 +437,4 @@ def create_test_user():
         return user
 
 if __name__ == '__main__':
-    create_test_user()
+    create_comprehensive_demo_farmer()

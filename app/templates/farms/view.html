@@ -12,11 +12,11 @@
                 <div class="flex items-center space-x-4 mb-2">
                     <a href="{{ url_for('farms.index') }}" 
                        class="text-blue-600 hover:text-blue-800">
-                        ← खेत सूची में वापस
+                        ← {{ _("Back to Farm List") }}
                     </a>
                 </div>
                 <h1 class="text-3xl font-bold text-gray-900">{{ farm.farm_name }}</h1>
-                <p class="text-gray-600 mt-2">{{ farm.area_acres }} एकड़ क्षेत्रफल</p>
+                <p class="text-gray-600 mt-2">{{ farm.area_acres }} {{ _("acres area") }}</p>
             </div>
             <div class="flex space-x-3">
                 <a href="{{ url_for('farms.edit', farm_id=farm.id) }}" 
@@ -47,7 +47,7 @@
                 
                 <!-- Farm Statistics -->
                 <div class="bg-white rounded-lg shadow p-6">
-                    <h2 class="text-xl font-semibold text-gray-900 mb-4">खेत का सांख्यिकी</h2>
+                    <h2 class="text-xl font-semibold text-gray-900 mb-4">{{ _("Farm Statistics") }}</h2>
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                         <div class="text-center p-4 bg-blue-50 rounded-lg">
                             <div class="text-2xl font-bold text-blue-600">{{ stats.total_crops }}</div>
@@ -55,11 +55,11 @@
                         </div>
                         <div class="text-center p-4 bg-green-50 rounded-lg">
                             <div class="text-2xl font-bold text-green-600">{{ "%.1f"|format(stats.total_area_used) }}</div>
-                            <div class="text-sm text-green-800">उपयोग में (एकड़)</div>
+                            <div class="text-sm text-green-800">{{ _("In Use (acres)") }}</div>
                         </div>
                         <div class="text-center p-4 bg-yellow-50 rounded-lg">
                             <div class="text-2xl font-bold text-yellow-600">{{ "%.1f"|format(stats.available_area) }}</div>
-                            <div class="text-sm text-yellow-800">उपलब्ध (एकड़)</div>
+                            <div class="text-sm text-yellow-800">{{ _("Available (acres)") }}</div>
                         </div>
                         <div class="text-center p-4 bg-purple-50 rounded-lg">
                             <div class="text-2xl font-bold text-purple-600">{{ "%.0f"|format(stats.utilization_percent) }}%</div>
@@ -95,7 +95,7 @@
                                                         {% if crop.variety %}({{ crop.variety }}){% endif %}
                                                     </h3>
                                                     <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">
-                                                        {{ crop.area_acres }} एकड़
+                                                        {{ crop.area_acres }} acres
                                                     </span>
                                                 </div>
                                                 <div class="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm text-gray-600">
@@ -103,7 +103,7 @@
                                                         <strong>रोपण:</strong> {{ crop.planting_date.strftime('%d/%m/%Y') if crop.planting_date }}
                                                     </div>
                                                     <div>
-                                                        <strong>दिन:</strong> {{ crop.get_days_since_planting() }} दिन पुराना
+                                                        <strong>दिन:</strong> {{ crop.get_days_since_planting() }} {{ _("days old") }}
                                                     </div>
                                                     <div>
                                                         <strong>अवस्था:</strong> {{ crop.get_growth_stage_info()['description'] }}
@@ -118,7 +118,7 @@
                                                         {% set days_to_harvest = crop.get_days_to_harvest() %}
                                                         {% if days_to_harvest is not none %}
                                                             <span class="text-gray-500">
-                                                                ({{ days_to_harvest }} दिन बाकी)
+                                                                ({{ days_to_harvest }} {{ _("days remaining") }})
                                                             </span>
                                                         {% endif %}
                                                     </div>
@@ -143,7 +143,7 @@
                         <div class="p-8 text-center">
                             <div class="text-4xl mb-4">🌱</div>
                             <h3 class="text-lg font-medium text-gray-900 mb-2">अभी तक कोई फसल नहीं</h3>
-                            <p class="text-gray-600 mb-4">इस खेत में अपनी पहली फसल जोड़ें</p>
+                            <p class="text-gray-600 mb-4">{{ _("Add your first crop to this farm") }}</p>
                             <a href="{{ url_for('crops.add_crop') }}?farm_id={{ farm.id }}" 
                                class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition duration-300">
                                 फसल जोड़ें
@@ -158,15 +158,15 @@
                 
                 <!-- Farm Details -->
                 <div class="bg-white rounded-lg shadow p-6">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">खेत की जानकारी</h3>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">{{ _("Farm Information") }}</h3>
                     <div class="space-y-3">
                         <div>
-                            <span class="text-gray-600">नाम:</span>
+                            <span class="text-gray-600">{{ _("Name:") }}</span>
                             <span class="font-medium">{{ farm.farm_name }}</span>
                         </div>
                         <div>
                             <span class="text-gray-600">क्षेत्रफल:</span>
-                            <span class="font-medium">{{ farm.area_acres }} एकड़</span>
+                            <span class="font-medium">{{ farm.area_acres }} acres</span>
                         </div>
                         {% if farm.soil_type %}
                             <div>
@@ -226,7 +226,7 @@
                         </a>
                         <a href="{{ url_for('farms.edit', farm_id=farm.id) }}" 
                            class="block w-full bg-blue-600 text-white py-2 px-4 rounded text-center hover:bg-blue-700 transition duration-300">
-                            ✏️ खेत संपादित करें
+                            ✏️ {{ _("Edit Farm") }}
                         </a>
                         {% if farm.is_location_set() %}
                             <a href="{{ url_for('main.get_weather_api', lat=farm.latitude, lon=farm.longitude) }}" 
@@ -239,13 +239,13 @@
 
                 <!-- Danger Zone -->
                 <div class="bg-red-50 border border-red-200 rounded-lg p-6">
-                    <h3 class="text-lg font-semibold text-red-800 mb-2">खतरनाक क्षेत्र</h3>
+                    <h3 class="text-lg font-semibold text-red-800 mb-2">{{ _("Danger Zone") }}</h3>
                     <p class="text-red-700 text-sm mb-4">
-                        खेत हटाने से सभी फसलों की जानकारी भी हट जाएगी।
+                        {{ _("Deleting farm will also remove all crop information.") }}
                     </p>
                     <button onclick="confirmDelete()" 
                             class="bg-red-600 text-white px-4 py-2 rounded text-sm hover:bg-red-700 transition duration-300">
-                        🗑️ खेत हटाएं
+                        🗑️ {{ _("Delete Farm") }}
                     </button>
                 </div>
             </div>
@@ -262,13 +262,13 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.5 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
                 </svg>
             </div>
-            <h3 class="text-lg font-medium text-gray-900 mt-5">खेत हटाएं?</h3>
+            <h3 class="text-lg font-medium text-gray-900 mt-5">{{ _("Delete Farm") }}?</h3>
             <div class="mt-2 px-7 py-3">
                 <p class="text-sm text-gray-500">
                     क्या आप वाकई "{{ farm.farm_name }}" को हटाना चाहते हैं? 
                     {% if active_crops %}
                         <br><br>
-                        <strong class="text-red-600">चेतावनी:</strong> इससे {{ active_crops|length }} सक्रिय फसलों की जानकारी भी हट जाएगी।
+                        <strong class="text-red-600">{{ _("Warning:") }}</strong> इससे {{ active_crops|length }} {{ _("active crops information will also be deleted.") }}
                     {% endif %}
                 </p>
             </div>

@@ -2589,3 +2589,49 @@ msgstr ""
 #~ msgid "Add First Farm"
 #~ msgstr "Add First Farm"
 
+# New crop management translations
+msgid "Healthy Crops"
+msgstr "Healthy Crops"
+
+msgid "Need Attention"
+msgstr "Need Attention"
+
+msgid "General Variety"
+msgstr "General Variety"
+
+msgid "Healthy"
+msgstr "Healthy"
+
+msgid "Caution"
+msgstr "Caution"
+
+msgid "Problem"
+msgstr "Problem"
+
+msgid "Not provided"
+msgstr "Not provided"
+
+msgid "Harvest Estimate"
+msgstr "Harvest Estimate"
+
+msgid "Not estimated"
+msgstr "Not estimated"
+
+msgid "Unknown"
+msgstr "Unknown"
+
+msgid "No crops yet"
+msgstr "No crops yet"
+
+msgid "Start by adding your first crop"
+msgstr "Start by adding your first crop"
+
+msgid "Add Farm First"
+msgstr "Add Farm First"
+
+msgid "View and manage all your crops in one place"
+msgstr "View and manage all your crops in one place"
+
+msgid "Smart Crop Care Assistant"
+msgstr "Smart Crop Care Assistant"
+

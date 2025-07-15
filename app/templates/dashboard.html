@@ -347,8 +347,11 @@ function loadCropDistributionChart() {
         })
         .catch(error => {
             console.error('Error loading crop distribution chart:', error);
+            const errorText = window.currentLanguage === 'hi' ? 
+                'चार्ट लोड करने में त्रुटि' : 
+                'Error loading chart';
             document.getElementById('cropDistributionChart').parentElement.innerHTML = 
-                '<div class="text-center text-gray-500 py-8">चार्ट लोड करने में त्रुटि</div>';
+                `<div class="text-center text-gray-500 py-8">${errorText}</div>`;
         });
 }
 
@@ -384,8 +387,11 @@ function loadMonthlyActivitiesChart() {
         })
         .catch(error => {
             console.error('Error loading monthly activities chart:', error);
+            const errorText = window.currentLanguage === 'hi' ? 
+                'चार्ट लोड करने में त्रुटि' : 
+                'Error loading chart';
             document.getElementById('monthlyActivitiesChart').parentElement.innerHTML = 
-                '<div class="text-center text-gray-500 py-8">चार्ट लोड करने में त्रुटि</div>';
+                `<div class="text-center text-gray-500 py-8">${errorText}</div>`;
         });
 }
 
@@ -417,7 +423,7 @@ function loadWeatherTrendsChart() {
                             display: true,
                             title: {
                                 display: true,
-                                text: 'दिनांक'
+                                text: window.currentLanguage === 'hi' ? 'दिनांक' : 'Date'
                             }
                         },
                         y: {
@@ -426,7 +432,7 @@ function loadWeatherTrendsChart() {
                             position: 'left',
                             title: {
                                 display: true,
-                                text: 'तापमान (°C)'
+                                text: window.currentLanguage === 'hi' ? 'तापमान (°C)' : 'Temperature (°C)'
                             }
                         },
                         y1: {
@@ -435,7 +441,7 @@ function loadWeatherTrendsChart() {
                             position: 'right',
                             title: {
                                 display: true,
-                                text: 'नमी (%)'
+                                text: window.currentLanguage === 'hi' ? 'नमी (%)' : 'Humidity (%)'
                             },
                             grid: {
                                 drawOnChartArea: false,
@@ -447,8 +453,11 @@ function loadWeatherTrendsChart() {
         })
         .catch(error => {
             console.error('Error loading weather trends chart:', error);
+            const errorText = window.currentLanguage === 'hi' ? 
+                'चार्ट लोड करने में त्रुटि' : 
+                'Error loading chart';
             document.getElementById('weatherTrendsChart').parentElement.innerHTML = 
-                '<div class="text-center text-gray-500 py-8">चार्ट लोड करने में त्रुटि</div>';
+                `<div class="text-center text-gray-500 py-8">${errorText}</div>`;
         });
 }
 </script>

@@ -363,7 +363,7 @@ function loadGrowthTimelineChart(cropId) {
                 data: {
                     labels: data.labels,
                     datasets: [{
-                        label: 'वृद्धि प्रगति (%)',
+                        label: window.currentLanguage === 'hi' ? 'वृद्धि प्रगति (%)' : 'Growth Progress (%)',
                         data: data.growth_data,
                         borderColor: '#10B981',
                         backgroundColor: 'rgba(16, 185, 129, 0.1)',
@@ -385,13 +385,13 @@ function loadGrowthTimelineChart(cropId) {
                             max: 100,
                             title: {
                                 display: true,
-                                text: 'वृद्धि प्रगति (%)'
+                                text: window.currentLanguage === 'hi' ? 'वृद्धि प्रगति (%)' : 'Growth Progress (%)'
                             }
                         },
                         x: {
                             title: {
                                 display: true,
-                                text: 'दिनांक'
+                                text: window.currentLanguage === 'hi' ? 'दिनांक' : 'Date'
                             }
                         }
                     }
@@ -400,8 +400,11 @@ function loadGrowthTimelineChart(cropId) {
         })
         .catch(error => {
             console.error('Error loading growth timeline:', error);
+            const errorText = window.currentLanguage === 'hi' ? 
+                'चार्ट लोड करने में त्रुटि' : 
+                'Error loading chart';
             document.getElementById('growthTimelineChart').parentElement.innerHTML = 
-                '<div class="text-center text-gray-500 py-8">चार्ट लोड करने में त्रुटि</div>';
+                `<div class="text-center text-gray-500 py-8">${errorText}</div>`;
         });
 }
 
@@ -416,17 +419,17 @@ function loadActivityTimelineChart(cropId) {
                     labels: data.labels,
                     datasets: [
                         {
-                            label: 'सिंचाई',
+                            label: window.currentLanguage === 'hi' ? 'सिंचाई' : 'Irrigation',
                             data: data.irrigation,
                             backgroundColor: '#3B82F6'
                         },
                         {
-                            label: 'उर्वरक',
+                            label: window.currentLanguage === 'hi' ? 'उर्वरक' : 'Fertilizer',
                             data: data.fertilizer,
                             backgroundColor: '#10B981'
                         },
                         {
-                            label: 'कीटनाशक',
+                            label: window.currentLanguage === 'hi' ? 'कीटनाशक' : 'Pesticide',
                             data: data.pesticide,
                             backgroundColor: '#F59E0B'
                         }
@@ -460,8 +463,11 @@ function loadActivityTimelineChart(cropId) {
         })
         .catch(error => {
             console.error('Error loading activity timeline:', error);
+            const errorText = window.currentLanguage === 'hi' ? 
+                'चार्ट लोड करने में त्रुटि' : 
+                'Error loading chart';
             document.getElementById('activityTimelineChart').parentElement.innerHTML = 
-                '<div class="text-center text-gray-500 py-8">चार्ट लोड करने में त्रुटि</div>';
+                `<div class="text-center text-gray-500 py-8">${errorText}</div>`;
         });
 }
 
@@ -484,7 +490,7 @@ function loadYieldPredictionChart(cropId) {
                             borderDash: [5, 5]
                         },
                         {
-                            label: 'औसत उत्पादन',
+                            label: window.currentLanguage === 'hi' ? 'औसत उत्पादन' : 'Average Production',
                             data: data.average_yield,
                             borderColor: '#6B7280',
                             backgroundColor: 'rgba(107, 114, 128, 0.1)',
@@ -505,13 +511,13 @@ function loadYieldPredictionChart(cropId) {
                             beginAtZero: true,
                             title: {
                                 display: true,
-                                text: 'उत्पादन (क्विंटल/एकड़)'
+                                text: window.currentLanguage === 'hi' ? 'उत्पादन (क्विंटल/acres)' : 'Production (Quintal/Acre)'
                             }
                         },
                         x: {
                             title: {
                                 display: true,
-                                text: 'महीना'
+                                text: window.currentLanguage === 'hi' ? 'महीना' : 'Month'
                             }
                         }
                     }
@@ -520,13 +526,20 @@ function loadYieldPredictionChart(cropId) {
         })
         .catch(error => {
             console.error('Error loading yield prediction:', error);
+            const errorText = window.currentLanguage === 'hi' ? 
+                'चार्ट लोड करने में त्रुटि' : 
+                'Error loading chart';
             document.getElementById('yieldPredictionChart').parentElement.innerHTML = 
-                '<div class="text-center text-gray-500 py-8">चार्ट लोड करने में त्रुटि</div>';
+                `<div class="text-center text-gray-500 py-8">${errorText}</div>`;
         });
 }
 
 function scheduleIrrigation(cropId, waterAmount) {
-    if (confirm(`क्या आप ${waterAmount}मिमी पानी की सिंचाई निर्धारित करना चाहते हैं?`)) {
+    const confirmText = window.currentLanguage === 'hi' ? 
+        `क्या आप ${waterAmount}मिमी पानी की सिंचाई निर्धारित करना चाहते हैं?` :
+        `Do you want to schedule irrigation of ${waterAmount}mm water?`;
+    
+    if (confirm(confirmText)) {
         fetch(`/crops/api/${cropId}/schedule-irrigation`, {
             method: 'POST',
             headers: {
@@ -539,14 +552,23 @@ function scheduleIrrigation(cropId, waterAmount) {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                alert('सिंचाई निर्धारित की गई! SMS भेजा गया।');
+                const successText = window.currentLanguage === 'hi' ? 
+                    'सिंचाई निर्धारित की गई! SMS भेजा गया।' :
+                    'Irrigation scheduled! SMS sent.';
+                alert(successText);
                 location.reload();
             } else {
-                alert('त्रुटि: ' + data.error);
+                const errorText = window.currentLanguage === 'hi' ? 
+                    'त्रुटि: ' + data.error :
+                    'Error: ' + data.error;
+                alert(errorText);
             }
         })
         .catch(error => {
-            alert('त्रुटि हुई। कृपया दोबारा कोशिश करें।');
+            const errorText = window.currentLanguage === 'hi' ? 
+                'त्रुटि हुई। कृपया दोबारा कोशिश करें।' :
+                'An error occurred. Please try again.';
+            alert(errorText);
         });
     }
 }
