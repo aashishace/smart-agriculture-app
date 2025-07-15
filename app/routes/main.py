@@ -259,7 +259,28 @@ def set_language(language):
     if current_user.is_authenticated:
         current_user.preferred_language = language
         db.session.commit()
-    return redirect(request.referrer or url_for('main.index'))
+    
+    # Get referrer and clean it of language parameters
+    referrer = request.referrer or url_for('main.index')
+    
+    # Remove any existing lang parameter from referrer
+    if '?' in referrer and 'lang=' in referrer:
+        from urllib.parse import urlparse, parse_qs, urlencode, urlunparse
+        parsed = urlparse(referrer)
+        query_params = parse_qs(parsed.query)
+        
+        # Remove lang parameter if it exists
+        if 'lang' in query_params:
+            del query_params['lang']
+        
+        # Rebuild URL without lang parameter
+        new_query = urlencode(query_params, doseq=True)
+        referrer = urlunparse((
+            parsed.scheme, parsed.netloc, parsed.path,
+            parsed.params, new_query, parsed.fragment
+        ))
+    
+    return redirect(referrer)
 
 # Error handlers
 @main_bp.errorhandler(404)

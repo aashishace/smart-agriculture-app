@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+
+{% block title %}{{ _('Smart Irrigation Dashboard') }} - {{ _('Smart Crop Care Assistant') }}{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gradient-to-br from-blue-50 to-green-50">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header -->
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-800 mb-2">💧 {{ _('Smart Irrigation Dashboard') }}</h1>
+                    <p class="text-gray-600">{{ _('AI-powered irrigation recommendations for optimal crop health') }}</p>
+                </div>
+                <div class="text-right">
+                    <div class="text-sm text-gray-500">{{ _('Last Updated') }}</div>
+                    <div class="text-lg font-semibold text-blue-600" id="lastUpdated">--:--</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white rounded-lg shadow p-6">
+                <div class="flex items-center">
+                    <div class="p-3 rounded-full bg-blue-100 text-blue-600 mr-4">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M3 12v3c0 1.657 3.134 3 7 3s7-1.343 7-3v-3c0 1.657-3.134 3-7 3s-7-1.343-7-3z"/>
+                            <path d="M3 7v3c0 1.657 3.134 3 7 3s7-1.343 7-3V7c0 1.657-3.134 3-7 3S3 8.657 3 7z"/>
+                            <path d="M17 5c0 1.657-3.134 3-7 3S3 6.657 3 5s3.134-3 7-3 7 1.343 7 3z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500">{{ _('Crops Monitored') }}</p>
+                        <p class="text-2xl font-bold text-gray-900" id="totalCrops">{{ stats.total_crops or 0 }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow p-6">
+                <div class="flex items-center">
+                    <div class="p-3 rounded-full bg-red-100 text-red-600 mr-4">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500">{{ _('Urgent Irrigation') }}</p>
+                        <p class="text-2xl font-bold text-red-600" id="urgentCrops">{{ stats.urgent_irrigation or 0 }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow p-6">
+                <div class="flex items-center">
+                    <div class="p-3 rounded-full bg-green-100 text-green-600 mr-4">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500">{{ _('Optimal Status') }}</p>
+                        <p class="text-2xl font-bold text-green-600" id="optimalCrops">{{ stats.optimal_status or 0 }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow p-6">
+                <div class="flex items-center">
+                    <div class="p-3 rounded-full bg-yellow-100 text-yellow-600 mr-4">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500">{{ _('Scheduled Today') }}</p>
+                        <p class="text-2xl font-bold text-yellow-600" id="scheduledToday">{{ stats.scheduled_today or 0 }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Weather-Based Recommendations -->
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+            <h2 class="text-xl font-bold text-gray-800 mb-4">🌤️ {{ _('Weather-Based Recommendations') }}</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="font-semibold text-gray-700 mb-2">{{ _('Current Weather') }}</h3>
+                    <div id="currentWeather" class="space-y-2">
+                        <div class="flex justify-between">
+                            <span>{{ _('Temperature') }}:</span>
+                            <span id="currentTemp">--°C</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>{{ _('Humidity') }}:</span>
+                            <span id="currentHumidity">--%</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>{{ _('Rain Probability') }}:</span>
+                            <span id="rainProb">--%</span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-gray-700 mb-2">{{ _('General Recommendation') }}</h3>
+                    <div id="generalRecommendation" class="p-4 bg-blue-50 rounded-lg">
+                        <p class="text-blue-800">{{ _('Loading weather-based recommendations...') }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Irrigation Schedule -->
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-xl font-bold text-gray-800">📅 {{ _('Irrigation Schedule') }}</h2>
+                <div class="space-x-2">
+                    <button onclick="generateAllRecommendations()" 
+                            class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-300">
+                        {{ _('Refresh All') }}
+                    </button>
+                    <button onclick="bulkScheduleIrrigation()" 
+                            class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition duration-300">
+                        {{ _('Schedule All Urgent') }}
+                    </button>
+                </div>
+            </div>
+            
+            <div id="irrigationSchedule" class="space-y-4">
+                <!-- Schedule items will be loaded here -->
+            </div>
+        </div>
+
+        <!-- Smart Irrigation Tips -->
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <h2 class="text-xl font-bold text-gray-800 mb-4">💡 {{ _('Smart Irrigation Tips') }}</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="p-4 bg-green-50 rounded-lg">
+                    <h3 class="font-semibold text-green-800 mb-2">{{ _('Best Time to Irrigate') }}</h3>
+                    <p class="text-sm text-green-700">{{ _('Early morning (5-8 AM) or late evening (6-8 PM) for minimum water loss through evaporation.') }}</p>
+                </div>
+                <div class="p-4 bg-blue-50 rounded-lg">
+                    <h3 class="font-semibold text-blue-800 mb-2">{{ _('Water Conservation') }}</h3>
+                    <p class="text-sm text-blue-700">{{ _('Use drip irrigation or sprinkler systems to reduce water wastage and ensure uniform distribution.') }}</p>
+                </div>
+                <div class="p-4 bg-yellow-50 rounded-lg">
+                    <h3 class="font-semibold text-yellow-800 mb-2">{{ _('Soil Moisture Check') }}</h3>
+                    <p class="text-sm text-yellow-700">{{ _('Check soil moisture at 6-8 inch depth. If dry, irrigation is needed regardless of schedule.') }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/irrigation-dashboard.js') }}" defer></script>
+{% endblock %}

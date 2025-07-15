@@ -140,7 +140,7 @@
                 <div class="bg-white rounded-lg shadow-sm p-6">
                     <h2 class="text-xl font-bold text-gray-800 mb-4">{{ _('Quick Actions') }}</h2>
                     <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                        <a href="{{ url_for('farms.add_farm') }}"
+                        <a href="{{ url_for('farms.add') }}"
                            class="flex flex-col items-center p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition duration-300">
                             <div class="text-blue-600 text-2xl mb-2">🏠</div>
                             <span class="text-sm font-medium text-blue-700">{{ _('Add Farm') }}</span>
@@ -165,10 +165,15 @@
                             <div class="text-red-600 text-2xl mb-2">❓</div>
                             <span class="text-sm font-medium text-red-700">{{ _('Help & Support') }}</span>
                         </a>
+                        <a href="{{ url_for('irrigation.dashboard') }}"
+                           class="flex flex-col items-center p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition duration-300">
+                            <div class="text-blue-600 text-2xl mb-2">💧</div>
+                            <span class="text-sm font-medium text-blue-700">{{ _('Smart Irrigation') }}</span>
+                        </a>
                         <a href="#" onclick="scheduleTodaysIrrigation()"
                            class="flex flex-col items-center p-4 bg-cyan-50 rounded-lg hover:bg-cyan-100 transition duration-300">
-                            <div class="text-cyan-600 text-2xl mb-2">💧</div>
-                            <span class="text-sm font-medium text-cyan-700">{{ _('Schedule Irrigation') }}</span>
+                            <div class="text-cyan-600 text-2xl mb-2">⏰</div>
+                            <span class="text-sm font-medium text-cyan-700">{{ _('Schedule Today') }}</span>
                         </a>
                     </div>
                 </div>
@@ -241,25 +246,8 @@
 
 <script>
 function scheduleTodaysIrrigation() {
-    fetch('/api/schedule-todays-irrigation', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        }
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            alert("{{ _('Today\'s irrigation has been scheduled!') }}");
-            location.reload();
-        } else {
-            alert("{{ _('Error') }}: " + data.message);
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert("{{ _('Something went wrong. Please try again.') }}");
-    });
+    // Redirect to Smart Irrigation Dashboard for better management
+    window.location.href = '/irrigation/';
 }
 </script>
 {% endblock %}

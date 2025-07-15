@@ -160,32 +160,176 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function showDiseaseResults(result) {
         const isHealthy = result.is_healthy;
-        const confidence = result.confidence.toFixed(1);
-        const statusColor = isHealthy ? 'green' : 'red';
-        const statusIcon = isHealthy ? '✅' : '⚠️';
+        const confidence = parseFloat(result.confidence || 0).toFixed(1);
+        const statusColor = isHealthy ? 'green' : getStatusColor(result.confidence_level);
+        const statusIcon = isHealthy ? '✅' : getSeverityIcon(result.severity);
+        const reliabilityMessage = result.reliability_message || '';
         
         let content = `
             <div class="border border-gray-200 rounded-lg p-6">
                 <div class="flex items-start space-x-4">
                     <div class="text-4xl">${statusIcon}</div>
                     <div class="flex-1">
-                        <h3 class="text-xl font-semibold text-${statusColor}-600 mb-2">${isHealthy ? resultsSection.dataset.healthyTitle : resultsSection.dataset.diseaseTitle}</h3>
+                        <h3 class="text-xl font-semibold text-${statusColor}-600 mb-2">
+                            ${isHealthy ? resultsSection.dataset.healthyTitle : resultsSection.dataset.diseaseTitle}
+                        </h3>
                         <p class="text-gray-700 mb-4">
-                            ${isHealthy ? resultsSection.dataset.healthyMessage : resultsSection.dataset.diseaseMessage.replace('{disease}', `<strong>${result.disease}</strong> (${result.disease_en})`)}
+                            ${isHealthy ? 
+                                resultsSection.dataset.healthyMessage : 
+                                resultsSection.dataset.diseaseMessage.replace('{disease}', `<strong>${result.disease}</strong>`)}
                         </p>
+                        
+                        <!-- Confidence and Reliability -->
                         <div class="mb-4">
                             <div class="flex justify-between items-center mb-2">
                                 <span class="text-sm font-medium">${resultsSection.dataset.confidenceLabel}</span>
-                                <span class="text-sm font-bold">${confidence}%</span>
+                                <span class="text-sm font-bold">${confidence}% (${result.confidence_level || 'unknown'})</span>
                             </div>
-                            <div class="w-full bg-gray-200 rounded-full h-2"><div class="bg-${statusColor}-600 h-2 rounded-full" style="width: ${confidence}%"></div></div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-${statusColor}-600 h-2 rounded-full" style="width: ${confidence}%"></div>
+                            </div>
+                            ${reliabilityMessage ? `<p class="text-sm text-gray-600 mt-1">${reliabilityMessage}</p>` : ''}
                         </div>
-                        ${!isHealthy && result.treatment ? `<div class="bg-${statusColor}-50 border border-${statusColor}-200 rounded-lg p-4 mb-4"><h4 class="font-semibold text-${statusColor}-800 mb-2">${resultsSection.dataset.treatmentTitle}</h4><div class="text-sm text-${statusColor}-700">${formatTreatment(result.treatment)}</div></div>` : ''}
+
+                        <!-- Crop and Disease Information -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                            <div class="bg-blue-50 p-3 rounded">
+                                <h4 class="font-semibold text-blue-800">Detected Crop</h4>
+                                <p class="text-blue-700">${result.crop_type || 'Unknown'}</p>
+                            </div>
+                            <div class="bg-${statusColor}-50 p-3 rounded">
+                                <h4 class="font-semibold text-${statusColor}-800">Disease Status</h4>
+                                <p class="text-${statusColor}-700">${result.disease}</p>
+                            </div>
+                        </div>
+
+                        <!-- Treatment Information -->
+                        ${!isHealthy && result.treatment ? formatTreatmentSection(result.treatment, statusColor) : ''}
+                        
+                        <!-- Prevention Recommendations -->
+                        ${result.recommendations && result.recommendations.length > 0 ? formatRecommendations(result.recommendations) : ''}
+                        
+                        <!-- Analysis Details -->
+                        ${result.analysis_details ? formatAnalysisDetails(result.analysis_details) : ''}
                     </div>
                 </div>
             </div>
         `;
         displayResults(content);
+    }
+
+    function getStatusColor(confidenceLevel) {
+        switch(confidenceLevel) {
+            case 'high': return 'green';
+            case 'medium': return 'yellow';
+            case 'low': return 'orange';
+            case 'very_low': return 'red';
+            case 'error': return 'red';
+            default: return 'gray';
+        }
+    }
+
+    function getSeverityIcon(severity) {
+        switch(severity) {
+            case 'high': return '🚨';
+            case 'medium': return '⚠️';
+            case 'low': return '🔍';
+            case 'none': return '✅';
+            default: return '❓';
+        }
+    }
+
+    function formatTreatmentSection(treatment, statusColor) {
+        const urgencyColors = {
+            'very_high': 'red',
+            'high': 'red',
+            'medium': 'yellow',
+            'low': 'blue'
+        };
+        
+        const urgencyColor = urgencyColors[treatment.urgency] || 'gray';
+        
+        return `
+            <div class="bg-${statusColor}-50 border border-${statusColor}-200 rounded-lg p-4 mb-4">
+                <h4 class="font-semibold text-${statusColor}-800 mb-3">
+                    ${resultsSection.dataset.treatmentTitle}
+                    ${treatment.urgency ? `<span class="ml-2 px-2 py-1 bg-${urgencyColor}-100 text-${urgencyColor}-800 text-xs rounded">${treatment.urgency.replace('_', ' ').toUpperCase()}</span>` : ''}
+                </h4>
+                <div class="text-sm text-${statusColor}-700 space-y-3">
+                    ${treatment.immediate_action ? `<div><strong>🚀 Immediate Action:</strong> ${treatment.immediate_action}</div>` : ''}
+                    ${treatment.organic_treatment ? `<div><strong>🌱 Organic Treatment:</strong> ${treatment.organic_treatment}</div>` : ''}
+                    ${treatment.chemical_treatment ? `<div><strong>🧪 Chemical Treatment:</strong> ${treatment.chemical_treatment}</div>` : ''}
+                    ${treatment.prevention ? `<div><strong>🛡️ Prevention:</strong> ${treatment.prevention}</div>` : ''}
+                    ${treatment.estimated_cost ? `<div><strong>💰 Estimated Cost:</strong> ${treatment.estimated_cost}</div>` : ''}
+                    ${treatment.treatment_duration ? `<div><strong>⏱️ Duration:</strong> ${treatment.treatment_duration}</div>` : ''}
+                </div>
+            </div>
+        `;
+    }
+
+    function formatRecommendations(recommendations) {
+        const recommendationsByCategory = {};
+        recommendations.forEach(rec => {
+            if (!recommendationsByCategory[rec.category]) {
+                recommendationsByCategory[rec.category] = [];
+            }
+            recommendationsByCategory[rec.category].push(rec);
+        });
+
+        let html = `
+            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
+                <h4 class="font-semibold text-blue-800 mb-3">📋 Prevention Recommendations</h4>
+                <div class="space-y-3">
+        `;
+
+        Object.entries(recommendationsByCategory).forEach(([category, recs]) => {
+            html += `<div class="bg-white p-3 rounded border-l-4 border-blue-400">`;
+            html += `<h5 class="font-medium text-blue-700 mb-2">${category}</h5>`;
+            html += `<ul class="space-y-1">`;
+            
+            recs.forEach(rec => {
+                const priorityColor = rec.priority === 'high' ? 'red' : rec.priority === 'medium' ? 'yellow' : 'green';
+                html += `
+                    <li class="flex items-start text-sm">
+                        <span class="w-2 h-2 bg-${priorityColor}-400 rounded-full mt-2 mr-2 flex-shrink-0"></span>
+                        <span class="flex-1">${rec.recommendation}</span>
+                        ${rec.frequency ? `<span class="text-xs text-gray-500 ml-2">(${rec.frequency})</span>` : ''}
+                    </li>
+                `;
+            });
+            
+            html += `</ul></div>`;
+        });
+
+        html += `</div></div>`;
+        return html;
+    }
+
+    function formatAnalysisDetails(details) {
+        return `
+            <div class="bg-gray-50 border border-gray-200 rounded-lg p-4">
+                <h4 class="font-semibold text-gray-800 mb-3">🔬 Analysis Details</h4>
+                <div class="text-sm text-gray-700 space-y-2">
+                    ${details.model_prediction ? `<div><strong>Model Prediction:</strong> ${details.model_prediction}</div>` : ''}
+                    ${details.model_confidence ? `<div><strong>Raw Confidence:</strong> ${(details.model_confidence * 100).toFixed(2)}%</div>` : ''}
+                    ${details.model_version ? `<div><strong>Model Version:</strong> ${details.model_version}</div>` : ''}
+                    ${details.image_processed ? `<div><strong>Status:</strong> ✅ Image processed successfully</div>` : ''}
+                    ${details.all_predictions && details.all_predictions.length > 1 ? formatAlternativePredictions(details.all_predictions) : ''}
+                    ${details.error ? `<div class="text-red-600"><strong>Error:</strong> ${details.error}</div>` : ''}
+                </div>
+            </div>
+        `;
+    }
+
+    function formatAlternativePredictions(predictions) {
+        if (predictions.length <= 1) return '';
+        
+        let html = `<div><strong>Alternative Predictions:</strong><ul class="ml-4 mt-1">`;
+        predictions.slice(1, 3).forEach((pred, index) => {
+            html += `<li>${index + 2}. ${pred.label.replace(/_/g, ' ')} (${(pred.score * 100).toFixed(1)}%)</li>`;
+        });
+        html += `</ul></div>`;
+        return html;
     }
 
     function showIdentificationResults(result) {
@@ -245,11 +389,11 @@ document.addEventListener('DOMContentLoaded', function() {
         if (typeof treatment === 'string') return `<p>${treatment}</p>`;
         let html = '';
         if (treatment.urgency) html += `<div class="mb-3 p-2 bg-red-100 border border-red-300 rounded text-red-800 font-medium">${treatment.urgency}</div>`;
-        if (treatment.immediate) html += `<div class="mb-2"><strong>${resultsSection.dataset.immediateActionLabel}:</strong> ${treatment.immediate}</div>`;
-        if (treatment.chemical) html += `<div class="mb-2"><strong>${resultsSection.dataset.chemicalTreatmentLabel}:</strong> ${treatment.chemical}</div>`;
-        if (treatment.organic) html += `<div class="mb-2"><strong>${resultsSection.dataset.organicTreatmentLabel}:</strong> ${treatment.organic}</div>`;
-        if (treatment.frequency) html += `<div class="mb-2"><strong>${resultsSection.dataset.frequencyLabel}:</strong> ${treatment.frequency}</div>`;
-        if (treatment.precautions) html += `<div class="mb-2"><strong>${resultsSection.dataset.precautionsLabel}:</strong> ${treatment.precautions}</div>`;
+        if (treatment.immediate_action) html += `<div class="mb-2"><strong>${resultsSection.dataset.immediateActionLabel || 'Immediate Action'}:</strong> ${treatment.immediate_action}</div>`;
+        if (treatment.chemical_treatment) html += `<div class="mb-2"><strong>${resultsSection.dataset.chemicalTreatmentLabel || 'Chemical Treatment'}:</strong> ${treatment.chemical_treatment}</div>`;
+        if (treatment.organic_treatment) html += `<div class="mb-2"><strong>${resultsSection.dataset.organicTreatmentLabel || 'Organic Treatment'}:</strong> ${treatment.organic_treatment}</div>`;
+        if (treatment.frequency) html += `<div class="mb-2"><strong>${resultsSection.dataset.frequencyLabel || 'Frequency'}:</strong> ${treatment.frequency}</div>`;
+        if (treatment.prevention) html += `<div class="mb-2"><strong>${resultsSection.dataset.precautionsLabel || 'Prevention'}:</strong> ${treatment.prevention}</div>`;
         return html;
     }
 

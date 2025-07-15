@@ -88,7 +88,7 @@ def add_crop():
         if errors:
             for error in errors:
                 flash(error, 'error')
-            return render_template('crops/add.html', farms=farms)
+            return render_template('crops/add.html', farms=farms, date=date)
         
         # Create crop
         try:
@@ -133,7 +133,7 @@ def add_crop():
             db.session.rollback()
             flash(_('Error adding crop.'), 'error')
     
-    return render_template('crops/add.html', farms=farms)
+    return render_template('crops/add.html', farms=farms, date=date)
 
 @crops_bp.route('/<int:crop_id>')
 @login_required

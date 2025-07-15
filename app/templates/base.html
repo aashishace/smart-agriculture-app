@@ -78,6 +78,10 @@
                            class="text-gray-900 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">
                             {{ _('Crops') }}
                         </a>
+                        <a href="{{ url_for('irrigation.dashboard') }}" 
+                           class="text-gray-900 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">
+                            💧 {{ _('Smart Irrigation') }}
+                        </a>
                         <a href="{{ url_for('ai.disease_scanner') }}" 
                            class="text-gray-900 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">
                             {{ _('Disease Scanner') }}
@@ -198,7 +202,7 @@
                     {% endif %}
                     
                     <div class="border-l-4 p-4 {{ alert_class }} mb-4 rounded-r-md">
-                        <p>{{ message }}</p>
+                        <p>{{ _(message) }}</p>
                     </div>
                 {% endfor %}
             </div>
@@ -303,6 +307,9 @@
             });
         }, 5000);
     </script>
+    
+    <!-- Enhanced Language Switcher -->
+    <script src="{{ url_for('static', filename='js/language-switcher.js') }}"></script>
     
     {% block scripts %}{% endblock %}
 </body>

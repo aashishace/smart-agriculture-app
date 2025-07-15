@@ -172,6 +172,7 @@ def create_app(config_name='development'):
     from app.routes.ai import ai_bp
     from app.routes.farms import farms_bp
     from app.routes.api import api_bp
+    from app.routes.irrigation import irrigation_bp
     
     app.register_blueprint(auth_bp, url_prefix='/auth')
     app.register_blueprint(main_bp)
@@ -179,6 +180,7 @@ def create_app(config_name='development'):
     app.register_blueprint(ai_bp, url_prefix='/ai')
     app.register_blueprint(farms_bp, url_prefix='/farms')
     app.register_blueprint(api_bp, url_prefix='/api')
+    app.register_blueprint(irrigation_bp, url_prefix='/irrigation')
     
     # Create database tables
     with app.app_context():

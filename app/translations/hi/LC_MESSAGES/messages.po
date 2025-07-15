@@ -20,32 +20,32 @@ msgstr ""
 
 #: app/__init__.py:93
 msgid "Please log in to access this page."
-msgstr ""
+msgstr "कृपया इस पेज को एक्सेस करने के लिए लॉग इन करें।"
 
 #: app/routes/ai.py:53
 msgid "No image uploaded"
-msgstr ""
+msgstr "कोई इमेज अपलोड नहीं की गई"
 
 #: app/routes/ai.py:59
 msgid "No file selected"
-msgstr ""
+msgstr "कोई फाइल नहीं चुनी गई"
 
 #: app/routes/ai.py:62
 msgid "Invalid crop selected"
-msgstr ""
+msgstr "अमान्य फसल चुनी गई"
 
 #: app/routes/ai.py:71
 #, fuzzy
 msgid "Crop not found"
-msgstr "फसल की जानकारी"
+msgstr "फसल नहीं मिली"
 
 #: app/routes/ai.py:77
 msgid "Invalid file type. Use PNG, JPG, or JPEG"
-msgstr ""
+msgstr "अमान्य फाइल प्रकार। PNG, JPG, या JPEG का उपयोग करें"
 
 #: app/routes/ai.py:81
 msgid "File too large. Maximum size is 16MB"
-msgstr ""
+msgstr "फाइल बहुत बड़ी है। अधिकतम साइज़ 16MB है"
 
 #: app/routes/ai.py:103
 msgid "Invalid image file. File may be corrupted or not a valid image."
@@ -414,11 +414,11 @@ msgstr "पंजीकरण"
 
 #: app/templates/base.html:220
 msgid "Making agriculture easier for Indian farmers with smart technology."
-msgstr ""
+msgstr "स्मार्ट तकनीक के साथ भारतीय किसानों के लिए कृषि को आसान बनाना।"
 
 #: app/templates/base.html:225
 msgid "Services"
-msgstr ""
+msgstr "सेवाएं"
 
 #: app/templates/base.html:227
 msgid "Smart Irrigation"
@@ -443,7 +443,7 @@ msgstr "संपर्क"
 
 #: app/templates/auth/register.html:145 app/templates/base.html:239
 msgid "Privacy Policy"
-msgstr ""
+msgstr "गोपनीयता नीति"
 
 #: app/templates/base.html:246
 msgid "All rights reserved."
@@ -495,7 +495,7 @@ msgstr ""
 
 #: app/templates/dashboard.html:13 app/templates/onboarding.html:4
 msgid "Welcome"
-msgstr ""
+msgstr "स्वागत है"
 
 #: app/templates/dashboard.html:13
 msgid "welcome!"
@@ -685,11 +685,11 @@ msgstr "आज की सिंचाई शेड्यूल हो गई ह
 
 #: app/templates/errors/404.html:30 app/templates/help.html:8
 msgid "Help Center"
-msgstr ""
+msgstr "सहायता केंद्र"
 
 #: app/templates/help.html:12
 msgid "Quick Help"
-msgstr ""
+msgstr "त्वरित सहायता"
 
 #: app/templates/help.html:15
 #, fuzzy
@@ -869,27 +869,27 @@ msgstr ""
 
 #: app/templates/auth/login.html:14
 msgid "Or"
-msgstr ""
+msgstr "या"
 
 #: app/templates/auth/login.html:16
 msgid "create a new account"
-msgstr ""
+msgstr "नया खाता बनाएं"
 
 #: app/templates/auth/login.html:37 app/templates/auth/register.html:109
 msgid "Password"
-msgstr ""
+msgstr "पासवर्ड"
 
 #: app/templates/auth/login.html:43
 msgid "Your password"
-msgstr ""
+msgstr "आपका पासवर्ड"
 
 #: app/templates/auth/login.html:55
 msgid "Remember me"
-msgstr ""
+msgstr "मुझे याद रखें"
 
 #: app/templates/auth/login.html:61
 msgid "Forgot password?"
-msgstr ""
+msgstr "पासवर्ड भूल गए?"
 
 #: app/templates/auth/login.html:76
 msgid "Smart Crop Care Assistant - Made for farmers"
@@ -911,151 +911,151 @@ msgstr ""
 
 #: app/templates/auth/register.html:14
 msgid "Already have an account?"
-msgstr ""
+msgstr "क्या आपका पहले से खाता है?"
 
 #: app/templates/auth/register.html:25
 msgid "Full Name"
-msgstr ""
+msgstr "पूरा नाम"
 
 #: app/templates/auth/register.html:31
 msgid "Your full name"
-msgstr ""
+msgstr "आपका पूरा नाम"
 
 #: app/templates/auth/register.html:46
 msgid "10 digit Indian mobile number"
-msgstr ""
+msgstr "10 अंकों का भारतीय मोबाइल नंबर"
 
 #: app/templates/auth/register.html:51
 msgid "Village/City"
-msgstr ""
+msgstr "गाँव/शहर"
 
 #: app/templates/auth/register.html:57
 msgid "Your village or city"
-msgstr ""
+msgstr "आपका गाँव या शहर"
 
 #: app/templates/auth/register.html:63
 msgid "State"
-msgstr ""
+msgstr "राज्य"
 
 #: app/templates/auth/register.html:69
 msgid "Select State"
-msgstr ""
+msgstr "राज्य चुनें"
 
 #: app/templates/auth/register.html:70
 msgid "Uttar Pradesh"
-msgstr ""
+msgstr "उत्तर प्रदेश"
 
 #: app/templates/auth/register.html:71
 msgid "Bihar"
-msgstr ""
+msgstr "बिहार"
 
 #: app/templates/auth/register.html:72
 msgid "Madhya Pradesh"
-msgstr ""
+msgstr "मध्य प्रदेश"
 
 #: app/templates/auth/register.html:73
 msgid "Rajasthan"
-msgstr ""
+msgstr "राजस्थान"
 
 #: app/templates/auth/register.html:74
 msgid "Punjab"
-msgstr ""
+msgstr "पंजाब"
 
 #: app/templates/auth/register.html:75
 msgid "Haryana"
-msgstr ""
+msgstr "हरियाणा"
 
 #: app/templates/auth/register.html:76
 msgid "Maharashtra"
-msgstr ""
+msgstr "महाराष्ट्र"
 
 #: app/templates/auth/register.html:77
 msgid "Karnataka"
-msgstr ""
+msgstr "कर्नाटक"
 
 #: app/templates/auth/register.html:78
 msgid "Tamil Nadu"
-msgstr ""
+msgstr "तमिल नाडु"
 
 #: app/templates/auth/register.html:79
 msgid "Andhra Pradesh"
-msgstr ""
+msgstr "आंध्र प्रदेश"
 
 #: app/templates/auth/register.html:80
 msgid "West Bengal"
-msgstr ""
+msgstr "पश्चिम बंगाल"
 
 #: app/templates/auth/register.html:81
 msgid "Gujarat"
-msgstr ""
+msgstr "गुजरात"
 
 #: app/templates/auth/register.html:82
 msgid "Odisha"
-msgstr ""
+msgstr "ओडिशा"
 
 #: app/templates/auth/register.html:83
 msgid "Telangana"
-msgstr ""
+msgstr "तेलंगाना"
 
 #: app/templates/auth/register.html:84
 msgid "Kerala"
-msgstr ""
+msgstr "केरल"
 
 #: app/templates/auth/register.html:85
 msgid "Jharkhand"
-msgstr ""
+msgstr "झारखंड"
 
 #: app/templates/auth/register.html:86
 msgid "Assam"
-msgstr ""
+msgstr "असम"
 
 #: app/templates/auth/register.html:87
 msgid "Chhattisgarh"
-msgstr ""
+msgstr "छत्तीसगढ़"
 
 #: app/templates/auth/register.html:88
 msgid "Uttarakhand"
-msgstr ""
+msgstr "उत्तराखंड"
 
 #: app/templates/auth/register.html:89
 msgid "Himachal Pradesh"
-msgstr ""
+msgstr "हिमाचल प्रदेश"
 
 #: app/templates/auth/register.html:90
 msgid "Jammu Kashmir"
-msgstr ""
+msgstr "जम्मू कश्मीर"
 
 #: app/templates/auth/register.html:91
 msgid "Other"
-msgstr ""
+msgstr "अन्य"
 
 #: app/templates/auth/register.html:97
 msgid "Language"
-msgstr ""
+msgstr "भाषा"
 
 #: app/templates/auth/register.html:116
 msgid "At least 6 characters"
-msgstr ""
+msgstr "कम से कम 6 अक्षर"
 
 #: app/templates/auth/register.html:122
 msgid "Confirm Password"
-msgstr ""
+msgstr "पासवर्ड दोबारा दर्ज करें"
 
 #: app/templates/auth/register.html:128
 msgid "Re-enter password"
-msgstr ""
+msgstr "पासवर्ड दोबारा दर्ज करें"
 
 #: app/templates/auth/register.html:142
 msgid "By registering you agree to our"
-msgstr ""
+msgstr "पंजीकरण करके आप हमारी शर्तों से सहमत हैं"
 
 #: app/templates/auth/register.html:143
 msgid "Terms"
-msgstr ""
+msgstr "नियम"
 
 #: app/templates/auth/register.html:144
 msgid "and"
-msgstr ""
+msgstr "और"
 
 #: app/templates/crops/add.html:13
 msgid "Back to Crop List"
@@ -1246,7 +1246,7 @@ msgstr ""
 
 #: app/templates/crops/view.html:210
 msgid "Completed"
-msgstr ""
+msgstr "पूर्ण"
 
 #: app/templates/crops/view.html:219
 msgid "Quantity"
@@ -1337,7 +1337,7 @@ msgstr ""
 
 #: app/templates/farms/add.html:61
 msgid "Soil Type"
-msgstr ""
+msgstr "मिट्टी का प्रकार"
 
 #: app/templates/farms/add.html:66
 msgid "Select Soil Type"
@@ -1345,11 +1345,11 @@ msgstr ""
 
 #: app/templates/farms/add.html:67
 msgid "Clay Soil"
-msgstr ""
+msgstr "चिकनी मिट्टी"
 
 #: app/templates/farms/add.html:68
 msgid "Sandy Soil"
-msgstr ""
+msgstr "बलुई मिट्टी"
 
 #: app/templates/farms/add.html:69
 msgid "Loamy Soil"
@@ -1361,11 +1361,11 @@ msgstr ""
 
 #: app/templates/farms/add.html:71
 msgid "Black Soil"
-msgstr ""
+msgstr "काली मिट्टी"
 
 #: app/templates/farms/add.html:72
 msgid "Red Soil"
-msgstr ""
+msgstr "लाल मिट्टी"
 
 #: app/templates/farms/add.html:73
 msgid "Alluvial Soil"
@@ -2513,4 +2513,80 @@ msgstr ""
 
 #~ msgid "Add First Farm"
 #~ msgstr "पहला खेत जोड़ें"
+
+# Smart Irrigation translations
+msgid "Smart Irrigation"
+msgstr "स्मार्ट सिंचाई"
+
+msgid "Smart Irrigation Dashboard"
+msgstr "स्मार्ट सिंचाई डैशबोर्ड"
+
+msgid "AI-powered irrigation recommendations for optimal crop health"
+msgstr "बेहतर फसल स्वास्थ्य के लिए AI-आधारित सिंचाई सुझाव"
+
+msgid "Last Updated"
+msgstr "अंतिम अपडेट"
+
+msgid "Crops Monitored"
+msgstr "निगरानी में फसलें"
+
+msgid "Urgent Irrigation"
+msgstr "तत्काल सिंचाई"
+
+msgid "Optimal Status"
+msgstr "उत्तम स्थिति"
+
+msgid "Scheduled Today"
+msgstr "आज निर्धारित"
+
+msgid "Weather-Based Recommendations"
+msgstr "मौसम आधारित सुझाव"
+
+msgid "Current Weather"
+msgstr "वर्तमान मौसम"
+
+msgid "Temperature"
+msgstr "तापमान"
+
+msgid "Humidity"
+msgstr "नमी"
+
+msgid "Rain Probability"
+msgstr "बारिश की संभावना"
+
+msgid "General Recommendation"
+msgstr "सामान्य सुझाव"
+
+msgid "Loading weather-based recommendations..."
+msgstr "मौसम आधारित सुझाव लोड हो रहे हैं..."
+
+msgid "Irrigation Schedule"
+msgstr "सिंचाई कार्यक्रम"
+
+msgid "Refresh All"
+msgstr "सभी को रीफ्रेश करें"
+
+msgid "Schedule All Urgent"
+msgstr "सभी तत्काल को निर्धारित करें"
+
+msgid "Smart Irrigation Tips"
+msgstr "स्मार्ट सिंचाई टिप्स"
+
+msgid "Best Time to Irrigate"
+msgstr "सिंचाई का सबसे अच्छा समय"
+
+msgid "Early morning (5-8 AM) or late evening (6-8 PM) for minimum water loss through evaporation."
+msgstr "वाष्पीकरण द्वारा न्यूनतम पानी की हानि के लिए सुबह जल्दी (5-8 AM) या देर शाम (6-8 PM)।"
+
+msgid "Water Conservation"
+msgstr "जल संरक्षण"
+
+msgid "Use drip irrigation or sprinkler systems to reduce water wastage and ensure uniform distribution."
+msgstr "पानी की बर्बादी कम करने और समान वितरण सुनिश्चित करने के लिए ड्रिप या स्प्रिंकलर सिस्टम का उपयोग करें।"
+
+msgid "Soil Moisture Check"
+msgstr "मिट्टी की नमी जांच"
+
+msgid "Check soil moisture at 6-8 inch depth. If dry, irrigation is needed regardless of schedule."
+msgstr "6-8 इंच की गहराई पर मिट्टी की नमी जांचें। यदि सूखी है, तो कार्यक्रम की परवाह किए बिना सिंचाई की आवश्यकता है।"
 

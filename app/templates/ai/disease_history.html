@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}रोग पहचान इतिहास - स्मार्ट फसल देखभाल सहायक{% endblock %}
+{% block title %}{{ _('Disease History') }} - {{ _('Smart Crop Care Assistant') }}{% endblock %}
 
 {% block content %}
 <div class="min-h-screen bg-gradient-to-br from-green-50 to-blue-50">
@@ -9,8 +9,8 @@
         <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
             <div class="flex justify-between items-center">
                 <div>
-                    <h1 class="text-3xl font-bold text-gray-800 mb-2">📋 रोग पहचान इतिहास</h1>
-                    <p class="text-gray-600">आपकी पिछली सभी रोग जांच का रिकॉर्ड</p>
+                    <h1 class="text-3xl font-bold text-gray-800 mb-2">📋 {{ _('Disease Detection History') }}</h1>
+                    <p class="text-gray-600">{{ _('A record of all your past disease checks') }}</p>
                 </div>
                 <a href="{{ url_for('ai.disease_scanner') }}" class="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition duration-300">
                     🔍 नई जांच करें

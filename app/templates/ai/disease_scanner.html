@@ -81,7 +81,7 @@
                  data-healthy-message="{{ _('Your crop appears to be healthy. Continue with regular care.') }}"
                  data-disease-message="{{ _('Your crop shows signs of {disease}.') }}"
                  data-confidence-label="{{ _('Confidence Level') }}"
-                 data-treatment-title="{{ _('Immediate Treatment') }}"
+                 data-treatment-title="{{ _('Treatment Recommendations') }}"
                  data-analysis-title="{{ _('Analysis Details') }}"
                  data-prevention-title="{{ _('Prevention Tips') }}"
                  data-immediate-action-label="{{ _('Immediate Action') }}"
@@ -94,10 +94,18 @@
                  data-model-prediction-label="{{ _('Model Prediction') }}"
                  data-predicted-crop-label="{{ _('Predicted Crop') }}"
                  data-error-label="{{ _('Error') }}"
-                 data-error-title="{{ _('Error') }}"
-                 data-error-message="{{ _('Please try again or contact a specialist.') }}">
+                 data-error-title="{{ _('Analysis Error') }}"
+                 data-error-message="{{ _('Please try again with a clearer image or contact a specialist.') }}"
+                 data-confidence-high="{{ _('High Confidence') }}"
+                 data-confidence-medium="{{ _('Medium Confidence') }}"
+                 data-confidence-low="{{ _('Low Confidence') }}"
+                 data-reliability-high="{{ _('High confidence - proceed with treatment') }}"
+                 data-reliability-medium="{{ _('Moderate confidence - consider expert consultation') }}"
+                 data-reliability-low="{{ _('Low confidence - expert diagnosis recommended') }}">
                 
-                <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">📊 {{ _('Analysis Results') }}</h2>
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+                    📊 {{ _('Analysis Results') }}
+                </h2>
                 
                 <div id="resultsContent" class="space-y-6">
                     <!-- Results will be populated here by JavaScript -->
@@ -117,7 +125,7 @@
             <div class="bg-white rounded-lg shadow-lg p-8 mt-8">
                 <h2 class="text-2xl font-bold text-gray-800 mb-4">📋 {{ _('Usage Guide') }}</h2>
                 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
                     <div class="text-center">
                         <div class="text-4xl mb-3">📸</div>
                         <h3 class="font-semibold mb-2">{{ _('Take a Clear Photo') }}</h3>
@@ -136,11 +144,51 @@
                         <p class="text-sm text-gray-600">{{ _('Focus on the symptoms of the disease for better accuracy.') }}</p>
                     </div>
                 </div>
+
+                <!-- Enhanced Tips -->
+                <div class="bg-blue-50 border-l-4 border-blue-400 p-4 mb-4">
+                    <h4 class="font-semibold text-blue-800 mb-2">{{ _('For Best Results') }}</h4>
+                    <ul class="text-sm text-blue-700 space-y-1">
+                        <li>• {{ _('Take photos during morning hours (8-10 AM) for best lighting') }}</li>
+                        <li>• {{ _('Fill the frame with the affected plant part') }}</li>
+                        <li>• {{ _('Avoid blurry or very distant shots') }}</li>
+                        <li>• {{ _('Include both diseased and healthy parts for comparison') }}</li>
+                        <li>• {{ _('Take multiple photos from different angles if unsure') }}</li>
+                    </ul>
+                </div>
                 
-                <div class="mt-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
                     <p class="text-sm text-yellow-800">
-                        <strong>{{ _('Note:') }}</strong> {{ _('This is an AI-based analysis and may not be 100% accurate. For serious issues, consult an agricultural expert.') }}
+                        <strong>{{ _('Important Disclaimer:') }}</strong> 
+                        {{ _('This AI-based analysis provides preliminary insights and may not be 100% accurate. For serious crop issues or when confidence is low, always consult with a local agricultural expert or extension officer for professional diagnosis and treatment recommendations.') }}
                     </p>
+                </div>
+
+                <!-- Confidence Level Guide -->
+                <div class="mt-6 bg-gray-50 rounded-lg p-4">
+                    <h4 class="font-semibold text-gray-800 mb-3">{{ _('Understanding Confidence Levels') }}</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-sm">
+                        <div class="text-center">
+                            <div class="w-8 h-2 bg-green-500 rounded mx-auto mb-2"></div>
+                            <div class="font-medium">{{ _('High (80%+)') }}</div>
+                            <div class="text-gray-600">{{ _('Proceed with treatment') }}</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-8 h-2 bg-yellow-500 rounded mx-auto mb-2"></div>
+                            <div class="font-medium">{{ _('Medium (60-80%)') }}</div>
+                            <div class="text-gray-600">{{ _('Consider expert consultation') }}</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-8 h-2 bg-orange-500 rounded mx-auto mb-2"></div>
+                            <div class="font-medium">{{ _('Low (40-60%)') }}</div>
+                            <div class="text-gray-600">{{ _('Expert diagnosis recommended') }}</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-8 h-2 bg-red-500 rounded mx-auto mb-2"></div>
+                            <div class="font-medium">{{ _('Very Low (<40%)') }}</div>
+                            <div class="text-gray-600">{{ _('Manual inspection required') }}</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
